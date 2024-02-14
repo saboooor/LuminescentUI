@@ -1,15 +1,29 @@
 
+import type { PropsOf } from '@builder.io/qwik';
 import { Slot, component$ } from '@builder.io/qwik';
 import { LoadingIcon } from './LoadingIcon';
 import { Link } from '@builder.io/qwik-city';
 
-export const Card = component$(({ color, darker, href, onClick$, extraClass, row }: any) => {
+interface CardProps extends Omit<PropsOf<'div'>, 'class'> {
+  color?: 'purple' | 'orange' | 'pink' | 'red' | 'blue' | 'yellow' | 'green' | 'gray';
+  darker?: boolean;
+  href?: string;
+  row?: boolean;
+  class?: { [key: string]: boolean };
+}
+
+interface CardHeaderProps {
+  id?: string;
+  loading?: boolean;
+}
+
+export const Card = component$<CardProps>(({ color, darker, href, row, ...props }) => {
   const blob = Math.round(Math.random() * 6);
 
-  const button = onClick$ || href;
+  const button = !!props.onClick$ || href;
 
   return (
-    <div class={{
+    <div {...{ ...props, class: undefined }} class={{
       'flex-1 relative border rounded-lg group transition-all': true,
       'border-purple-400/10': color === 'purple',
       'border-orange-400/10': color === 'orange',
@@ -31,8 +45,8 @@ export const Card = component$(({ color, darker, href, onClick$, extraClass, row
       'bg-gray-800 border-gray-700': !color && !darker,
       'bg-gray-800/50': color,
       'bg-gray-900 border-gray-700': !!darker,
-      ...extraClass,
-    }} onClick$={onClick$}>
+      ...props.class,
+    }}>
       <div class={{
         'p-8': true,
       }}>
@@ -113,27 +127,25 @@ export const Card = component$(({ color, darker, href, onClick$, extraClass, row
   );
 });
 
-export const CardHeader = component$(({ id, loading, subheader }: any) => {
+export const CardHeader = component$<CardHeaderProps>(({ id, loading = false }) => {
   return (
     <h1 class="flex font-bold text-gray-100 text-2xl">
-      <span id={id} class="block h-32 -mt-32" />
+      { id && <span id={id} class="block h-32 -mt-32" /> }
       <div class="flex flex-1">
         <div class="flex flex-col">
           <div class="flex items-center gap-3">
             <Slot />
           </div>
-          {subheader &&
-            <p class="text-base text-gray-500 font-normal">{subheader}</p>
-          }
+          <Slot name="subheader" />
         </div>
       </div>
-      { loading !== undefined &&
+      { loading &&
         <div class={{
           'transition-all': true,
           'opacity-0': !loading,
           'opacity-100': loading,
         }}>
-          <LoadingIcon />
+          <LoadingIcon width={20} class={{ 'text-white': true }} />
         </div>
       }
     </h1>

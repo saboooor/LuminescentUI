@@ -1,4 +1,6 @@
+import type { PropsOf } from '@builder.io/qwik';
 import { component$, Slot } from '@builder.io/qwik';
+import type { LinkProps } from '@builder.io/qwik-city';
 import { Link } from '@builder.io/qwik-city';
 
 const classes = {
@@ -11,10 +13,24 @@ const classes = {
   yellow: 'bg-yellow-700/90 border-yellow-600 hover:bg-yellow-600 focus:bg-yellow-600',
 };
 
-export const Button = component$(({ color, small, big, massive, bold, extraClass, ...props }: any) => {
-  const colorClasses = color ? classes[color as keyof typeof classes] : classes.gray;
+interface GenericButtonProps {
+  color?: keyof typeof classes;
+  small?: boolean;
+  big?: boolean;
+  massive?: boolean;
+  bold?: boolean;
+  class?: { [key: string]: boolean };
+}
+
+interface ButtonProps extends Omit<PropsOf<'button'>, 'class'>, GenericButtonProps {}
+interface ButtonSPAProps extends Omit<LinkProps, 'class'>, GenericButtonProps {}
+interface ButtonExternalProps extends Omit<PropsOf<'a'>, 'class'>, GenericButtonProps {}
+
+export const Button = component$<ButtonProps>(({ color = 'gray', small, big, massive, bold, ...props }) => {
+  const colorClasses = classes[color as keyof typeof classes];
+
   return (
-    <button {...props} class={{
+    <button {...{ ...props, class: undefined }} class={{
       'relative flex items-center transition ease-in-out border text-gray-50 disabled:opacity-50': true,
       [colorClasses]: true,
       'text-sm px-2 py-1 rounded-md gap-2': small,
@@ -22,17 +38,18 @@ export const Button = component$(({ color, small, big, massive, bold, extraClass
       'text-base px-8 py-4 rounded-xl gap-4': massive,
       'font-bold': bold,
       'text-base px-4 py-2 rounded-md gap-3': !small && !big && !massive,
-      ...extraClass,
+      ...props.class,
     }}>
       <Slot />
     </button>
   );
 });
 
-export const ButtonSPA = component$(({ color, small, big, massive, bold, extraClass, ...props }: any) => {
-  const colorClasses = color ? classes[color as keyof typeof classes] : classes.gray;
+export const ButtonSPA = component$<ButtonSPAProps>(({ color = 'gray', small, big, massive, bold, ...props }) => {
+  const colorClasses = classes[color as keyof typeof classes];
+
   return (
-    <Link {...props} class={{
+    <Link {...{ ...props, class: undefined }} class={{
       'relative flex items-center gap-3 transition ease-in-out border text-gray-50': true,
       [colorClasses]: true,
       'text-sm px-2 py-1 rounded-md': small,
@@ -40,17 +57,18 @@ export const ButtonSPA = component$(({ color, small, big, massive, bold, extraCl
       'text-base px-8 py-4 rounded-xl': massive,
       'font-bold': bold,
       'text-base px-4 py-2 rounded-md': !small && !big && !massive,
-      ...extraClass,
+      ...props.class,
     }}>
       <Slot />
     </Link>
   );
 });
 
-export const ButtonExternal = component$(({ color, small, big, massive, bold, extraClass, ...props }: any) => {
-  const colorClasses = color ? classes[color as keyof typeof classes] : classes.gray;
+export const ButtonExternal = component$<ButtonExternalProps>(({ color = 'gray', small, big, massive, bold, ...props }) => {
+  const colorClasses = classes[color as keyof typeof classes];
+
   return (
-    <a {...props} class={{
+    <a {...{ ...props, class: undefined }} class={{
       'relative flex items-center gap-3 transition ease-in-out border text-gray-50 fill-gray-50': true,
       [colorClasses]: true,
       'text-sm px-2 py-1 rounded-md': small,
@@ -58,7 +76,7 @@ export const ButtonExternal = component$(({ color, small, big, massive, bold, ex
       'text-base px-8 py-4 rounded-xl': massive,
       'font-bold': bold,
       'text-base px-4 py-2 rounded-md': !small && !big && !massive,
-      ...extraClass,
+      ...props.class,
     }}>
       <Slot />
     </a>

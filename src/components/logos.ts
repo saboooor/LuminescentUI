@@ -1,4 +1,5 @@
 export * from './logos/Birdflop';
+export * from './logos/Discord';
 export * from './logos/Fabric';
 export * from './logos/Forge';
 export * from './logos/Paper';

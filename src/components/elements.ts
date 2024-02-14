@@ -1,6 +1,5 @@
 export * from './elements/Button';
 export * from './elements/Card';
-export * from './elements/Chart';
 export * from './elements/ColorInput';
 export * from './elements/LoadingIcon';
 export * from './elements/NumberInput';

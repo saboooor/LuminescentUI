@@ -1,10 +1,10 @@
 import { component$ } from '@builder.io/qwik';
+import type { IconProps } from './types';
 
-export const LogoPterodactyl = component$(({ extraClass }: any) => {
+export const LogoPterodactyl = component$<IconProps>((props) => {
   return (
-    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-      class={extraClass} viewBox="0 0 180.000000 180.000000"
-      preserveAspectRatio="xMidYMid meet">
+    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" preserveAspectRatio="xMidYMid meet"
+      {...props} height={props.width} >
       <g transform="translate(0,180) scale(0.100000,-0.100000)"
         fill="currentColor" stroke="none">
         <path d="M965 1489 c-86 -13 -231 -63 -305 -107 -70 -41 -175 -138 -204 -190 l-18 -34 53 32 c127 75 410 193 425 177 3 -3 -3 -18 -13 -34 l-18 -28 40 33 c39 32 136 99 205 140 l35 22 -70 -1 c-38 -1 -97 -5 -130 -10z"/>

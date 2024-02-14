@@ -1,8 +1,14 @@
 import { component$ } from '@builder.io/qwik';
+import type { IconProps } from './types';
 
-export const LogoBirdflop = component$(({ width, confused }: any) => {
+interface LogoBirdflopProps extends IconProps {
+  confused?: boolean;
+}
+
+export const LogoBirdflop = component$<LogoBirdflopProps>(({ confused, ...props }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width={width} height={width} viewBox="0 0 1080 1080">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1080 1080"
+      {...props} height={props.width} >
       <defs>
         <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
           <stop offset="0" stop-color="#54daf4"/>

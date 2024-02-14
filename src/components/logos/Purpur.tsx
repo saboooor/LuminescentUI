@@ -1,8 +1,10 @@
 import { component$ } from '@builder.io/qwik';
+import type { IconProps } from './types';
 
-export const LogoPurpur = component$(({ extraClass }: any) => {
+export const LogoPurpur = component$<IconProps>((props) => {
   return (
-    <svg xml:space="preserve" class={extraClass} fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="1.5" clip-rule="evenodd" viewBox="0 0 24 24">
+    <svg xml:space="preserve" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="1.5" clip-rule="evenodd" viewBox="0 0 24 24"
+      {...props} height={props.width} >
       <defs>
         <path id="purpur" fill="none" stroke="currentColor" stroke-width="1.68" d="m264 41.95 8-4v8l-8 4v-8Z"></path>
       </defs>
