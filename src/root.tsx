@@ -1,4 +1,5 @@
-import { Button } from './components/elements';
+import { TextInput } from './components/elements';
+import './global.css';
 
 export default () => {
   return (
@@ -8,9 +9,9 @@ export default () => {
         <title>Qwik Blank App</title>
       </head>
       <body>
-        <div class="bg-red-500">
-          <Button>Click Me</Button>
-        </div>
+        <TextInput id="clickme">
+          Click me
+        </TextInput>
       </body>
     </>
   );
