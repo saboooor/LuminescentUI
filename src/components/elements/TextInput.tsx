@@ -18,7 +18,7 @@ export const TextInput = component$<TextInputProps>((props) => {
 
 export const TextInputRaw = component$<TextInputProps>((props) => {
   return (
-    <input {...{ ...props, class: undefined }} class={{
+    <input {...props} class={{
       'transition ease-in-out text-lg border border-gray-700 bg-gray-800 text-gray-50 hover:bg-gray-700 focus:bg-gray-700 rounded-md px-3 py-2': true,
       ...props.class,
     }}/>

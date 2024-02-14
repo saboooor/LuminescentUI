@@ -30,7 +30,7 @@ export const Button = component$<ButtonProps>(({ color = 'gray', small, big, mas
   const colorClasses = classes[color as keyof typeof classes];
 
   return (
-    <button {...{ ...props, class: undefined }} class={{
+    <button {...props} class={{
       'relative flex items-center transition ease-in-out border text-gray-50 disabled:opacity-50': true,
       [colorClasses]: true,
       'text-sm px-2 py-1 rounded-md gap-2': small,
@@ -49,7 +49,7 @@ export const ButtonSPA = component$<ButtonSPAProps>(({ color = 'gray', small, bi
   const colorClasses = classes[color as keyof typeof classes];
 
   return (
-    <Link {...{ ...props, class: undefined }} class={{
+    <Link {...props} class={{
       'relative flex items-center gap-3 transition ease-in-out border text-gray-50': true,
       [colorClasses]: true,
       'text-sm px-2 py-1 rounded-md': small,
@@ -68,7 +68,7 @@ export const ButtonExternal = component$<ButtonExternalProps>(({ color = 'gray',
   const colorClasses = classes[color as keyof typeof classes];
 
   return (
-    <a {...{ ...props, class: undefined }} class={{
+    <a {...props} class={{
       'relative flex items-center gap-3 transition ease-in-out border text-gray-50 fill-gray-50': true,
       [colorClasses]: true,
       'text-sm px-2 py-1 rounded-md': small,

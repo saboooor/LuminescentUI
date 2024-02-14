@@ -7,7 +7,7 @@ interface loadingIconProps extends IconProps {
 
 export const LoadingIcon = component$<loadingIconProps>((props) => {
   return (
-    <svg {...{ ...props, class: undefined }} class={{
+    <svg {...props} class={{
       'animate-spin': true,
       ...props.class,
     }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

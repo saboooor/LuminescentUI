@@ -18,7 +18,7 @@ export const TextAreaInput = component$<TextAreaProps>((props) => {
 
 export const TextAreaInputRaw = component$<TextAreaProps>((props) => {
   return (
-    <textarea {...{ ...props, class: undefined }} class={{
+    <textarea {...props} class={{
       'transition ease-in-out text-lg border border-gray-700 bg-gray-800 text-gray-50 hover:bg-gray-700 focus:bg-gray-700 rounded-md px-3 py-2 resize-y w-full h-32': true,
       ...props.class,
     }}/>

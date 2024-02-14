@@ -37,7 +37,7 @@ export const NumberInputRaw = component$<NumberInputProps>(({ input, onDecrement
         <Remove width="24" class="fill-current" />
       </button>
       { input &&
-        <input {...{ ...props, class: undefined }}
+        <input {...props}
           class={{
             'transition ease-in-out text-lg text-center border border-gray-600 bg-gray-700 text-gray-50 hover:bg-gray-600 focus:bg-gray-500 px-3 py-1 w-full': true,
             ...props.class,

@@ -21,7 +21,7 @@ export const SelectInput = component$<SelectInputProps>((props) => {
 
 export const SelectInputRaw = component$<SelectInputProps>(({ transparent, ...props }) => {
   return (
-    <select {...{ ...props, class: undefined }} class={{
+    <select {...props} class={{
       'transition ease-in-out text-lg border border-gray-700 bg-gray-800 text-gray-50 hover:bg-gray-700 focus:bg-gray-700 rounded-md px-2 py-3': true,
       'border-0 bg-transparent': transparent,
       ...props.class,

@@ -23,7 +23,7 @@ export const Card = component$<CardProps>(({ color, darker, href, row, ...props 
   const button = !!props.onClick$ || href;
 
   return (
-    <div {...{ ...props, class: undefined }} class={{
+    <div {...props} class={{
       'flex-1 relative border rounded-lg group transition-all': true,
       'border-purple-400/10': color === 'purple',
       'border-orange-400/10': color === 'orange',
