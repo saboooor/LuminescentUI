@@ -1,5 +1,5 @@
 import { component$ } from '@builder.io/qwik';
-import type { IconProps } from './types';
+import type { IconProps } from './IconProps';
 
 export const LogoDiscord = component$<IconProps>((props) => {
   return (

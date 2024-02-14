@@ -1,5 +1,5 @@
 import { component$ } from '@builder.io/qwik';
-import type { IconProps } from '../logos/types';
+import type { IconProps } from '../logos/IconProps';
 
 interface loadingIconProps extends IconProps {
   class?: { [key: string]: boolean };
