@@ -81,7 +81,7 @@ export const Card = component$<CardProps>(({ color, darker, href, row, ...props 
               'bg-yellow-400': color === 'yellow',
               'bg-green-400': color === 'green',
               'bg-gray-400': color === 'gray',
-            }}></div>
+            }} />
             <div class={{
               'absolute top-0 w-[30cqw] h-[30cqw] rounded-full opacity-20 ease-in-out blur-xl': true,
               '-animation-delay-5': true,
@@ -100,7 +100,7 @@ export const Card = component$<CardProps>(({ color, darker, href, row, ...props 
               'bg-yellow-500': color === 'yellow',
               'bg-green-500': color === 'green',
               'bg-gray-500': color === 'gray',
-            }}></div>
+            }} />
             <div class={{
               'absolute top-0 w-[30cqw] h-[30cqw] rounded-full opacity-20 ease-in-out blur-xl': true,
               '-animation-delay-10': true,
@@ -119,7 +119,7 @@ export const Card = component$<CardProps>(({ color, darker, href, row, ...props 
               'bg-yellow-600': color === 'yellow',
               'bg-green-600': color === 'green',
               'bg-gray-600': color === 'gray',
-            }}></div>
+            }} />
           </div>
         )}
       </div>

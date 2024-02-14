@@ -35,7 +35,7 @@ export const ColorInput = component$<ColorInputProps>(({ onInput, id, value, ...
         <Slot />
       </label>
       <TextInputRaw {...props}
-        onFocus$={(event: FocusEvent) => {
+        onFocus$={(event) => {
           const pickerDiv = document.getElementById(`${id}-color-picker`)!;
 
           if (!pickerDiv.children.length) {
