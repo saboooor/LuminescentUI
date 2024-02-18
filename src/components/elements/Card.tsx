@@ -7,6 +7,7 @@ import { Anchor } from './Anchor';
 interface CardProps extends Omit<PropsOf<'div'>, 'class'> {
   color?: keyof typeof cardColorClasses;
   hoverable?: boolean;
+  href?: string;
   row?: boolean;
   blobs?: boolean;
   class?: { [key: string]: boolean };
@@ -150,7 +151,7 @@ const blobClasses = [
   'animate-blob6',
 ];
 
-export const Card = component$<CardProps>(({ color = 'darkgray', hoverable, row, blobs, ...props }) => {
+export const Card = component$<CardProps>(({ color = 'darkgray', hoverable, href, row, blobs, ...props }) => {
   const blob = Math.round(Math.random() * 6);
 
   const button = !!props.onClick$ || hoverable;
@@ -168,6 +169,9 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hoverable, row,
       <div class={{
         'p-8': true,
       }}>
+        {href && (
+          <a href={href} class="absolute inset-0 z-20" />
+        )}
         <div class="relative z-10">
           <div class={{
             'flex gap-4': true,
