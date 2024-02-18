@@ -2,6 +2,7 @@
 import type { PropsOf } from '@builder.io/qwik';
 import { Slot, component$ } from '@builder.io/qwik';
 import { LoadingIcon } from '../logos/LoadingIcon';
+import { Anchor } from './Anchor';
 
 interface CardProps extends Omit<PropsOf<'div'>, 'class'> {
   color?: keyof typeof cardColorClasses;
@@ -205,7 +206,7 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hoverable, row,
 export const CardHeader = component$<CardHeaderProps>(({ id, loading = false }) => {
   return (
     <h1 class="flex font-bold text-gray-100 text-2xl">
-      { id && <span id={id} class="block h-32 -mt-32" /> }
+      { id && <Anchor id={id}/> }
       <div class="flex flex-1">
         <div class="flex flex-col">
           <div class="flex items-center gap-3">

@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Button, Card, CardHeader, ColorInput, NumberInput, OutputField, OutputFieldRaw, SelectInput, TextAreaInput, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses } from './components/elements';
+import { Button, ButtonAnchor, Card, CardHeader, ColorInput, NumberInput, OutputField, OutputFieldRaw, SelectInput, TextAreaInput, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses } from './components/elements';
 import './global.css';
 
 interface docsStore {
@@ -44,6 +44,15 @@ export default component$(() => {
         <h1 class="text-5xl font-bold mb-6">
           Luminescent UI
         </h1>
+        <Card>
+          <CardHeader id="anchor">
+            Anchor
+          </CardHeader>
+          <ButtonAnchor href="#anchor">
+            Scroll to anchor
+          </ButtonAnchor>
+          <OutputFieldRaw value={'<Anchor id="anchor"/>'} />
+        </Card>
         <Card>
           <CardHeader>
             Button
