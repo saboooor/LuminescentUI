@@ -1,10 +1,10 @@
 
 import type { QRL } from '@builder.io/qwik';
 import { component$, useStore } from '@builder.io/qwik';
-import ColorPicker from 'simple-color-picker';
 import type { TextInputRawProps } from './TextInput';
 import { TextInputRaw } from './TextInput';
 import { isServer } from '@builder.io/qwik/build';
+import { ColorPicker } from '../../utils/simple-color-picker';
 
 // COLOR INPUT
 // ====================
@@ -16,9 +16,10 @@ interface ColorInputProps extends Omit<TextInputRawProps, 'onInput$'> {
   onInput$?: QRL<(color: string, element: HTMLInputElement) => void>;
   value?: string;
   label?: string;
+  presetColors?: string[];
 }
 
-export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#FFFFFF', ...props }) => {
+export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#FFFFFF', presetColors, ...props }) => {
   const { id } = props;
 
   const store = useStore({
@@ -41,7 +42,7 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#FFF
             const picker = new ColorPicker({
               el: pickerDiv,
               color: store.value,
-              background: '#1D1D1D',
+              colors: presetColors,
               width: 150,
               height: 150,
             });

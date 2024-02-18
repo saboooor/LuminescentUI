@@ -44,9 +44,6 @@ devDependencies:
   qwik-ionicons:
     specifier: ^1.0.5
     version: 1.0.5
-  simple-color-picker:
-    specifier: ^1.0.5
-    version: 1.0.5
   tailwindcss:
     specifier: 3.4.1
     version: 3.4.1
@@ -952,10 +949,6 @@ packages:
 
   /@types/http-cache-semantics@4.0.4:
     resolution: {integrity: sha512-1m0bIFVc7eJWyve9S0RnuRgcQqF/Xd5QsUZAZeQFr1Q3/p9JWoQQEqmVy+DPTNpGXwhgIetAoYF8JSc33q29QA==}
-    dev: true
-
-  /@types/insert-css@2.0.3:
-    resolution: {integrity: sha512-QgdWn3Mi9D1qqjCKy4PeC+tCasItQYOTk/S9icmHi8dgPx43aotI3cvyHsDaTN18uyYQ1kq/EIdJI0Dzsnm1Kg==}
     dev: true
 
   /@types/json-schema@7.0.15:
@@ -3062,10 +3055,6 @@ packages:
       wrap-ansi: 6.2.0
     dev: true
 
-  /insert-css@2.0.0:
-    resolution: {integrity: sha512-xGq5ISgcUP5cvGkS2MMFLtPDBtrtQPSFfC6gA6U8wHKqfjTIMZLZNxOItQnoSjdOzlXOLU/yD32RKC4SvjNbtA==}
-    dev: true
-
   /internal-slot@1.0.7:
     resolution: {integrity: sha512-NGnrKwXzSms2qUUih/ILZ5JBqNTSa1+ZmP6flaIp6KmSElgE9qdndzS3cqjrDovwFdmwsGsLdeFgB6suw+1e9g==}
     engines: {node: '>= 0.4'}
@@ -5151,13 +5140,6 @@ packages:
   /signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
-    dev: true
-
-  /simple-color-picker@1.0.5:
-    resolution: {integrity: sha512-MUsSVfO/51zTrBA6nsmX5ABe/FXmhd6N+hie6EAWb6Ph4eydtQNRZ9hyb/HmLaG403YB/JAtpry70AaCd8AwBw==}
-    dependencies:
-      '@types/insert-css': 2.0.3
-      insert-css: 2.0.0
     dev: true
 
   /simple-swizzle@0.2.2:
