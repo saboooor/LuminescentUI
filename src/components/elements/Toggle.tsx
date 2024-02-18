@@ -1,20 +1,20 @@
 import type { PropsOf } from '@builder.io/qwik';
-import { component$, Slot } from '@builder.io/qwik';
+import { component$ } from '@builder.io/qwik';
 
-interface ToggleProps extends Omit<(PropsOf<'input'> & { type: 'checkbox' }), 'class' | 'bind:checked'> {
+interface ToggleProps extends Omit<(PropsOf<'input'> & { type: 'checkbox' }), 'class' | 'bind:checked' | 'type'> {
   class?: { [key: string]: boolean };
-  nolabel?: boolean;
   center?: boolean;
+  label?: string;
 }
 
-export const Toggle = component$<ToggleProps>(({ nolabel, center, ...props }) => {
+export const Toggle = component$<ToggleProps>(({ label, center, ...props }) => {
   return (
     <div class={{
       'flex gap-3 items-center': true,
       'justify-center': center,
     }}>
       <label class="inline-flex relative items-center cursor-pointer">
-        <input {...props} class={{
+        <input type="checkbox" {...props} class={{
           'sr-only peer': true,
           ...props.class,
         }} />
@@ -25,9 +25,9 @@ export const Toggle = component$<ToggleProps>(({ nolabel, center, ...props }) =>
           'peer-checked:after:translate-x-full peer-checked:after:bg-blue-500 peer-checked:after:border-blue-400 peer-checked:hover:after:bg-blue-400': true,
         }} />
       </label>
-      {!nolabel &&
+      {label &&
         <label for={props.id} class="text-gray-100">
-          <Slot/>
+          {label}
         </label>
       }
     </div>

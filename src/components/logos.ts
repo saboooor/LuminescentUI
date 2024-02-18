@@ -7,3 +7,4 @@ export * from './logos/Pterodactyl';
 export * from './logos/Purpur';
 export * from './logos/Velocity';
 export * from './logos/Waterfall';
+export * from './logos/LoadingIcon';

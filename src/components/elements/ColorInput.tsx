@@ -1,7 +1,8 @@
 
-import type { PropsOf, QRL } from '@builder.io/qwik';
-import { component$, Slot, useStyles$ } from '@builder.io/qwik';
+import type { QRL } from '@builder.io/qwik';
+import { component$, useStore, useStyles$ } from '@builder.io/qwik';
 import ColorPicker from 'simple-color-picker';
+import type { TextInputRawProps } from './TextInput';
 import { TextInputRaw } from './TextInput';
 import { isServer } from '@builder.io/qwik/build';
 
@@ -11,12 +12,13 @@ import { isServer } from '@builder.io/qwik/build';
 // This is because the color picker is absolutely positioned.
 // ====================
 
-interface ColorInputProps extends Omit<(PropsOf<'input'> & { type: 'text' }), 'class'> {
-  onInput: QRL;
-  value: string;
+interface ColorInputProps extends Omit<TextInputRawProps, 'onInput$'> {
+  onInput$?: QRL<(color: string, element: HTMLInputElement) => void>;
+  value?: string;
+  label?: string;
 }
 
-export const ColorInput = component$<ColorInputProps>(({ onInput, id, value, ...props }) => {
+export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#FFFFFF', ...props }) => {
   useStyles$(`
     .Scp {
       display: flex;
@@ -29,31 +31,39 @@ export const ColorInput = component$<ColorInputProps>(({ onInput, id, value, ...
     }
   `);
 
+  const { id } = props;
+
+  const store = useStore({
+    value: value || '#FFFFFF',
+  });
+
   return (
     <div>
-      <label for={id} class="mb-2 flex">
-        <Slot />
-      </label>
-      <TextInputRaw {...props}
-        onFocus$={(event) => {
+      {props.label &&
+        <label for={id} class="mb-2 flex">
+          {props.label}
+        </label>
+      }
+      <TextInputRaw {...props} value={store.value}
+        onFocus$={(event, element) => {
           const pickerDiv = document.getElementById(`${id}-color-picker`)!;
 
           if (!pickerDiv.children.length) {
             if (isServer) return;
-            const textinput = event.target as HTMLInputElement;
             const picker = new ColorPicker({
               el: pickerDiv,
-              color: value,
+              color: store.value,
               background: '#1D1D1D',
               width: 150,
               height: 150,
             });
             picker.onChange((color: string) => {
-              textinput.value = color;
-              onInput(color);
+              store.value = color;
+              if (onInput$) onInput$(color, element);
             });
-            textinput.addEventListener('input', () => {
-              picker.setColor(textinput.value);
+            element.addEventListener('input', () => {
+              if (!/^#[0-9A-F]{6}$/i.test(element.value)) return;
+              picker.setColor(element.value);
             });
           }
 
@@ -64,8 +74,7 @@ export const ColorInput = component$<ColorInputProps>(({ onInput, id, value, ...
           pickerDiv.style.display = 'none';
         }}
         style={{
-          borderLeft: `40px solid ${value}`,
-          width: '100%',
+          borderLeft: `40px solid ${store.value}`,
         }}
       />
       <div id={`${id}-color-picker`} class="hidden absolute mt-2" />

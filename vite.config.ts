@@ -25,6 +25,9 @@ export default defineConfig(() => {
         ],
       },
     },
-    plugins: [qwikVite(), tsconfigPaths()],
+    plugins: [
+      qwikVite(),
+      tsconfigPaths()
+    ],
   };
 });
