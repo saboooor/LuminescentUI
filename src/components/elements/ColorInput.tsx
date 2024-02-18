@@ -1,6 +1,6 @@
 
 import type { QRL } from '@builder.io/qwik';
-import { component$, useStore, useStyles$ } from '@builder.io/qwik';
+import { component$, useStore } from '@builder.io/qwik';
 import ColorPicker from 'simple-color-picker';
 import type { TextInputRawProps } from './TextInput';
 import { TextInputRaw } from './TextInput';
@@ -19,18 +19,6 @@ interface ColorInputProps extends Omit<TextInputRawProps, 'onInput$'> {
 }
 
 export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#FFFFFF', ...props }) => {
-  useStyles$(`
-    .Scp {
-      display: flex;
-      height: 170px !important;
-      width: 170px !important;
-      padding: 10px !important;
-      border-radius: 0.375rem;
-      border: hsl(0, 27%, 76%);
-      border-width: 1px;
-    }
-  `);
-
   const { id } = props;
 
   const store = useStore({
