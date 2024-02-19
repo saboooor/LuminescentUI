@@ -1,6 +1,6 @@
 
 import type { PropsOf } from '@builder.io/qwik';
-import { Slot, component$ } from '@builder.io/qwik';
+import { Slot, component$, useStyles$ } from '@builder.io/qwik';
 import { LoadingIcon } from '../logos/LoadingIcon';
 import { Anchor } from './Anchor';
 
@@ -152,6 +152,11 @@ const blobClasses = [
 ];
 
 export const Card = component$<CardProps>(({ color = 'darkgray', hoverable, href, row, blobs, ...props }) => {
+  useStyles$(`
+    .-animation-delay-5 { animation-delay: -5s; }
+    .-animation-delay-10 { animation-delay: -10s; }
+  `);
+
   const blob = Math.round(Math.random() * 6);
 
   const button = !!props.onClick$ || hoverable;
