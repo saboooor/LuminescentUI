@@ -12,7 +12,7 @@ The theme property is optional if you don't want to use blobs in the Card compon
 ```javascript
 /** @type {import('tailwindcss').Config} */
 
-import tailwindConfig from '@luminescent/ui/tailwind-config';
+import tailwindConfig from '@luminescent/ui/config';
 
 export default {
   content: [

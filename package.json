@@ -10,11 +10,15 @@
       "import": "./lib/index.qwik.mjs",
       "require": "./lib/index.qwik.cjs",
       "types": "./lib-types/index.d.ts"
+    },
+    "./config": {
+      "import": "./src/tailwind.config.ts"
     }
   },
   "files": [
     "lib",
-    "lib-types"
+    "lib-types",
+    "src/tailwind.config.ts"
   ],
   "engines": {
     "node": ">=15.0.0"

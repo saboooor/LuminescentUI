@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-import luminescentTailwindConfig from '@luminescent/ui';
+import luminescentTailwindConfig from '@luminescent/ui/config';
 
 export default {
   content: [
