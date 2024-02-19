@@ -12,8 +12,8 @@ devDependencies:
     specifier: ^1.4.5
     version: 1.4.5(@types/node@20.11.19)
   '@luminescent/ui':
-    specifier: ^0.3.0
-    version: 0.3.0
+    specifier: ^0.3.1
+    version: 0.3.1
   '@types/eslint':
     specifier: ^8.56.2
     version: 8.56.2
@@ -902,8 +902,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@luminescent/ui@0.3.0:
-    resolution: {integrity: sha512-kfT/2/6FakBBu1Sw5HX3/rtT87VAMk0i9pnZejWq2/qXK0aLxpwt7KKa0GwMPiD8udp+mUyMUmy87rLZUjOi0w==}
+  /@luminescent/ui@0.3.1:
+    resolution: {integrity: sha512-++lsmWyzzoSnbVmzrKHxq4/0P+uOEhY/VPLAwK1UEe/v/GKl/hariHfctBcNC1wg2rVXhXdAiowK/6FzQM9wBQ==}
     engines: {node: '>=15.0.0'}
     dev: true
 
