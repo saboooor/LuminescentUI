@@ -1,4 +1,4 @@
-# Luminescent UI Qwik Library ⚡️
+![Luminescent UI](./branding.png)
 
 To use the Luminescent UI Qwik Library, you need to install the package from npm.
 
