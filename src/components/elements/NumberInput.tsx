@@ -1,6 +1,7 @@
 import type { PropsOf, QRL } from '@builder.io/qwik';
 import { Slot, component$, useStore } from '@builder.io/qwik';
-import { Add, Remove } from 'qwik-ionicons';
+import { Plus } from '../../svg/Plus';
+import { Minus } from '../../svg/Minus';
 
 interface NumberInputRawProps extends Omit<(PropsOf<'input'> & { type: 'number' }), 'class' | 'type'> {
   onDecrement$: QRL<(event: PointerEvent, element: HTMLButtonElement, store: { value: number }) => void>;
@@ -47,7 +48,7 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, onDecrem
         'w-[50%] rounded-md': !input,
         'opacity-50 pointer-events-none': props.min ? store.value <= props.min : false,
       }}>
-        <Remove width="24" class="fill-current" />
+        <Minus width="24" class="fill-current" />
       </button>
       { input &&
         <input type="number" {...props} value={store.value} step={step}
@@ -65,7 +66,7 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, onDecrem
         'w-[50%] rounded-md': !input,
         'opacity-50 pointer-events-none': props.max ? store.value >= props.max : false,
       }}>
-        <Add width="24" class="fill-current" />
+        <Plus width="24" class="fill-current" />
       </button>
     </div>
   );

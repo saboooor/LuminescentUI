@@ -41,9 +41,6 @@ devDependencies:
   postcss:
     specifier: ^8.4.35
     version: 8.4.35
-  qwik-ionicons:
-    specifier: ^1.0.5
-    version: 1.0.5
   tailwindcss:
     specifier: 3.4.1
     version: 3.4.1
@@ -4747,11 +4744,6 @@ packages:
   /quick-lru@5.1.1:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
-    dev: true
-
-  /qwik-ionicons@1.0.5:
-    resolution: {integrity: sha512-bXOS4NNNQqftIkRY3jvA755YA/H9WTYGGqTYpzam8QVkyduVOjvkIvUJE+3BapCxBdO3QEb9+9Nl0cDHUdYzRg==}
-    engines: {node: '>=15.0.0'}
     dev: true
 
   /rc@1.2.8:
