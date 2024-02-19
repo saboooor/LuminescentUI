@@ -1,7 +1,7 @@
 import { component$, useStore } from '@builder.io/qwik';
 import { Button, ButtonAnchor, Card, CardHeader, ColorInput, NumberInput, OutputField, OutputFieldRaw, SelectInput, TextAreaInput, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses } from './components/elements';
 import './global.css';
-import { LogoBirdflop, LogoLuminescentFull } from './components/logos';
+import { LogoLuminescentFull } from './components/logos';
 
 interface docsStore {
   button: {
