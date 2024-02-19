@@ -36,9 +36,11 @@ export default component$(() => {
   });
   return (
     <section class="max-w-6xl mx-auto py-20 flex flex-col gap-4">
-      <h1 class="text-5xl font-bold mb-6">
-        Luminescent UI
-      </h1>
+      <div style="filter: drop-shadow(0 0 2rem #CB6CE6);">
+        <div class="text-5xl font-semibold mb-6 flex items-center gap-1 text-[#f0ccfb] fill-[#f0ccfb]" style="filter: drop-shadow(0 0 2rem #CB6CE6);">
+          <LogoLuminescentFull width={250} class="mt-1.5" /> / ui
+        </div>
+      </div>
       <Card>
         <CardHeader id="anchor">
           Anchor

@@ -1,7 +1,7 @@
 import { component$, useStore } from '@builder.io/qwik';
 import { Button, ButtonAnchor, Card, CardHeader, ColorInput, NumberInput, OutputField, OutputFieldRaw, SelectInput, TextAreaInput, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses } from './components/elements';
 import './global.css';
-import { LogoLuminescentFull } from './components/logos';
+import { LogoBirdflop, LogoLuminescentFull } from './components/logos';
 
 interface docsStore {
   button: {
@@ -41,9 +41,9 @@ export default component$(() => {
         <meta charSet="utf-8" />
         <title>Luminescent UI</title>
       </head>
-      <body class="bg-black text-gray-200 max-w-6xl mx-auto py-20 flex flex-col gap-4">
+      <body class="bg-gray-950 text-gray-200 max-w-6xl mx-auto py-20 flex flex-col gap-4">
         <div style="filter: drop-shadow(0 0 2rem #CB6CE6);">
-          <div class="text-5xl font-semibold mb-6 flex items-center gap-1 text-[#f0ccfb]" style="filter: drop-shadow(0 0 2rem #CB6CE6);">
+          <div class="text-5xl font-semibold mb-6 flex items-center gap-1 text-[#f0ccfb] fill-[#f0ccfb]" style="filter: drop-shadow(0 0 2rem #CB6CE6);">
             <LogoLuminescentFull width={250} class="mt-1.5" /> / ui
           </div>
         </div>
