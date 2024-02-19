@@ -1,9 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 
-const luminescentTailwindConfig = require('./src/tailwind-config');
+import luminescentTailwindConfig from '@luminescent/ui';
 
-module.exports = {
-  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+export default {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}',
+    ...luminescentTailwindConfig.content,
+  ],
   theme: {
     extend: {
       animation: {
