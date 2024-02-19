@@ -11,9 +11,7 @@
       "require": "./lib/index.qwik.cjs",
       "types": "./lib-types/index.d.ts"
     },
-    "./config": {
-      "import": "./src/tailwind.config.js"
-    }
+    "./config": "./src/tailwind.config.js"
   },
   "files": [
     "lib",
