@@ -1,5 +1,5 @@
 import type { PropsOf, QRL } from '@builder.io/qwik';
-import { component$, useStore } from '@builder.io/qwik';
+import { Slot, component$, useStore } from '@builder.io/qwik';
 
 interface alertsStore {
   alerts: {
@@ -13,18 +13,17 @@ interface OutputFieldRawProps extends Omit<PropsOf<'textarea'>, 'class' | 'onCha
   onChange$?: QRL<(event: Event, element: HTMLTextAreaElement, alertsStore: alertsStore ) => any>
 }
 
-interface OutputFieldProps extends OutputFieldRawProps {
+interface OutputFieldProps extends Omit<OutputFieldRawProps, 'children'> {
   id: string;
-  label: string;
 }
 
 export const OutputField = component$<OutputFieldProps>((props) => {
   return (
     <div class="flex flex-col">
       <label for={props.id} class="mb-2">
-        {props.label}
+        <Slot />
       </label>
-      <OutputFieldRaw {...props} />
+      <OutputFieldRaw {...{ ...props, children: undefined }} />
     </div>
   );
 });

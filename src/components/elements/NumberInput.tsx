@@ -1,5 +1,5 @@
-import type { PropsOf, QRL } from '@builder.io/qwik';
-import { component$, useStore } from '@builder.io/qwik';
+import type { JSXChildren, PropsOf, QRL } from '@builder.io/qwik';
+import { Slot, component$, useStore } from '@builder.io/qwik';
 import { Add, Remove } from 'qwik-ionicons';
 
 interface NumberInputRawProps extends Omit<(PropsOf<'input'> & { type: 'number' }), 'class' | 'type'> {
@@ -13,18 +13,18 @@ interface NumberInputRawProps extends Omit<(PropsOf<'input'> & { type: 'number' 
   step?: number;
 }
 
-interface NumberInputProps extends NumberInputRawProps {
+interface NumberInputProps extends Omit<NumberInputRawProps, 'children'>{
   id: string;
-  label: string;
+  children?: JSXChildren;
 }
 
 export const NumberInput = component$<NumberInputProps>((props) => {
   return (
     <div class="flex flex-col">
       <label for={props.id} class="mb-2">
-        {props.label}
+        <Slot />
       </label>
-      <NumberInputRaw {...props} />
+      <NumberInputRaw {...{ ...props, children: undefined }} />
     </div>
   );
 });

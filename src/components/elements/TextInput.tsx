@@ -1,5 +1,5 @@
 import type { PropsOf } from '@builder.io/qwik';
-import { component$ } from '@builder.io/qwik';
+import { Slot, component$ } from '@builder.io/qwik';
 
 export interface TextInputRawProps extends Omit<(PropsOf<'input'> & { type: 'text' }), 'class' | 'type'> {
   class?: { [key: string]: boolean };
@@ -7,14 +7,13 @@ export interface TextInputRawProps extends Omit<(PropsOf<'input'> & { type: 'tex
 
 interface TextInputProps extends Omit<TextInputRawProps, 'children'> {
   id: string;
-  label: string;
 }
 
 export const TextInput = component$<TextInputProps>((props) => {
   return (
     <div class="flex flex-col">
       <label for={props.id} class="mb-2">
-        {props.label}
+        <Slot />
       </label>
       <TextInputRaw {...{ ...props, children: undefined }} />
     </div>

@@ -1,6 +1,6 @@
 
 import type { QRL } from '@builder.io/qwik';
-import { component$, useStore, useStyles$ } from '@builder.io/qwik';
+import { Slot, component$, useStore, useStyles$ } from '@builder.io/qwik';
 import type { TextInputRawProps } from './TextInput';
 import { TextInputRaw } from './TextInput';
 import { isServer } from '@builder.io/qwik/build';
@@ -12,10 +12,9 @@ import { ColorPicker } from '../../utils/simple-color-picker';
 // This is because the color picker is absolutely positioned.
 // ====================
 
-interface ColorInputProps extends Omit<TextInputRawProps, 'onInput$'> {
+interface ColorInputProps extends Omit<TextInputRawProps, 'onInput$' | 'children'> {
   onInput$?: QRL<(color: string, element: HTMLInputElement) => void>;
   value?: string;
-  label?: string;
   presetColors?: string[];
 }
 
@@ -117,11 +116,9 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#FFF
 
   return (
     <div>
-      {props.label &&
-        <label for={id} class="mb-2 flex">
-          {props.label}
-        </label>
-      }
+      <label for={id} class="mb-2 flex">
+        <Slot />
+      </label>
       <TextInputRaw {...props} value={store.value}
         onFocus$={(event, element) => {
           const pickerDiv = document.getElementById(`${id}-color-picker`)!;

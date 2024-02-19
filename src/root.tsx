@@ -61,12 +61,14 @@ export default component$(() => {
             Button
           </CardHeader>
           <div class="grid grid-cols-2 gap-4">
-            <SelectInput label="color" id="button-color" onChange$={(e, element) => store.button.color = element.value as keyof typeof buttonColorClasses}>
+            <SelectInput id="button-color" onChange$={(e, element) => store.button.color = element.value as keyof typeof buttonColorClasses}>
+              <span q:slot="label">color</span>
               {Object.keys(buttonColorClasses).map((color, i) => (
                 <option key={i} value={color} selected={color == 'gray'}>{color}</option>
               ))}
             </SelectInput>
-            <SelectInput label="size" id="button-size" onChange$={(e, element) => store.button.size = element.value as keyof typeof sizeClasses}>
+            <SelectInput id="button-size" onChange$={(e, element) => store.button.size = element.value as keyof typeof sizeClasses}>
+              <span q:slot="label">size</span>
               {Object.keys(sizeClasses).map((size, i) => (
                 <option key={i} value={size} selected={size == 'md'}>{size}</option>
               ))}
@@ -90,16 +92,25 @@ export default component$(() => {
             Card
           </CardHeader>
           <div class="flex">
-            <SelectInput label="color" id="button-color" onChange$={(e, element) => store.card.color = element.value as keyof typeof cardColorClasses}>
+            <SelectInput id="button-color" onChange$={(e, element) => store.card.color = element.value as keyof typeof cardColorClasses}>
+              <span q:slot="label">color</span>
               {Object.keys(cardColorClasses).map((color, i) => (
                 <option key={i} value={color} selected={color == 'darkgray'}>{color}</option>
               ))}
             </SelectInput>
           </div>
-          <Toggle label="hoverable" id="card-hoverable" onChange$={(e, element) => store.card.hoverable = element.checked} />
-          <Toggle label="row" id="card-row" onChange$={(e, element) => store.card.row = element.checked} />
-          <Toggle label="blobs" id="card-blobs" onChange$={(e, element) => store.card.blobs = element.checked} />
-          <Toggle label="loading" id="card-loading" onChange$={(e, element) => store.card.loading = element.checked} />
+          <Toggle id="card-hoverable" onChange$={(e, element) => store.card.hoverable = element.checked}>
+            hoverable
+          </Toggle>
+          <Toggle id="card-row" onChange$={(e, element) => store.card.row = element.checked}>
+            row
+          </Toggle>
+          <Toggle id="card-blobs" onChange$={(e, element) => store.card.blobs = element.checked}>
+            blobs
+          </Toggle>
+          <Toggle id="card-loading" onChange$={(e, element) => store.card.loading = element.checked}>
+            loading
+          </Toggle>
           <div>
             <Card
               color={store.card.color}
@@ -126,36 +137,56 @@ export default component$(() => {
             ColorInput
           </CardHeader>
           <div>
-            <ColorInput id="color-input" onInput$={() => {}} />
+            <ColorInput id="color-input" onInput$={() => {}}>
+              Color Input
+            </ColorInput>
           </div>
-          <OutputFieldRaw value={'<ColorInput id="color-input" />'} />
+          <OutputFieldRaw value={`
+<ColorInput id="color-input">
+  Color Input
+</ColorInput>`} />
         </Card>
         <Card>
           <CardHeader>
             NumberInput
           </CardHeader>
-          <Toggle label="input" id="numberinput-input" onChange$={(e, element) => store.numberinput.input = element.checked} />
+          <Toggle id="numberinput-input" onChange$={(e, element) => store.numberinput.input = element.checked}>
+            input
+          </Toggle>
           <div>
-            <NumberInput id="number-input" label="Number Input" onDecrement$={() => {}} onIncrement$={() => {}} input={store.numberinput.input} />
+            <NumberInput id="number-input" onDecrement$={() => {}} onIncrement$={() => {}} input={store.numberinput.input}>
+              Number Input
+            </NumberInput>
           </div>
-          <OutputFieldRaw value={`<NumberInput id="number-input" label="Number Input"${store.numberinput.input ? ' input' : ''} />`} />
+          <OutputFieldRaw value={`
+<NumberInput id="number-input" ${store.numberinput.input ? ' input' : ''}>
+  Number Input
+</NumberInput`} />
         </Card>
         <Card>
           <CardHeader>
             OutputField
           </CardHeader>
           <div>
-            <OutputField id="output-field" label="Output Field" value="text output" />
+            <OutputField id="output-field" value="text output">
+              Output Field
+            </OutputField>
           </div>
-          <OutputFieldRaw value={`<NumberInput id="number-input" label="Number Input"${store.numberinput.input ? ' input' : ''} value="text output" />`} />
+          <OutputFieldRaw value={`
+<NumberInput id="number-input"${store.numberinput.input ? ' input' : ''} value="text output">
+  Output Field
+</NumberInput>`} />
         </Card>
         <Card>
           <CardHeader>
             SelectInput
           </CardHeader>
-          <Toggle label="transparent" id="selectinput-transparent" onChange$={(e, element) => store.selectinput.transparent = element.checked} />
+          <Toggle id="selectinput-transparent" onChange$={(e, element) => store.selectinput.transparent = element.checked}>
+            transparent
+          </Toggle>
           <div>
-            <SelectInput id="select-input" label="Select Input" transparent={store.selectinput.transparent}>
+            <SelectInput id="select-input" transparent={store.selectinput.transparent}>
+              <span q:slot="label">Select Input</span>
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
               <option value="3">Option 3</option>
@@ -163,6 +194,7 @@ export default component$(() => {
           </div>
           <OutputFieldRaw value={`
 <SelectInput id="select-input" label="Select Input"${store.selectinput.transparent ? ' transparent' : ''}>
+  <span q:slot="label">Select Input</span>
   <option value="1">Option 1</option>
   <option value="2">Option 2</option>
   <option value="3">Option 3</option>
@@ -173,28 +205,45 @@ export default component$(() => {
             TextAreaInput
           </CardHeader>
           <div>
-            <TextAreaInput id="textarea-input" label="Text Area Input" value="Text" />
+            <TextAreaInput id="textarea-input" value="Text">
+              Text Area Input
+            </TextAreaInput>
           </div>
-          <OutputFieldRaw value={'<TextAreaInput id="textarea-input" label="Text Area Input" value="Text" />'} />
+          <OutputFieldRaw value={`
+<TextAreaInput id="textarea-input" value="Text">
+  Text Area Input
+</TextAreaInput>`} />
         </Card>
         <Card>
           <CardHeader>
             TextInput
           </CardHeader>
           <div>
-            <TextInput id="text-input" label="Text Input" value="Text" />
+            <TextInput id="text-input" value="Text">
+              Text Input
+            </TextInput>
           </div>
-          <OutputFieldRaw value={'<TextInput id="text-input" label="Text Input" value="Text" />'} />
+          <OutputFieldRaw value={`
+<TextInput id="text-input" value="Text">
+  Text Input
+</TextInput>`} />
         </Card>
         <Card>
           <CardHeader>
             Toggle
           </CardHeader>
-          <Toggle label="center" id="toggle-center" onChange$={(e, element) => store.toggle.center = element.checked} />
+          <Toggle id="toggle-center" onChange$={(e, element) => store.toggle.center = element.checked}>
+            center
+          </Toggle>
           <div>
-            <Toggle id="toggle" label="Toggle" center={store.toggle.center} />
+            <Toggle id="toggle" center={store.toggle.center}>
+              Toggle
+            </Toggle>
           </div>
-          <OutputFieldRaw value={`<Toggle id="toggle" label="Toggle"${store.toggle.center ? ' center' : ''} />`} />
+          <OutputFieldRaw value={`
+<Toggle id="toggle"${store.toggle.center ? ' center' : ''}>
+  Toggle
+</Toggle>`} />
         </Card>
       </body>
     </>
