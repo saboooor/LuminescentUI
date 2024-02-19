@@ -1,4 +1,4 @@
-import type { JSXChildren, PropsOf, QRL } from '@builder.io/qwik';
+import type { PropsOf, QRL } from '@builder.io/qwik';
 import { Slot, component$, useStore } from '@builder.io/qwik';
 import { Add, Remove } from 'qwik-ionicons';
 
@@ -15,7 +15,6 @@ interface NumberInputRawProps extends Omit<(PropsOf<'input'> & { type: 'number' 
 
 interface NumberInputProps extends Omit<NumberInputRawProps, 'children'>{
   id: string;
-  children?: JSXChildren;
 }
 
 export const NumberInput = component$<NumberInputProps>((props) => {
