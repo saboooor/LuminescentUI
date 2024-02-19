@@ -44,25 +44,29 @@ function getBlobKeyFrame() {
   return keyframe;
 }
 
-export default {
+module.exports = {
   content: ['./node_modules/@luminescent/ui/**/*.{mjs,cjs}'],
-  animation: {
-    blob: 'blob 15s infinite',
-    blob1: 'blob1 15s infinite',
-    blob2: 'blob2 15s infinite',
-    blob3: 'blob3 15s infinite',
-    blob4: 'blob4 15s infinite',
-    blob5: 'blob5 15s infinite',
-    blob6: 'blob6 15s infinite',
-    float: 'float 6s infinite',
-  },
-  keyframes: {
-    blob: getBlobKeyFrame(),
-    blob1: getBlobKeyFrame(),
-    blob2: getBlobKeyFrame(),
-    blob3: getBlobKeyFrame(),
-    blob4: getBlobKeyFrame(),
-    blob5: getBlobKeyFrame(),
-    blob6: getBlobKeyFrame(),
-  },
+  theme: {
+    extend: {
+      animation: {
+        blob: 'blob 15s infinite',
+        blob1: 'blob1 15s infinite',
+        blob2: 'blob2 15s infinite',
+        blob3: 'blob3 15s infinite',
+        blob4: 'blob4 15s infinite',
+        blob5: 'blob5 15s infinite',
+        blob6: 'blob6 15s infinite',
+        float: 'float 6s infinite',
+      },
+      keyframes: {
+        blob: getBlobKeyFrame(),
+        blob1: getBlobKeyFrame(),
+        blob2: getBlobKeyFrame(),
+        blob3: getBlobKeyFrame(),
+        blob4: getBlobKeyFrame(),
+        blob5: getBlobKeyFrame(),
+        blob6: getBlobKeyFrame(),
+      },    
+    }
+  }
 };

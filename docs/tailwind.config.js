@@ -1,19 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 
-import luminescentTailwindConfig from '@luminescent/ui/config';
+import { theme, content } from '@luminescent/ui/config';
 
 export default {
   content: [
     './src/**/*.{js,ts,jsx,tsx}',
-    ...luminescentTailwindConfig.content,
+    ...content,
   ],
   theme: {
     extend: {
       animation: {
-        ...luminescentTailwindConfig.animation,
+        ...theme.extend.animation,
       },
       keyframes: {
-        ...luminescentTailwindConfig.keyframes,
+        ...theme.extend.keyframes,
       },
     },
   },

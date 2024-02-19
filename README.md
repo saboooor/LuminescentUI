@@ -23,11 +23,11 @@ export default {
     extend: {
       animation: {
         // ...
-        ...tailwindConfig.animation,
+        ...tailwindConfig.theme.extend.animation,
       },
       keyframes: {
         // ...
-        ...tailwindConfig.keyframes,
+        ...tailwindConfig.theme.extend.keyframes,
       },
     },
   },

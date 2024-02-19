@@ -12,13 +12,13 @@
       "types": "./lib-types/index.d.ts"
     },
     "./config": {
-      "import": "./src/tailwind-config.ts"
+      "import": "./src/tailwind.config.js"
     }
   },
   "files": [
     "lib",
     "lib-types",
-    "src/tailwind-config.ts"
+    "src/tailwind.config.js"
   ],
   "engines": {
     "node": ">=15.0.0"
