@@ -11,14 +11,6 @@ interface TextAreaProps extends Omit<TextAreaRawProps, 'children'> {
   id: string;
 }
 
-interface alertsStore {
-  alerts: {
-    class: string;
-    text: string;
-  }[];
-}
-
-
 export const TextArea = component$<TextAreaProps>((props) => {
   return (
     <div class="flex flex-col">
@@ -41,7 +33,7 @@ export const TextAreaRaw = component$<TextAreaRawProps>(({ output, ...props }) =
       navigator.clipboard.writeText(element.value);
       const notification = document.createElement('div');
       notification.className = 'fixed bottom-0 right-0 px-6 py-4 m-6 bg-green-600/50 border border-green-500 text-gray-50 rounded-md shadow-lg whitespace-nowrap backdrop-blur-xl';
-      notification.innerText = `Copied to clipboard!`;
+      notification.innerText = 'Copied to clipboard!';
       document.body.appendChild(notification);
       setTimeout(() => {
         notification.remove();

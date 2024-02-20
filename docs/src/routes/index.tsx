@@ -1,6 +1,6 @@
 import { component$, useStore } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
-import { Button, ButtonAnchor, Card, CardHeader, ColorInput, NumberInput, OutputField, OutputFieldRaw, SelectInput, TextAreaInput, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses, LogoLuminescentFull } from '@luminescent/ui';
+import { Button, ButtonAnchor, Card, CardHeader, ColorInput, NumberInput, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses, LogoLuminescentFull } from '@luminescent/ui';
 
 interface docsStore {
   button: {
@@ -10,17 +10,23 @@ interface docsStore {
   };
   card: {
     color?: keyof typeof cardColorClasses;
-    hoverable?: boolean;
+    hover?: boolean | 'clickable';
     row?: boolean;
     blobs?: boolean;
     loading?: boolean;
+  };
+  colorinput: {
+    preview?: 'left' | 'right' | 'top' | 'bottom' | 'full';
   };
   numberinput: {
     input?: boolean;
   };
   selectinput: {
     transparent?: boolean;
-  }
+  };
+  textarea: {
+    output?: boolean;
+  };
   toggle: {
     center?: boolean;
   };
@@ -30,8 +36,10 @@ export default component$(() => {
   const store = useStore<docsStore>({
     button: {},
     card: {},
+    colorinput: {},
     numberinput: {},
     selectinput: {},
+    textarea: {},
     toggle: {},
   });
   return (
@@ -48,26 +56,26 @@ export default component$(() => {
         <ButtonAnchor href="#anchor">
           Scroll to anchor
         </ButtonAnchor>
-        <OutputFieldRaw value={'<Anchor id="anchor"/>'} />
+        <TextAreaRaw output value={'<Anchor id="anchor"/>'} />
       </Card>
       <Card>
         <CardHeader>
           Button
         </CardHeader>
-        <div class="grid grid-cols-2 gap-4">
-          <SelectInput id="button-color" onChange$={(e, element) => store.button.color = element.value as keyof typeof buttonColorClasses}>
-            <span q:slot="label">color</span>
-            {Object.keys(buttonColorClasses).map((color, i) => (
-              <option key={i} value={color} selected={color == 'gray'}>{color}</option>
-            ))}
-          </SelectInput>
-          <SelectInput id="button-size" onChange$={(e, element) => store.button.size = element.value as keyof typeof sizeClasses}>
-            <span q:slot="label">size</span>
-            {Object.keys(sizeClasses).map((size, i) => (
-              <option key={i} value={size} selected={size == 'md'}>{size}</option>
-            ))}
-          </SelectInput>
-        </div>
+        <SelectInput id="button-color"
+          onChange$={(e, element) => store.button.color = element.value as keyof typeof buttonColorClasses}
+          values={Object.keys(buttonColorClasses).map((color) => ({ name: color, value: color }))}
+          value="gray"
+        >
+          color
+        </SelectInput>
+        <SelectInput id="button-size"
+          onChange$={(e, element) => store.button.size = element.value as keyof typeof sizeClasses}
+          values={Object.keys(sizeClasses).map((size) => ({ name: size, value: size }))}
+          value="md"
+        >
+          size
+        </SelectInput>
         <div>
           <Button
             color={store.button.color}
@@ -76,7 +84,7 @@ export default component$(() => {
             Button
           </Button>
         </div>
-        <OutputFieldRaw value={`
+        <TextAreaRaw output value={`
 <Button${(store.button.color && ` color="${store.button.color}"`) ?? ''}${(store.button.size && ` size="${store.button.size}"`) ?? ''}>
   Button
 </Button>`} />
@@ -86,15 +94,19 @@ export default component$(() => {
           Card
         </CardHeader>
         <div class="flex">
-          <SelectInput id="button-color" onChange$={(e, element) => store.card.color = element.value as keyof typeof cardColorClasses}>
-            <span q:slot="label">color</span>
-            {Object.keys(cardColorClasses).map((color, i) => (
-              <option key={i} value={color} selected={color == 'darkgray'}>{color}</option>
-            ))}
+          <SelectInput id="card-color"
+            onChange$={(e, element) => store.card.color = element.value as keyof typeof cardColorClasses}
+            values={Object.keys(cardColorClasses).map((color) => ({ name: color, value: color }))}
+            value="darkgray"
+          >
+            color
           </SelectInput>
         </div>
-        <Toggle id="card-hoverable" onChange$={(e, element) => store.card.hoverable = element.checked}>
+        <Toggle id="card-hoverable" checked={store.card.hover == 'clickable' || store.card.hover} onChange$={(e, element) => store.card.hover = element.checked}>
           hoverable
+        </Toggle>
+        <Toggle id="card-clickable" checked={store.card.hover == 'clickable'} onChange$={(e, element) => store.card.hover = element.checked ? 'clickable' : false}>
+          clickable
         </Toggle>
         <Toggle id="card-row" onChange$={(e, element) => store.card.row = element.checked}>
           row
@@ -108,7 +120,7 @@ export default component$(() => {
         <div>
           <Card
             color={store.card.color}
-            hoverable={store.card.hoverable}
+            hover={store.card.hover}
             row={store.card.row}
             blobs={store.card.blobs}
           >
@@ -118,8 +130,8 @@ export default component$(() => {
             Description
           </Card>
         </div>
-        <OutputFieldRaw value={`
-<Card${(store.card.color && ` color="${store.card.color}"`) ?? ''}${store.card.hoverable ? ' hoverable' : ''}${store.card.row ? ' row' : ''}${store.card.blobs ? ' blobs' : ''}>
+        <TextAreaRaw output value={`
+<Card${(store.card.color && ` color="${store.card.color}"`) ?? ''}${store.card.hover ? ' hover' : ''}${store.card.hover == 'clickable' ? '="clickable"' : ''}${store.card.row ? ' row' : ''}${store.card.blobs ? ' blobs' : ''}>
   <CardHeader ${store.card.loading ? 'loading' : ''}>
     Header
   </CardHeader>
@@ -130,13 +142,20 @@ export default component$(() => {
         <CardHeader>
           ColorInput
         </CardHeader>
+        <SelectInput id="color-preview"
+          onChange$={(e, element) => store.colorinput.preview = element.value as 'left' | 'right' | 'top' | 'bottom' | 'full'}
+          values={['left', 'right', 'top', 'bottom', 'full'].map((preview) => ({ name: preview, value: preview }))}
+          value="left"
+        >
+          preview
+        </SelectInput>
         <div>
-          <ColorInput id="color-input" onInput$={() => {}}>
+          <ColorInput id="color-input" onInput$={() => {}} preview={store.colorinput.preview}>
             Color Input
           </ColorInput>
         </div>
-        <OutputFieldRaw value={`
-<ColorInput id="color-input">
+        <TextAreaRaw output value={`
+<ColorInput id="color-input"${store.colorinput.preview ? ` preview="${store.colorinput.preview}"` : ''}>
   Color Input
 </ColorInput>`} />
       </Card>
@@ -152,61 +171,55 @@ export default component$(() => {
             Number Input
           </NumberInput>
         </div>
-        <OutputFieldRaw value={`
+        <TextAreaRaw output value={`
 <NumberInput id="number-input" ${store.numberinput.input ? ' input' : ''}>
   Number Input
 </NumberInput`} />
       </Card>
       <Card>
         <CardHeader>
-          OutputField
-        </CardHeader>
-        <div>
-          <OutputField id="output-field" value="text output">
-            Output Field
-          </OutputField>
-        </div>
-        <OutputFieldRaw value={`
-<NumberInput id="number-input"${store.numberinput.input ? ' input' : ''} value="text output">
-  Output Field
-</NumberInput>`} />
-      </Card>
-      <Card>
-        <CardHeader>
           SelectInput
         </CardHeader>
-        <Toggle id="selectinput-transparent" onChange$={(e, element) => store.selectinput.transparent = element.checked}>
-          transparent
-        </Toggle>
         <div>
-          <SelectInput id="select-input" transparent={store.selectinput.transparent}>
-            <span q:slot="label">Select Input</span>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
+          <SelectInput id="select-input"
+            values={[
+              { name: 'Option 1', value: '1' },
+              { name: 'Option 2', value: '2' },
+              { name: 'Option 3', value: '3' },
+            ]}
+            value="1"
+          >
+            Select Input
           </SelectInput>
         </div>
-        <OutputFieldRaw value={`
-  <SelectInput id="select-input" label="Select Input"${store.selectinput.transparent ? ' transparent' : ''}>
-    <span q:slot="label">Select Input</span>
-    <option value="1">Option 1</option>
-    <option value="2">Option 2</option>
-    <option value="3">Option 3</option>
-  </SelectInput>`} />
+        <TextAreaRaw output value={`
+<SelectInput id="select-input"
+  values={[
+    { name: 'Option 1', value: '1' },
+    { name: 'Option 2', value: '2' },
+    { name: 'Option 3', value: '3' },
+  ]}
+  value="1"
+>
+  Select Input
+</SelectInput>`} />
       </Card>
       <Card>
         <CardHeader>
-          TextAreaInput
+          TextArea
         </CardHeader>
+        <Toggle id="textarea-output" onChange$={(e, element) => store.textarea.output = element.checked}>
+          output
+        </Toggle>
         <div>
-          <TextAreaInput id="textarea-input" value="Text">
-            Text Area Input
-          </TextAreaInput>
+          <TextArea id="textarea" value="Text" output={store.textarea.output}>
+            Text Area
+          </TextArea>
         </div>
-        <OutputFieldRaw value={`
-<TextAreaInput id="textarea-input" value="Text">
-  Text Area Input
-</TextAreaInput>`} />
+        <TextAreaRaw output value={`
+<TextArea id="textarea" value="Text"${store.textarea.output ? ' output' : ''}>
+  Text Area
+</TextArea>`} />
       </Card>
       <Card>
         <CardHeader>
@@ -217,7 +230,7 @@ export default component$(() => {
             Text Input
           </TextInput>
         </div>
-        <OutputFieldRaw value={`
+        <TextAreaRaw output value={`
 <TextInput id="text-input" value="Text">
   Text Input
 </TextInput>`} />
@@ -234,7 +247,7 @@ export default component$(() => {
             Toggle
           </Toggle>
         </div>
-        <OutputFieldRaw value={`
+        <TextAreaRaw output value={`
 <Toggle id="toggle"${store.toggle.center ? ' center' : ''}>
   Toggle
 </Toggle>`} />

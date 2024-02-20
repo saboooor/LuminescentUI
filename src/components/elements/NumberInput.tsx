@@ -41,7 +41,7 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, onDecrem
     input[type=number] {
       -moz-appearance: textfield;
     }
-  `)
+  `);
 
   const store = useStore({
     value,
