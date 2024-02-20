@@ -30,7 +30,7 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, ...pro
 
   return (
     <div class="relative">
-      <select {...props} id={id} class={{
+      <select {...{ ...props, class: undefined }} id={id} class={{
         'hidden': true,
       }}>
         {values.map((value, i) => {
