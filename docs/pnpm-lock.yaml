@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 devDependencies:
+  '@anuragroy/tailwindcss-animate':
+    specifier: ^1.0.6
+    version: 1.0.6(tailwindcss@3.4.1)
   '@builder.io/qwik':
     specifier: ^1.4.5
     version: 1.4.5(@types/node@20.11.19)(undici@6.6.2)
@@ -67,6 +70,14 @@ packages:
   /@alloc/quick-lru@5.2.0:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
+    dev: true
+
+  /@anuragroy/tailwindcss-animate@1.0.6(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-kErZ8jqKVJIcOSemkxhhzioYULx6afpQWldsKBUYMiJctwexjcEfgOf772i4QkagWPwwxPwWP09XvTG3dKjHcQ==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
+    dependencies:
+      tailwindcss: 3.4.1
     dev: true
 
   /@builder.io/qwik-city@1.4.5(@types/node@20.11.19):
