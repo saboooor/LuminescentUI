@@ -38,20 +38,21 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, ...pro
         })}
       </select>
       <Button class={{
+        'flex': true,
         ...props.class,
       }} onClick$={() => {
         store.opened = !store.opened;
       }}>
-        <span id={`lui-${id}-name`}>
+        <span id={`lui-${id}-name`} class="flex-1 text-left">
           {values.find((value) => value.value.toString() === props.value)?.name ?? values[0].name}
         </span>
-        <ChevronDown width={20} class={{
+        <ChevronDown width={16} class={{
           'transition-all duration-200': true,
           'transform rotate-180': store.opened,
         }}/>
       </Button>
       <div id={`lui-${id}-opts`} class={{
-        'transition-all absolute top-full p-1 mt-2 gap-1 left-0 bg-gray-800/50 backdrop-blur-xl flex flex-col rounded-lg border border-gray-700 z-[1000] max-h-72 overflow-scroll': true,
+        'transition-all absolute top-full left-0 p-1 mt-2 gap-1 bg-gray-800/50 backdrop-blur-xl flex flex-col rounded-lg border border-gray-700 z-[1000] max-h-72 overflow-scroll select-none': true,
         'pointer-events-none opacity-0 scale-95': !store.opened,
       }}>
         {values.map((value, i) => {

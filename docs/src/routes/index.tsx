@@ -1,6 +1,9 @@
 import { component$, useStore } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
-import { Button, ButtonAnchor, Card, CardHeader, ColorInput, NumberInput, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses, LogoLuminescentFull } from '@luminescent/ui';
+import {
+  Button, ButtonAnchor, Card, CardHeader, ColorInput, NumberInput, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses,
+  LogoBirdflop, LogoDiscord, LogoFabric, LogoForge, LogoLuminescent, LogoLuminescentFull, LogoPaper, LogoPterodactyl, LogoPurpur, LogoVelocity, LogoWaterfall, LoadingIcon,
+} from '@luminescent/ui';
 
 interface docsStore {
   button: {
@@ -251,6 +254,27 @@ export default component$(() => {
 <Toggle id="toggle"${store.toggle.center ? ' center' : ''}>
   Toggle
 </Toggle>`} />
+      </Card>
+      <Card>
+        <CardHeader>
+          Icons/Logos
+        </CardHeader>
+        <Card>
+          <div class="flex gap-10 flex-wrap justify-evenly">
+            <LogoBirdflop width={40} />
+            <LogoDiscord width={40} />
+            <LogoFabric width={40} />
+            <LogoForge width={40} />
+            <LoadingIcon width={40} />
+            <LogoLuminescent width={40} />
+            <LogoLuminescentFull width={40} />
+            <LogoPaper width={40} />
+            <LogoPterodactyl width={40} />
+            <LogoPurpur width={40} />
+            <LogoVelocity width={40} />
+            <LogoWaterfall width={40} />
+          </div>
+        </Card>
       </Card>
     </section>
   );

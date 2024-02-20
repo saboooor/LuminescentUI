@@ -3,7 +3,7 @@ import type { IconProps } from './IconProps';
 
 export const LogoLuminescent = component$<IconProps>((props) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomAndPan="magnify" viewBox="0 0 375 375" preserveAspectRatio="xMidYMid meet" version="1.0"
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomAndPan="magnify" viewBox="80 80 220 220" preserveAspectRatio="xMidYMid meet" version="1.0" fill="currentColor"
       {...props} height={props.width} >
       <g fill-opacity="1">
         <g transform="translate(86.97656, 254.624983)">
@@ -16,7 +16,7 @@ export const LogoLuminescent = component$<IconProps>((props) => {
 
 export const LogoLuminescentFull = component$<IconProps>((props) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomAndPan="magnify" viewBox="0 0 1230 318" preserveAspectRatio="xMidYMid meet" version="1.0"
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomAndPan="magnify" viewBox="30 60 1160 200" preserveAspectRatio="xMidYMid meet" version="1.0" fill="currentColor"
       {...props}>
       <g fill-opacity="1">
         <g transform="translate(12.743357, 223.612604)">

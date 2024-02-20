@@ -1,7 +1,7 @@
 
 import type { PropsOf } from '@builder.io/qwik';
 import { Slot, component$ } from '@builder.io/qwik';
-import { LoadingIcon } from '../logos/LoadingIcon';
+import { LoadingIcon } from './LoadingIcon';
 import { Anchor } from './Anchor';
 
 interface CardProps extends Omit<PropsOf<'div'>, 'class'> {
@@ -233,7 +233,7 @@ export const CardHeader = component$<CardHeaderProps>(({ id, loading = false }) 
           'opacity-0': !loading,
           'opacity-100': loading,
         }}>
-          <LoadingIcon width={20} class={{ 'text-white': true }} />
+          <LoadingIcon width={24} />
         </div>
       }
     </h1>

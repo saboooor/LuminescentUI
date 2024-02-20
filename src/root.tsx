@@ -1,7 +1,7 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Button, ButtonAnchor, Card, CardHeader, ColorInput, NumberInput, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses } from './components/elements';
+import { Button, ButtonAnchor, Card, CardHeader, ColorInput, NumberInput, LoadingIcon, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses } from './components/elements';
+import { LogoBirdflop, LogoDiscord, LogoFabric, LogoForge, LogoLuminescent, LogoLuminescentFull, LogoPaper, LogoPterodactyl, LogoPurpur, LogoVelocity, LogoWaterfall } from './components/logos';
 import './global.css';
-import { LogoLuminescentFull } from './components/logos';
 
 interface docsStore {
   button: {
@@ -51,7 +51,7 @@ export default component$(() => {
       </head>
       <body class="bg-gray-950 text-gray-200 max-w-6xl mx-auto py-20 flex flex-col gap-4">
         <div style="filter: drop-shadow(0 0 2rem #CB6CE6);">
-          <div class="text-5xl font-semibold mb-6 flex items-center gap-1 text-[#f0ccfb] fill-[#f0ccfb]" style="filter: drop-shadow(0 0 2rem #CB6CE6);">
+          <div class="text-5xl font-semibold mb-6 flex items-center gap-4 text-[#f0ccfb] fill-[#f0ccfb]" style="filter: drop-shadow(0 0 2rem #CB6CE6);">
             <LogoLuminescentFull width={250} class="mt-1.5" /> / ui
           </div>
         </div>
@@ -257,6 +257,27 @@ export default component$(() => {
 <Toggle id="toggle"${store.toggle.center ? ' center' : ''}>
   Toggle
 </Toggle>`} />
+        </Card>
+        <Card>
+          <CardHeader>
+            Icons/Logos
+          </CardHeader>
+          <Card>
+            <div class="flex gap-10 flex-wrap justify-evenly">
+              <LogoBirdflop width={40} />
+              <LogoDiscord width={40} />
+              <LogoFabric width={40} />
+              <LogoForge width={40} />
+              <LoadingIcon width={40} />
+              <LogoLuminescent width={40} />
+              <LogoLuminescentFull width={40} />
+              <LogoPaper width={40} />
+              <LogoPterodactyl width={40} />
+              <LogoPurpur width={40} />
+              <LogoVelocity width={40} />
+              <LogoWaterfall width={40} />
+            </div>
+          </Card>
         </Card>
       </body>
     </>
