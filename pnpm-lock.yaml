@@ -21,10 +21,10 @@ devDependencies:
     specifier: ^20.11.19
     version: 20.11.19
   '@typescript-eslint/eslint-plugin':
-    specifier: ^7.0.1
+    specifier: ^7.0.2
     version: 7.0.2(@typescript-eslint/parser@7.0.2)(eslint@8.56.0)(typescript@5.3.3)
   '@typescript-eslint/parser':
-    specifier: ^7.0.1
+    specifier: ^7.0.2
     version: 7.0.2(eslint@8.56.0)(typescript@5.3.3)
   autoprefixer:
     specifier: ^10.4.17
