@@ -23,14 +23,14 @@ export const SelectInput = component$<SelectInputProps>((props) => {
   );
 });
 
-export const SelectInputRaw = component$<SelectInputProps>(({ id, values, ...props }) => {
+export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class: Class, ...props }) => {
   const store = useStore({
     opened: false,
   });
 
   return (
     <div class="relative">
-      <select {...{ ...props, class: undefined }} id={id} class={{
+      <select {...props} id={id} class={{
         'hidden': true,
       }}>
         {values.map((value, i) => {
@@ -39,7 +39,7 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, ...pro
       </select>
       <Button class={{
         'flex': true,
-        ...props.class,
+        ...Class,
       }} onClick$={() => {
         store.opened = !store.opened;
       }}>
