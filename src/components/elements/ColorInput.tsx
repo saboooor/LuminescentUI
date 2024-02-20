@@ -1,6 +1,6 @@
 
 import type { QRL } from '@builder.io/qwik';
-import { Slot, component$, useStore, useStyles$ } from '@builder.io/qwik';
+import { Slot, component$, useStyles$ } from '@builder.io/qwik';
 import type { TextInputRawProps } from './TextInput';
 import { TextInputRaw } from './TextInput';
 import { isServer } from '@builder.io/qwik/build';
@@ -64,7 +64,7 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
       top: -7px;
       left: -7px;
       box-sizing: border-box;
-≈    }
+    }
 
     .color-picker-hue {
       width: 8px;
@@ -111,16 +111,12 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
 
   const { id } = props;
 
-  const store = useStore({
-    value: value || '#FFFFFF',
-  });
-
   return (
     <div>
       <label for={id} class="mb-2 flex">
         <Slot />
       </label>
-      <TextInputRaw {...props} value={store.value}
+      <TextInputRaw {...props} value={value}
         onFocus$={(event, element) => {
           const pickerDiv = document.getElementById(`${id}-color-picker`)!;
 
@@ -128,19 +124,36 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
             if (isServer) return;
             const picker = new ColorPicker({
               el: pickerDiv,
-              color: store.value,
+              color: value,
               colors: presetColors,
               width: 150,
               height: 150,
             });
             picker.onChange((color: string) => {
-              store.value = color;
+              element.value = color;
+              switch (preview) {
+              case 'full':
+                element.style.backgroundColor = color;
+                element.style.color = getBrightness(hexNumberToRgb(hexStringToNumber(color))) > 0.5 ? 'black' : 'white';
+                break;
+              case 'left':
+                element.style.borderLeft = `40px solid ${color}`;
+                break;
+              case 'right':
+                element.style.borderRight = `40px solid ${color}`;
+                break;
+              case 'top':
+                element.style.borderTop = `10px solid ${color}`;
+                break;
+              case 'bottom':
+                element.style.borderBottom = `10px solid ${color}`;
+                break;
+              }
               if (onInput$) onInput$(color, element);
             });
-            element.addEventListener('input', () => {
-              if (!/^#[0-9A-F]{6}$/i.test(element.value)) return;
-              picker.setColor(element.value);
-            });
+
+            // do not touch, use picker.onChange instead
+            element.addEventListener('input', () => picker.setColor(element.value));
           }
 
           pickerDiv.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
@@ -150,16 +163,16 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
           pickerDiv.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
         }}
         style={preview == 'full' ? {
-          backgroundColor: `${store.value}`,
-          color: getBrightness(hexNumberToRgb(hexStringToNumber(store.value))) > 0.5 ? 'black' : 'white',
+          backgroundColor: `${value}`,
+          color: getBrightness(hexNumberToRgb(hexStringToNumber(value))) > 0.5 ? 'black' : 'white',
         } : preview == 'left' ? {
-          borderLeft: `40px solid ${store.value}`,
+          borderLeft: `40px solid ${value}`,
         } : preview == 'right' ? {
-          borderRight: `40px solid ${store.value}`,
+          borderRight: `40px solid ${value}`,
         } : preview == 'top' ? {
-          borderTop: `10px solid ${store.value}`,
+          borderTop: `10px solid ${value}`,
         } : preview == 'bottom' ? {
-          borderBottom: `10px solid ${store.value}`,
+          borderBottom: `10px solid ${value}`,
         } : {}
         }
       />
