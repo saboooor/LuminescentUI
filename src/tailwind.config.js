@@ -69,7 +69,4 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('@anuragroy/tailwindcss-animate'),
-  ],
 };

@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-const { theme, plugins } = require('./src/tailwind.config');
+const { theme } = require('./src/tailwind.config');
 
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
@@ -15,6 +15,6 @@ module.exports = {
     },
   },
   plugins: [
-    ...plugins,
-  ]
+    require('@anuragroy/tailwindcss-animate'),
+  ],
 };

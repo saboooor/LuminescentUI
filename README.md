@@ -3,7 +3,7 @@
 To use the Luminescent UI Qwik Library, you need to install the package from npm.
 
 ```bash
-npm install @luminescent/ui
+npm install @anuragroy/tailwindcss-animate @luminescent/ui
 ```
 
 Once installed, since this is a tailwind based library, you need to include the following to your tailwind config
@@ -36,7 +36,7 @@ export default {
   },
   plugins: [
     // ...
-    ...tailwindConfig.plugins,
+    require('@anuragroy/tailwindcss-animate'),
   ],
 };
 ```
