@@ -38,7 +38,7 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
         })}
       </select>
       <Button class={{
-        'flex': true,
+        'flex focus:bg-gray-700': true,
         ...Class,
       }} onClick$={() => {
         store.opened = !store.opened;
