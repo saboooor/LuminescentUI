@@ -5,6 +5,7 @@ import type { TextInputRawProps } from './TextInput';
 import { TextInputRaw } from './TextInput';
 import { isServer } from '@builder.io/qwik/build';
 import { ColorPicker } from '../../utils/simple-color-picker';
+import { getBrightness, hexNumberToRgb, hexStringToNumber } from '../../utils/simple-color-picker/color';
 
 // COLOR INPUT
 // ====================
@@ -12,13 +13,14 @@ import { ColorPicker } from '../../utils/simple-color-picker';
 // This is because the color picker is absolutely positioned.
 // ====================
 
-interface ColorInputProps extends Omit<TextInputRawProps, 'onInput$' | 'children'> {
+export interface ColorInputProps extends Omit<TextInputRawProps, 'onInput$' | 'children'> {
   onInput$?: QRL<(color: string, element: HTMLInputElement) => void>;
   value?: string;
   presetColors?: string[];
+  preview?: 'left' | 'right' | 'top' | 'bottom' | 'full';
 }
 
-export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#FFFFFF', presetColors, ...props }) => {
+export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000000', presetColors, preview = 'left', ...props }) => {
   useStyles$(`
     .color-picker {
       display: flex;
@@ -33,6 +35,7 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#FFF
       backdrop-filter: blur(10px);
       user-select: none;
       position: relative;
+      z-index: 1000;
     }
 
     .color-picker-saturation {
@@ -61,8 +64,7 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#FFF
       top: -7px;
       left: -7px;
       box-sizing: border-box;
-      z-index: 10;
-    }
+≈    }
 
     .color-picker-hue {
       width: 8px;
@@ -104,7 +106,6 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#FFF
       top: -6px;
       left: -4px;
       box-sizing: border-box;
-      z-index: 10;
     }
   `);
 
@@ -142,17 +143,27 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#FFF
             });
           }
 
-          pickerDiv.style.display = 'block';
+          pickerDiv.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
         }}
         onBlur$={() => {
           const pickerDiv = document.getElementById(`${id}-color-picker`)!;
-          pickerDiv.style.display = 'none';
+          pickerDiv.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
         }}
-        style={{
+        style={preview == 'full' ? {
+          backgroundColor: `${store.value}`,
+          color: getBrightness(hexNumberToRgb(hexStringToNumber(store.value))) > 0.5 ? 'black' : 'white',
+        } : preview == 'left' ? {
           borderLeft: `40px solid ${store.value}`,
-        }}
+        } : preview == 'right' ? {
+          borderRight: `40px solid ${store.value}`,
+        } : preview == 'top' ? {
+          borderTop: `10px solid ${store.value}`,
+        } : preview == 'bottom' ? {
+          borderBottom: `10px solid ${store.value}`,
+        } : {}
+        }
       />
-      <div id={`${id}-color-picker`} class="hidden absolute mt-2" />
+      <div id={`${id}-color-picker`} class="absolute mt-2 opacity-0 transition-all pointer-events-none scale-95"></div>
     </div>
   );
 });

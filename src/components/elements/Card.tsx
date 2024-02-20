@@ -1,12 +1,12 @@
 
 import type { PropsOf } from '@builder.io/qwik';
-import { Slot, component$, useStyles$ } from '@builder.io/qwik';
+import { Slot, component$ } from '@builder.io/qwik';
 import { LoadingIcon } from '../logos/LoadingIcon';
 import { Anchor } from './Anchor';
 
 interface CardProps extends Omit<PropsOf<'div'>, 'class'> {
   color?: keyof typeof cardColorClasses;
-  hoverable?: boolean;
+  hover?: boolean | 'clickable';
   href?: string;
   row?: boolean;
   blobs?: boolean;
@@ -24,6 +24,7 @@ export const cardColorClasses = {
       bg_blobs: 'bg-pink-400/10 border-pink-400/20',
       bg: 'bg-pink-400/60 border-pink-400',
       hover: 'hover:bg-pink-400/20',
+      click: 'active:bg-pink-300/20',
     },
     blobs: [
       'bg-pink-400',
@@ -33,9 +34,10 @@ export const cardColorClasses = {
   },
   red: {
     card: {
-      bg_blobs: 'bg-purple-400/10 border-purple-400/20',
+      bg_blobs: 'bg-red-400/10 border-red-400/20',
       bg: 'bg-red-400/60 border-red-400',
-      hover: 'hover:bg-purple-400/20',
+      hover: 'hover:bg-red-400/20',
+      click: 'active:bg-red-300/20',
     },
     blobs: [
       'bg-red-400',
@@ -48,6 +50,7 @@ export const cardColorClasses = {
       bg_blobs: 'bg-orange-400/10 border-orange-400/20',
       bg: 'bg-orange-400/60 border-orange-400',
       hover: 'hover:bg-orange-400/20',
+      click: 'active:bg-orange-300/20',
     },
     blobs: [
       'bg-orange-400',
@@ -60,6 +63,7 @@ export const cardColorClasses = {
       bg_blobs: 'bg-yellow-400/10 border-yellow-400/20',
       bg: 'bg-yellow-400/60 border-yellow-400',
       hover: 'hover:bg-yellow-400/20',
+      click: 'active:bg-yellow-300/20',
     },
     blobs: [
       'bg-yellow-400',
@@ -72,6 +76,7 @@ export const cardColorClasses = {
       bg_blobs: 'bg-green-400/10 border-green-400/20',
       bg: 'bg-green-400/60 border-green-400',
       hover: 'hover:bg-green-400/20',
+      click: 'active:bg-green-300/20',
     },
     blobs: [
       'bg-green-400',
@@ -84,6 +89,7 @@ export const cardColorClasses = {
       bg_blobs: 'bg-blue-400/10 border-blue-400/20',
       bg: 'bg-blue-400/60 border-blue-400',
       hover: 'hover:bg-blue-400/20',
+      click: 'active:bg-blue-300/20',
     },
     blobs: [
       'bg-blue-400',
@@ -96,6 +102,7 @@ export const cardColorClasses = {
       bg_blobs: 'bg-purple-400/10 border-purple-400/20',
       bg: 'bg-purple-400/60 border-purple-400',
       hover: 'hover:bg-purple-400/20',
+      click: 'active:bg-purple-300/20',
     },
     blobs: [
       'bg-purple-400',
@@ -108,6 +115,7 @@ export const cardColorClasses = {
       bg_blobs: 'bg-gray-400/10 border-gray-400/20',
       bg: 'bg-gray-400/60 border-gray-400',
       hover: 'hover:bg-gray-400/20',
+      click: 'active:bg-gray-300/20',
     },
     blobs: [
       'bg-gray-400',
@@ -120,6 +128,7 @@ export const cardColorClasses = {
       bg_blobs: 'bg-gray-800/10 border-gray-800/20',
       bg: 'bg-gray-800/60 border-gray-800',
       hover: 'hover:bg-gray-800/20',
+      click: 'active:bg-gray-700/20',
     },
     blobs: [
       'bg-gray-400',
@@ -132,6 +141,7 @@ export const cardColorClasses = {
       bg_blobs: 'bg-gray-900/10 border-gray-900/20',
       bg: 'bg-gray-900/60 border-gray-900',
       hover: 'hover:bg-gray-900/20',
+      click: 'active:bg-gray-800/20',
     },
     blobs: [
       'bg-gray-400',
@@ -151,15 +161,8 @@ const blobClasses = [
   'animate-blob6',
 ];
 
-export const Card = component$<CardProps>(({ color = 'darkgray', hoverable, href, row, blobs, ...props }) => {
-  useStyles$(`
-    .-animation-delay-5 { animation-delay: -5s; }
-    .-animation-delay-10 { animation-delay: -10s; }
-  `);
-
+export const Card = component$<CardProps>(({ color = 'darkgray', hover, href, row, blobs, ...props }) => {
   const blob = Math.round(Math.random() * 6);
-
-  const button = !!props.onClick$ || hoverable;
   const colorClass = cardColorClasses[color];
 
   return (
@@ -167,8 +170,8 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hoverable, href
       'flex-1 relative border rounded-lg group transition-all': true,
       [colorClass.card.bg]: !blobs,
       [colorClass.card.bg_blobs]: blobs,
-      [colorClass.card.hover]: hoverable,
-      'hover:shadow-lg cursor-pointer': button,
+      [colorClass.card.hover + ' hover:shadow-lg']: hover,
+      [colorClass.card.click + ' active:scale-[99%] cursor-pointer']: hover == 'clickable',
       ...props.class,
     }}>
       <div class={{
@@ -177,7 +180,7 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hoverable, href
         {href && (
           <a href={href} class="absolute inset-0 z-20" />
         )}
-        <div class="relative z-10">
+        <div class="relative">
           <div class={{
             'flex gap-4': true,
             'flex-col': !row,
@@ -187,7 +190,7 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hoverable, href
           </div>
         </div>
         {blobs && (
-          <div class="absolute -z-10 inset-0 w-full h-full transition-all overflow-clip" style={{ containerType: 'size' }}>
+          <div class="absolute -z-10 inset-0 w-full h-full transition-all overflow-clip animate-in fade-in anim-duration-[2s]" style={{ containerType: 'size' }}>
             <div class={{
               'absolute top-0 w-[30cqw] h-[30cqw] rounded-full opacity-20 ease-in-out blur-xl': true,
               [blobClasses[blob]]: true,
@@ -195,13 +198,13 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hoverable, href
             }} />
             <div class={{
               'absolute top-0 w-[30cqw] h-[30cqw] rounded-full opacity-20 ease-in-out blur-xl': true,
-              '-animation-delay-5': true,
+              'anim-delay-[-5s]': true,
               [blobClasses[blob]]: true,
               [colorClass.blobs[1]]: true,
             }} />
             <div class={{
               'absolute top-0 w-[30cqw] h-[30cqw] rounded-full opacity-20 ease-in-out blur-xl': true,
-              '-animation-delay-10': true,
+              'anim-delay-[-10s]': true,
               [blobClasses[blob]]: true,
               [colorClass.blobs[2]]: true,
             }} />

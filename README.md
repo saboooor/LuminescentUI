@@ -7,7 +7,8 @@ npm install @luminescent/ui
 ```
 
 Once installed, since this is a tailwind based library, you need to include the following to your tailwind config
-The theme property is optional if you don't want to use blobs in the Card component
+
+The theme and plugins properties are optional if you don't want to use blobs in the Card component
 
 ```javascript
 /** @type {import('tailwindcss').Config} */
@@ -15,10 +16,12 @@ The theme property is optional if you don't want to use blobs in the Card compon
 import tailwindConfig from '@luminescent/ui/config';
 
 export default {
+  // required
   content: [
     // ...
     ...tailwindConfig.content,
   ],
+  // only for blobs in the Card component
   theme: {
     extend: {
       animation: {
@@ -31,6 +34,10 @@ export default {
       },
     },
   },
+  plugins: [
+    // ...
+    ...tailwindConfig.plugins,
+  ],
 };
 ```
 

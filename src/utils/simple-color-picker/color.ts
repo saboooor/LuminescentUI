@@ -72,8 +72,7 @@ export class Color {
   }
 
   private _updateBrightness() {
-    const { r, g, b } = this._rgba;
-    this._brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    this._brightness = getBrightness(this._rgba);
     this._isDark = this._brightness < 0.5;
     this._isLight = !this._isDark;
   }
@@ -105,6 +104,11 @@ export class Color {
   get isLight() {
     return this._isLight;
   }
+}
+
+export function getBrightness(color: RGBAColor) {
+  const { r, g, b } = color;
+  return (r * 299 + g * 587 + b * 114) / 1000;
 }
 
 export function hexNumberToRgb(color: number) {

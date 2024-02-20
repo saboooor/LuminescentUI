@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-import { theme, content } from '@luminescent/ui/config';
+import { content, theme, plugins } from '@luminescent/ui/config';
 
 export default {
   content: [
@@ -17,4 +17,7 @@ export default {
       },
     },
   },
+  plugins: [
+    ...plugins,
+  ]
 };

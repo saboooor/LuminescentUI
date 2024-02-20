@@ -66,7 +66,10 @@ module.exports = {
         blob4: getBlobKeyFrame(),
         blob5: getBlobKeyFrame(),
         blob6: getBlobKeyFrame(),
-      },    
-    }
-  }
+      },
+    },
+  },
+  plugins: [
+    require('@anuragroy/tailwindcss-animate'),
+  ],
 };

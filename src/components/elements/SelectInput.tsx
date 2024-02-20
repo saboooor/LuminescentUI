@@ -1,36 +1,77 @@
 import type { PropsOf } from '@builder.io/qwik';
-import { component$, Slot } from '@builder.io/qwik';
+import { component$, Slot, useStore } from '@builder.io/qwik';
+import { Button } from './Button';
+import { ChevronDown } from '../../svg/ChevronDown';
 
-interface SelectInputRawProps extends Omit<PropsOf<'select'>, 'class'> {
+interface SelectInputProps extends Omit<PropsOf<'select'>, 'class'> {
   class?: { [key: string]: boolean };
-  transparent?: boolean;
-}
-
-interface SelectInputProps extends SelectInputRawProps {
   id: string;
+  values: {
+    name: string;
+    value: string | number;
+  }[];
 }
 
 export const SelectInput = component$<SelectInputProps>((props) => {
   return (
     <div class="flex flex-col">
-      <label for={props.id} class="mb-2">
-        <Slot name="label" />
-      </label>
-      <SelectInputRaw {...props}>
+      <label for={props.id} class="pb-2">
         <Slot />
-      </SelectInputRaw>
+      </label>
+      <SelectInputRaw {...props}/>
     </div>
   );
 });
 
-export const SelectInputRaw = component$<SelectInputRawProps>(({ transparent, ...props }) => {
+export const SelectInputRaw = component$<SelectInputProps>(({ id, values, ...props }) => {
+  const store = useStore({
+    opened: false,
+  });
+
   return (
-    <select {...props} class={{
-      'transition ease-in-out text-lg border border-gray-700 bg-gray-800 text-gray-50 hover:bg-gray-700 focus:bg-gray-700 rounded-md px-2 py-3': true,
-      'border-0 bg-transparent': transparent,
-      ...props.class,
-    }}>
-      <Slot />
-    </select>
+    <div class="relative">
+      <select {...props} id={id} class={{
+        'hidden': true,
+      }}>
+        {values.map((value, i) => {
+          return <option key={i} value={value.value}>{value.name}</option>;
+        })}
+      </select>
+      <Button class={{
+        ...props.class,
+      }} onClick$={() => {
+        store.opened = !store.opened;
+      }}>
+        <span id={`lui-${id}-name`}>
+          {values.find((value) => value.value.toString() === props.value)?.name ?? values[0].name}
+        </span>
+        <ChevronDown width={20} class={{
+          'transition-all duration-200': true,
+          'transform rotate-180': store.opened,
+        }}/>
+      </Button>
+      <div id={`lui-${id}-opts`} class={{
+        'transition-all absolute top-full p-1 mt-2 gap-1 left-0 bg-gray-800/50 backdrop-blur-xl flex flex-col rounded-lg border border-gray-700 z-[1000] max-h-72 overflow-scroll': true,
+        'pointer-events-none opacity-0 scale-95': !store.opened,
+      }}>
+        {values.map((value, i) => {
+          return (
+            <Button key={i} onClick$={() => {
+              store.opened = false;
+              const select = document.getElementById(id) as HTMLSelectElement;
+              select.value = value.value.toString();
+              const name = document.getElementById(`lui-${id}-name`) as HTMLSpanElement;
+              name.textContent = value.name;
+              select.dispatchEvent(new Event('change'));
+            }} class={{
+              'border-0 bg-transparent': true,
+              'opacity-0': !store.opened,
+            }}>
+              {value.name}
+            </Button>
+          );
+        })}
+      </div>
+    </div>
   );
 });
