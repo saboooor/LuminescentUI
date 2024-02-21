@@ -158,27 +158,25 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
   const blob = Math.round(Math.random() * 6);
   const colorClass = cardColorClasses[color];
 
-  let Component = (
-    <div {...props} class={{
-      'flex gap-4 p-8 border rounded-lg transition-all': true,
+  return (
+    <div  {...props} class={{
+      'relative p-8 border rounded-lg transition-all': true,
       [colorClass.card.bg]: !blobs,
       [colorClass.card.bg_blobs]: blobs,
       [colorClass.card.hover + ' hover:shadow-lg']: hover,
       [colorClass.card.click + ' active:scale-[99%] cursor-pointer select-none']: hover == 'clickable',
-      'h-full': props.href,
-      'flex-col': !row,
-      'flex-row items-center': row,
       ...props.class,
     }}>
-      <Slot />
-    </div>
-  );
-
-  if (blobs) {
-    Component = (
-      <div class="relative">
-        {Component}
-        <div class="absolute -z-10 inset-0 w-full h-full transition-all overflow-clip animate-in fade-in anim-duration-[2s]" style={{ containerType: 'size' }}>
+      <div class={{
+        'flex gap-4': true,
+        'flex-col': !row,
+        'flex-row items-center': row,
+      }}>
+        <Slot />
+      </div>
+      {props.href && <a href={props.href} class="absolute inset-0" />}
+      {blobs &&
+        <div class="absolute -z-10 inset-0 transition-all overflow-clip animate-in fade-in anim-duration-[2s]" style={{ containerType: 'size' }}>
           <div class={{
             'absolute top-0 w-[30cqw] h-[30cqw] rounded-full opacity-20 ease-in-out blur-xl': true,
             [blobClasses[blob]]: true,
@@ -197,10 +195,7 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
             [colorClass.blobs[2]]: true,
           }} />
         </div>
-      </div>
-    );
-  }
-
-  if (props.href) Component = <a href={props.href}>{Component}</a>;
-  return Component;
+      }
+    </div>
+  );
 });

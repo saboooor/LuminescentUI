@@ -15,6 +15,7 @@ interface docsStore {
     row?: boolean;
     blobs?: boolean;
     loading?: boolean;
+    href?: boolean;
   };
   colorinput: {
     preview?: 'left' | 'right' | 'top' | 'bottom' | 'full';
@@ -120,12 +121,15 @@ export default component$(() => {
             label="blobs" />
           <Toggle id="card-loading" onChange$={(e, element) => store.card.loading = element.checked}
             label="loading" />
+          <Toggle id="card-href" onChange$={(e, element) => store.card.href = element.checked}
+            label="href" />
           <div>
             <Card
               color={store.card.color}
               hover={store.card.hover}
               row={store.card.row}
               blobs={store.card.blobs}
+              href={store.card.href ? 'https://luminescent.dev' : undefined}
             >
               <Header subheader="Subheader" loading={!!store.card.loading}>
                 Header
@@ -134,7 +138,7 @@ export default component$(() => {
             </Card>
           </div>
           <TextAreaRaw output value={`
-<Card${(store.card.color && ` color="${store.card.color}"`) ?? ''}${store.card.hover ? ' hover' : ''}${store.card.hover == 'clickable' ? '="clickable"' : ''}${store.card.row ? ' row' : ''}${store.card.blobs ? ' blobs' : ''}>
+<Card${(store.card.color && ` color="${store.card.color}"`) ?? ''}${store.card.hover ? ' hover' : ''}${store.card.hover == 'clickable' ? '="clickable"' : ''}${store.card.row ? ' row' : ''}${store.card.blobs ? ' blobs' : ''}${store.card.href ? ' href="https://luminescent.dev"' : ''}>
   <Header subheader="Subheader" ${store.card.loading ? 'loading' : ''}/>
     Header
   </Header>
