@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Button, ButtonAnchor, Card, CardHeader, ColorInput, NumberInput, LoadingIcon, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses } from './components/elements';
+import { Button, ButtonAnchor, Card, Header, ColorInput, NumberInput, LoadingIcon, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses } from './components/elements';
 import { LogoBirdflop, LogoDiscord, LogoFabric, LogoForge, LogoLuminescent, LogoLuminescentFull, LogoPaper, LogoPterodactyl, LogoPurpur, LogoVelocity, LogoWaterfall } from './components/logos';
 import './global.css';
 
@@ -56,18 +56,18 @@ export default component$(() => {
           </div>
         </div>
         <Card>
-          <CardHeader id="anchor">
+          <Header id="anchor">
             Anchor
-          </CardHeader>
+          </Header>
           <ButtonAnchor href="#anchor">
             Scroll to anchor
           </ButtonAnchor>
           <TextAreaRaw output value={'<Anchor id="anchor"/>'} />
         </Card>
         <Card>
-          <CardHeader>
+          <Header>
             Button
-          </CardHeader>
+          </Header>
           <SelectInput id="button-color"
             onChange$={(e, element) => store.button.color = element.value as keyof typeof buttonColorClasses}
             values={Object.keys(buttonColorClasses).map((color) => ({ name: color, value: color }))}
@@ -96,9 +96,9 @@ export default component$(() => {
 </Button>`} />
         </Card>
         <Card>
-          <CardHeader>
-            Card
-          </CardHeader>
+          <Header>
+            Card (and Header)
+          </Header>
           <div class="flex">
             <SelectInput id="card-color"
               onChange$={(e, element) => store.card.color = element.value as keyof typeof cardColorClasses}
@@ -108,21 +108,18 @@ export default component$(() => {
               color
             </SelectInput>
           </div>
-          <Toggle id="card-hoverable" checked={store.card.hover == 'clickable' || store.card.hover} onChange$={(e, element) => store.card.hover = element.checked}>
-            hoverable
-          </Toggle>
-          <Toggle id="card-clickable" checked={store.card.hover == 'clickable'} onChange$={(e, element) => store.card.hover = element.checked ? 'clickable' : false}>
-            clickable
-          </Toggle>
-          <Toggle id="card-row" onChange$={(e, element) => store.card.row = element.checked}>
-            row
-          </Toggle>
-          <Toggle id="card-blobs" onChange$={(e, element) => store.card.blobs = element.checked}>
-            blobs
-          </Toggle>
-          <Toggle id="card-loading" onChange$={(e, element) => store.card.loading = element.checked}>
-            loading
-          </Toggle>
+          <Toggle id="card-hoverable" onChange$={(e, element) => store.card.hover = element.checked}
+            checked={store.card.hover == 'clickable' || store.card.hover}
+            label="hoverable" />
+          <Toggle id="card-clickable" onChange$={(e, element) => store.card.hover = element.checked ? 'clickable' : false}
+            checked={store.card.hover == 'clickable'}
+            label="clickable" />
+          <Toggle id="card-row" onChange$={(e, element) => store.card.row = element.checked}
+            label="row" />
+          <Toggle id="card-blobs" onChange$={(e, element) => store.card.blobs = element.checked}
+            label="blobs" />
+          <Toggle id="card-loading" onChange$={(e, element) => store.card.loading = element.checked}
+            label="loading" />
           <div>
             <Card
               color={store.card.color}
@@ -130,24 +127,24 @@ export default component$(() => {
               row={store.card.row}
               blobs={store.card.blobs}
             >
-              <CardHeader loading={store.card.loading}>
+              <Header subheader="Subheader" loading={!!store.card.loading}>
                 Header
-              </CardHeader>
-              Description
+              </Header>
+              Content
             </Card>
           </div>
           <TextAreaRaw output value={`
 <Card${(store.card.color && ` color="${store.card.color}"`) ?? ''}${store.card.hover ? ' hover' : ''}${store.card.hover == 'clickable' ? '="clickable"' : ''}${store.card.row ? ' row' : ''}${store.card.blobs ? ' blobs' : ''}>
-  <CardHeader ${store.card.loading ? 'loading' : ''}>
+  <Header subheader="Subheader" ${store.card.loading ? 'loading' : ''}/>
     Header
-  </CardHeader>
-  Description
+  </Header>
+  Content
 </Card>`} />
         </Card>
         <Card>
-          <CardHeader>
+          <Header>
             ColorInput
-          </CardHeader>
+          </Header>
           <SelectInput id="color-preview"
             onChange$={(e, element) => store.colorinput.preview = element.value as 'left' | 'right' | 'top' | 'bottom' | 'full'}
             values={['left', 'right', 'top', 'bottom', 'full'].map((preview) => ({ name: preview, value: preview }))}
@@ -166,12 +163,11 @@ export default component$(() => {
 </ColorInput>`} />
         </Card>
         <Card>
-          <CardHeader>
+          <Header>
             NumberInput
-          </CardHeader>
-          <Toggle id="numberinput-input" onChange$={(e, element) => store.numberinput.input = element.checked}>
-            input
-          </Toggle>
+          </Header>
+          <Toggle id="numberinput-input" onChange$={(e, element) => store.numberinput.input = element.checked}
+            label='input' />
           <div>
             <NumberInput id="number-input" onDecrement$={() => {}} onIncrement$={() => {}} input={store.numberinput.input}>
               Number Input
@@ -183,9 +179,9 @@ export default component$(() => {
 </NumberInput`} />
         </Card>
         <Card>
-          <CardHeader>
+          <Header>
             SelectInput
-          </CardHeader>
+          </Header>
           <div>
             <SelectInput id="select-input"
               values={[
@@ -211,12 +207,11 @@ export default component$(() => {
 </SelectInput>`} />
         </Card>
         <Card>
-          <CardHeader>
+          <Header>
             TextArea
-          </CardHeader>
-          <Toggle id="textarea-output" onChange$={(e, element) => store.textarea.output = element.checked}>
-            output
-          </Toggle>
+          </Header>
+          <Toggle id="textarea-output" onChange$={(e, element) => store.textarea.output = element.checked}
+            label='output' />
           <div>
             <TextArea id="textarea" value="Text" output={store.textarea.output}>
               Text Area
@@ -228,9 +223,9 @@ export default component$(() => {
 </TextArea>`} />
         </Card>
         <Card>
-          <CardHeader>
+          <Header>
             TextInput
-          </CardHeader>
+          </Header>
           <div>
             <TextInput id="text-input" value="Text">
               Text Input
@@ -242,26 +237,20 @@ export default component$(() => {
 </TextInput>`} />
         </Card>
         <Card>
-          <CardHeader>
+          <Header>
             Toggle
-          </CardHeader>
-          <Toggle id="toggle-center" onChange$={(e, element) => store.toggle.center = element.checked}>
-            center
-          </Toggle>
+          </Header>
+          <Toggle id="toggle-center" onChange$={(e, element) => store.toggle.center = element.checked}
+            label='center'/>
           <div>
-            <Toggle id="toggle" center={store.toggle.center}>
-              Toggle
-            </Toggle>
+            <Toggle id="toggle" label="Toggle" center={store.toggle.center} />
           </div>
-          <TextAreaRaw output value={`
-<Toggle id="toggle"${store.toggle.center ? ' center' : ''}>
-  Toggle
-</Toggle>`} />
+          <TextAreaRaw output value={`<Toggle id="toggle" label="Toggle"${store.toggle.center ? ' center' : ''} />`} />
         </Card>
         <Card>
-          <CardHeader>
+          <Header>
             Icons/Logos
-          </CardHeader>
+          </Header>
           <Card>
             <div class="flex gap-10 flex-wrap justify-evenly">
               <LogoBirdflop width={40} />

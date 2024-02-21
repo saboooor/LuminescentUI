@@ -1,12 +1,13 @@
 import type { PropsOf } from '@builder.io/qwik';
-import { Slot, component$ } from '@builder.io/qwik';
+import { component$ } from '@builder.io/qwik';
 
 interface ToggleProps extends Omit<(PropsOf<'input'> & { type: 'checkbox' }), 'class' | 'bind:checked' | 'type' | 'children'> {
   class?: { [key: string]: boolean };
   center?: boolean;
+  label?: string;
 }
 
-export const Toggle = component$<ToggleProps>(({ center, ...props }) => {
+export const Toggle = component$<ToggleProps>(({ center, label, ...props }) => {
   return (
     <div class={{
       'flex gap-3 items-center': true,
@@ -26,9 +27,7 @@ export const Toggle = component$<ToggleProps>(({ center, ...props }) => {
           'peer-checked:after:translate-x-full peer-checked:after:bg-blue-600 peer-checked:after:border-blue-500 peer-checked:after:hover:bg-blue-500 peer-checked:after:active:bg-blue-400': true,
         }} />
       </label>
-      <label for={props.id} class="text-gray-100">
-        <Slot />
-      </label>
+      {label && <label for={props.id} class="text-gray-100">{label}</label>}
     </div>
   );
 });

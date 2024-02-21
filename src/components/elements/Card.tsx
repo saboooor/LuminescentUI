@@ -1,8 +1,6 @@
 
 import type { PropsOf } from '@builder.io/qwik';
 import { Slot, component$ } from '@builder.io/qwik';
-import { LoadingIcon } from './LoadingIcon';
-import { Anchor } from './Anchor';
 
 interface CardProps extends Omit<PropsOf<'div'>, 'class'> {
   color?: keyof typeof cardColorClasses;
@@ -11,11 +9,6 @@ interface CardProps extends Omit<PropsOf<'div'>, 'class'> {
   row?: boolean;
   blobs?: boolean;
   class?: { [key: string]: boolean };
-}
-
-interface CardHeaderProps {
-  id?: string;
-  loading?: boolean;
 }
 
 export const cardColorClasses = {
@@ -125,28 +118,28 @@ export const cardColorClasses = {
   },
   darkgray: {
     card: {
-      bg_blobs: 'bg-gray-800/10 border-gray-800/20',
+      bg_blobs: 'bg-gray-800/10 border-gray-800/40',
       bg: 'bg-gray-800/60 border-gray-800',
-      hover: 'hover:bg-gray-800/20',
-      click: 'active:bg-gray-700/20',
+      hover: 'hover:bg-gray-800/40',
+      click: 'active:bg-gray-700/40',
     },
     blobs: [
-      'bg-gray-400',
       'bg-gray-500',
       'bg-gray-600',
+      'bg-gray-700',
     ],
   },
   darkergray: {
     card: {
-      bg_blobs: 'bg-gray-900/10 border-gray-900/20',
+      bg_blobs: 'bg-gray-900/10 border-gray-900/50',
       bg: 'bg-gray-900/60 border-gray-900',
-      hover: 'hover:bg-gray-900/20',
-      click: 'active:bg-gray-800/20',
+      hover: 'hover:bg-gray-900/50',
+      click: 'active:bg-gray-800/50',
     },
     blobs: [
-      'bg-gray-400',
-      'bg-gray-500',
       'bg-gray-600',
+      'bg-gray-700',
+      'bg-gray-800',
     ],
   },
 };
@@ -161,81 +154,52 @@ const blobClasses = [
   'animate-blob6',
 ];
 
-export const Card = component$<CardProps>(({ color = 'darkgray', hover, href, row, blobs, ...props }) => {
+export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blobs, ...props }) => {
   const blob = Math.round(Math.random() * 6);
   const colorClass = cardColorClasses[color];
 
-  return (
+  let Component = (
     <div {...props} class={{
-      'flex-1 relative border rounded-lg group transition-all': true,
+      'flex gap-4 p-8 border rounded-lg transition-all': true,
       [colorClass.card.bg]: !blobs,
       [colorClass.card.bg_blobs]: blobs,
       [colorClass.card.hover + ' hover:shadow-lg']: hover,
-      [colorClass.card.click + ' active:scale-[99%] cursor-pointer']: hover == 'clickable',
+      [colorClass.card.click + ' active:scale-[99%] cursor-pointer select-none']: hover == 'clickable',
+      'flex-col': !row,
+      'flex-row items-center': row,
       ...props.class,
     }}>
-      <div class={{
-        'p-8': true,
-      }}>
-        {href && (
-          <a href={href} class="absolute inset-0 z-20" />
-        )}
-        <div class="relative">
-          <div class={{
-            'flex gap-4': true,
-            'flex-col': !row,
-            'flex-row items-center': row,
-          }}>
-            <Slot />
-          </div>
-        </div>
-        {blobs && (
-          <div class="absolute -z-10 inset-0 w-full h-full transition-all overflow-clip animate-in fade-in anim-duration-[2s]" style={{ containerType: 'size' }}>
-            <div class={{
-              'absolute top-0 w-[30cqw] h-[30cqw] rounded-full opacity-20 ease-in-out blur-xl': true,
-              [blobClasses[blob]]: true,
-              [colorClass.blobs[0]]: true,
-            }} />
-            <div class={{
-              'absolute top-0 w-[30cqw] h-[30cqw] rounded-full opacity-20 ease-in-out blur-xl': true,
-              'anim-delay-[-5s]': true,
-              [blobClasses[blob]]: true,
-              [colorClass.blobs[1]]: true,
-            }} />
-            <div class={{
-              'absolute top-0 w-[30cqw] h-[30cqw] rounded-full opacity-20 ease-in-out blur-xl': true,
-              'anim-delay-[-10s]': true,
-              [blobClasses[blob]]: true,
-              [colorClass.blobs[2]]: true,
-            }} />
-          </div>
-        )}
-      </div>
+      <Slot />
     </div>
   );
-});
 
-export const CardHeader = component$<CardHeaderProps>(({ id, loading = false }) => {
-  return (
-    <h1 class="flex font-bold text-gray-100 text-2xl">
-      { id && <Anchor id={id}/> }
-      <div class="flex flex-1">
-        <div class="flex flex-col">
-          <div class="flex items-center gap-3">
-            <Slot />
-          </div>
-          <Slot name="subheader" />
+  if (blobs) {
+    Component = (
+      <div class="relative">
+        {Component}
+        <div class="absolute -z-10 inset-0 w-full h-full transition-all overflow-clip animate-in fade-in anim-duration-[2s]" style={{ containerType: 'size' }}>
+          <div class={{
+            'absolute top-0 w-[30cqw] h-[30cqw] rounded-full opacity-20 ease-in-out blur-xl': true,
+            [blobClasses[blob]]: true,
+            [colorClass.blobs[0]]: true,
+          }} />
+          <div class={{
+            'absolute top-0 w-[30cqw] h-[30cqw] rounded-full opacity-20 ease-in-out blur-xl': true,
+            'anim-delay-[-5s]': true,
+            [blobClasses[blob]]: true,
+            [colorClass.blobs[1]]: true,
+          }} />
+          <div class={{
+            'absolute top-0 w-[30cqw] h-[30cqw] rounded-full opacity-20 ease-in-out blur-xl': true,
+            'anim-delay-[-10s]': true,
+            [blobClasses[blob]]: true,
+            [colorClass.blobs[2]]: true,
+          }} />
         </div>
       </div>
-      { loading &&
-        <div class={{
-          'transition-all': true,
-          'opacity-0': !loading,
-          'opacity-100': loading,
-        }}>
-          <LoadingIcon width={24} />
-        </div>
-      }
-    </h1>
-  );
+    );
+  }
+
+  if (props.href) Component = <a href={props.href}>{Component}</a>;
+  return Component;
 });
