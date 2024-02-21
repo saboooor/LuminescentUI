@@ -165,6 +165,7 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
       [colorClass.card.bg_blobs]: blobs,
       [colorClass.card.hover + ' hover:shadow-lg']: hover,
       [colorClass.card.click + ' active:scale-[99%] cursor-pointer select-none']: hover == 'clickable',
+      'h-full': props.href,
       'flex-col': !row,
       'flex-row items-center': row,
       ...props.class,
