@@ -1,11 +1,11 @@
 export const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
 export function getMousePosition(e: MouseEvent | TouchEvent) {
-  if (e instanceof TouchEvent) {
+  if (window.TouchEvent && e instanceof TouchEvent) {
     const touch = e.touches[0];
     return { x: touch.clientX, y: touch.clientY };
   }
-  const mouse = e;
+  const mouse = e as MouseEvent;
   return { x: mouse.clientX, y: mouse.clientY };
 }
 
