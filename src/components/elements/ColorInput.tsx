@@ -88,12 +88,19 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
     }
 
     .color-picker-color {
+      transition: all 0.2s;
       height: 25px;
       width: 25px;
       border-radius: 5px;
       position: relative;
       background: red;
       border: 1px solid rgb(31 41 55);
+      cursor: pointer;
+    }
+
+    .color-picker-color:hover {
+      border: 1px solid white;
+      transform: scale(1.1);
     }
 
     .color-picker-hSelector {
@@ -113,7 +120,7 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
 
   return (
     <div>
-      <label for={id} class="mb-2 flex">
+      <label for={id} class="text-gray-300 pb-1 flex">
         <Slot />
       </label>
       <TextInputRaw {...props} value={value}
@@ -125,7 +132,8 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
             const picker = new ColorPicker({
               el: pickerDiv,
               color: value,
-              colors: presetColors,
+              colors: ['#FAEDCB', '#C9E4DE', '#C6DEF1', '#DBCDF0', '#F2C6DE',
+              '#FCD05C', '#5FE2C5', '#4498DB', '#9863E7', '#E43A96', ...presetColors ?? []],
               width: 150,
               height: 150,
             });
@@ -158,10 +166,13 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
 
           pickerDiv.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
         }}
-        onBlur$={() => {
+
+        onBlur$={(event, element) => {
+          console.log(event);
           const pickerDiv = document.getElementById(`${id}-color-picker`)!;
           pickerDiv.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
         }}
+
         style={preview == 'full' ? {
           backgroundColor: `${value}`,
           color: getBrightness(hexNumberToRgb(hexStringToNumber(value))) > 0.5 ? 'black' : 'white',

@@ -92,7 +92,20 @@ export class ColorPicker {
       this.$colors = this._document.createElement('div');
       this.$colors.className = 'color-picker-colors';
       this.$el.appendChild(this.$colors);
-      this.$colors.innerHTML = options.colors.map((color) => `<div class="color-picker-color" style="background: ${color}"></div>`).join('');
+      options.colors.forEach((color) => {
+        const $color = this._document.createElement('button');
+        $color.className = 'color-picker-color';
+        $color.style.background = `${color}`;
+        $color.addEventListener('mousedown', (e) => {
+          this.setColor(color);
+          e.preventDefault();
+        });
+        $color.addEventListener('touchstart', (e) => {
+          this.setColor(color);
+          e.preventDefault();
+        });
+        this.$colors!.appendChild($color);
+      });
     }
 
     this.setSize(options.width || 175, options.height || 150);

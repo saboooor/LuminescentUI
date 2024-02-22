@@ -15,7 +15,7 @@ interface SelectInputProps extends Omit<PropsOf<'select'>, 'class'> {
 export const SelectInput = component$<SelectInputProps>((props) => {
   return (
     <div class="flex flex-col">
-      <label for={props.id} class="pb-2">
+      <label for={props.id} class="text-gray-300 pb-1">
         <Slot />
       </label>
       <SelectInputRaw {...props}/>

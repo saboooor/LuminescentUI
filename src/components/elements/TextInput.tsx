@@ -14,7 +14,7 @@ export const InputClasses = 'transition ease-in-out text-lg border border-gray-7
 export const TextInput = component$<TextInputProps>((props) => {
   return (
     <div class="flex flex-col">
-      <label for={props.id} class="pb-2">
+      <label for={props.id} class="text-gray-300 pb-1">
         <Slot />
       </label>
       <TextInputRaw {...{ ...props, children: undefined }} />

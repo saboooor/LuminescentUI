@@ -12,9 +12,9 @@ interface HeaderProps {
 
 export const Header = component$<HeaderProps>(({ id, loading, subheader }) => {
   let Component = <>
-    <h2 class="flex flex-1 items-center font-bold text-2xl">
-      {id && <Anchor id={id}/>}
+    <h2 class="flex gap-2 flex-1 items-center font-bold text-2xl whitespace-nowrap">
       <Slot />
+      {id && <Anchor id={id}/>}
     </h2>
   </>;
 
@@ -22,7 +22,7 @@ export const Header = component$<HeaderProps>(({ id, loading, subheader }) => {
     Component = (
       <div class="flex flex-1 flex-col gap-1">
         {Component}
-        <h3 class="flex flex-1 items-center text-gray-400 text-sm">
+        <h3 class="flex items-center text-gray-400 text-sm">
           {subheader}
         </h3>
       </div>

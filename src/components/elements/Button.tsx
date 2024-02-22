@@ -19,7 +19,7 @@ export const sizeClasses = {
   xl: 'text-base px-8 py-4 rounded-xl gap-4',
 };
 
-const buttonClass = 'relative flex items-center gap-3 transition ease-in-out border text-gray-50 fill-gray-50 disabled:opacity-50 hover:shadow-lg active:scale-95';
+const buttonClass = 'relative flex items-center gap-3 transition ease-in-out border text-gray-50 fill-gray-50 disabled:opacity-50 hover:shadow-lg active:scale-95 whitespace-nowrap';
 
 interface GenericButtonProps {
   color?: keyof typeof buttonColorClasses;
