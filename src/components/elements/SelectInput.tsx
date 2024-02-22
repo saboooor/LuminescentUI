@@ -49,7 +49,7 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
     .lui-scroll::-webkit-scrollbar-corner {
       background-color: transparent;
     }
-  `)
+  `);
 
   return (
     <div class="relative">
