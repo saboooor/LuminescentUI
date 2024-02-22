@@ -1,5 +1,5 @@
 import type { PropsOf } from '@builder.io/qwik';
-import { component$, Slot, useStore } from '@builder.io/qwik';
+import { component$, Slot, useStore, useStyles$ } from '@builder.io/qwik';
 import { Button } from './Button';
 import { ChevronDown } from '../../svg/ChevronDown';
 
@@ -28,6 +28,29 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
     opened: false,
   });
 
+  useStyles$(`
+    .lui-scroll {
+      scroll-behavior: smooth;
+    }
+    .lui-scroll::-webkit-scrollbar {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 8px;
+      height: 8px;
+    }
+    .lui-scroll::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    .lui-scroll::-webkit-scrollbar-thumb {
+      background-color: #ffffff20;
+      border: 1px solid #ffffff20;
+      border-radius: 3px;
+    }
+    .lui-scroll::-webkit-scrollbar-corner {
+      background-color: transparent;
+    }
+  `)
+
   return (
     <div class="relative">
       <select {...props} id={id} class={{
@@ -52,7 +75,7 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
         }}/>
       </Button>
       <div id={`lui-${id}-opts`} class={{
-        'transition-all absolute top-full left-0 p-1 mt-2 gap-1 bg-gray-800/50 backdrop-blur-xl flex flex-col rounded-lg border border-gray-700 z-[1000] max-h-72 overflow-scroll select-none': true,
+        'transition-all absolute top-full left-0 p-1 mt-2 gap-1 bg-gray-800/50 backdrop-blur-xl flex flex-col rounded-lg border border-gray-700 z-[1000] max-h-72 lui-scroll overflow-auto select-none': true,
         'pointer-events-none opacity-0 scale-95': !store.opened,
       }}>
         {values.map((value, i) => {
