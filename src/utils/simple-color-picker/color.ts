@@ -1,6 +1,17 @@
-import { pad2 } from './utils';
+export const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
-// Each member has a range of 0-1\
+export function getMousePosition(e: MouseEvent | TouchEvent) {
+  if (window.TouchEvent && e instanceof TouchEvent) {
+    const touch = e.touches[0];
+    return { x: touch.clientX, y: touch.clientY };
+  }
+  const mouse = e as MouseEvent;
+  return { x: mouse.clientX, y: mouse.clientY };
+}
+
+export const pad2 = (c: string) => c.length == 1 ? '0' + c : '' + c;
+
+// Each member has a range of 0-1
 export type RGBAColor = {
   r: number
   g: number
@@ -14,96 +25,6 @@ export type HSVAColor = {
   s: number
   v: number
   a?: number
-}
-
-export class Color {
-  private _rgba: RGBAColor = { r: 0, g: 0, b: 0, a: 1 };
-  private _hsva: HSVAColor = { h: 0, s: 0, v: 0, a: 1 };
-  private _hexNumber!: number;
-  private _brightness!: number;
-  private _hexString!: string;
-  private _isDark!: boolean;
-  private _isLight!: boolean;
-
-  constructor(color: number | string) {
-    this.fromHex(color);
-  }
-
-  public fromHex(color: number | string = 0) {
-    if (typeof color === 'number') {
-      this._hexNumber = color;
-      this._hexString = numberToHexString(this._hexNumber);
-    } else {
-      this._hexString = color.toUpperCase();
-      this._hexNumber = hexStringToNumber(this._hexString);
-    }
-    const { r, g, b } = hexNumberToRgb(this._hexNumber);
-
-    this._rgba.r = r;
-    this._rgba.g = g;
-    this._rgba.b = b;
-
-    const { h, s, v } = rgbToHsv(this._rgba);
-
-    this._hsva.h = h;
-    this._hsva.s = s;
-    this._hsva.v = v;
-
-    this._updateBrightness();
-  }
-
-  public fromHsv(color: HSVAColor) {
-    const { h, s, v } = color;
-
-    this._hsva.h = h;
-    this._hsva.s = s;
-    this._hsva.v = v;
-
-    const { r, g, b } = hsvToRgb(this._hsva);
-
-    this._rgba.r = r;
-    this._rgba.g = g;
-    this._rgba.b = b;
-
-    this._hexString = rgbToHex(this._rgba);
-    this._hexNumber = hexStringToNumber(this._hexString);
-
-    this._updateBrightness();
-  }
-
-  private _updateBrightness() {
-    this._brightness = getBrightness(this._rgba);
-    this._isDark = this._brightness < 0.5;
-    this._isLight = !this._isDark;
-  }
-
-  get rgb() {
-    return this._rgba;
-  }
-
-  get hsv() {
-    return this._hsva;
-  }
-
-  get hex() {
-    return this._hexNumber;
-  }
-
-  get hexString() {
-    return this._hexString;
-  }
-
-  get brightness() {
-    return this._brightness;
-  }
-
-  get isDark() {
-    return this._isDark;
-  }
-
-  get isLight() {
-    return this._isLight;
-  }
 }
 
 export function getBrightness(color: RGBAColor) {
@@ -129,8 +50,6 @@ export function rgbToHex(color: RGBAColor) {
 
   return hex.join('').toUpperCase();
 }
-
-export const numberToHexString = (color: number) => '#' + ('00000' + (color | 0).toString(16)).substr(-6).toUpperCase();
 
 export const hexStringToNumber = (color: string) => parseInt(color.replace('#', ''), 16);
 
