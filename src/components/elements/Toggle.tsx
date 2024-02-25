@@ -1,10 +1,10 @@
-import type { PropsOf } from '@builder.io/qwik';
+import type { JSXOutput, PropsOf } from '@builder.io/qwik';
 import { component$ } from '@builder.io/qwik';
 
 interface ToggleProps extends Omit<(PropsOf<'input'> & { type: 'checkbox' }), 'class' | 'bind:checked' | 'type' | 'children'> {
   class?: { [key: string]: boolean };
   center?: boolean;
-  label?: string;
+  label?: string | JSXOutput;
 }
 
 export const Toggle = component$<ToggleProps>(({ center, label, ...props }) => {
@@ -27,7 +27,7 @@ export const Toggle = component$<ToggleProps>(({ center, label, ...props }) => {
           'peer-checked:after:translate-x-full peer-checked:after:bg-blue-600 peer-checked:after:border-blue-500 peer-checked:after:hover:bg-blue-500 peer-checked:after:active:bg-blue-400': true,
         }} />
       </label>
-      {label && <label for={props.id} class="text-gray-300">{label}</label>}
+      {label && <label for={props.id} class="text-gray-300 flex gap-2">{label}</label>}
     </div>
   );
 });
