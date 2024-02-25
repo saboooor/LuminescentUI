@@ -1,6 +1,6 @@
 
 import type { PropsOf, QRL } from '@builder.io/qwik';
-import { $, Slot, component$, useStore } from '@builder.io/qwik';
+import { $, Slot, component$, useOn, useStore } from '@builder.io/qwik';
 import type { TextInputRawProps } from './TextInput';
 import { TextInputRaw } from './TextInput';
 import { getBrightness, hexNumberToRgb, hexStringToNumber, hsvToRgb, rgbToHex, rgbToHsv, clamp, getMousePosition } from '../../utils/simple-color-picker/color';
@@ -34,6 +34,13 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
           store.opened = false;
         }}
 
+        onInput$={(e, el) => {
+          const div = document.getElementById(`${id}-picker`)!;
+          const event = new Event('change');
+          div.dispatchEvent(event);
+          onInput$?.(el.value);
+        }}
+
         style={preview == 'full' ? {
           backgroundColor: `${value}`,
           color: getBrightness(hexNumberToRgb(hexStringToNumber(value))) > 0.5 ? 'black' : 'white',
@@ -49,6 +56,7 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
         }
       />
       <ColorPickerRaw
+        id={id}
         color={value}
         colors={[
           '#FAEDCB', '#C9E4DE', '#C6DEF1', '#DBCDF0', '#F2C6DE',
@@ -96,7 +104,7 @@ export interface ColorPickerProps extends Omit<PropsOf<'div'>, 'class' | 'onInpu
   colors: string[];
 }
 
-export const ColorPickerRaw = component$<ColorPickerProps>(({ color, colors, onInput$, ...props }) => {
+export const ColorPickerRaw = component$<ColorPickerProps>(({ id, color, colors, onInput$, ...props }) => {
   const height = 150;
   const width = height - 25;
   const maxHue = height - 2;
@@ -179,45 +187,55 @@ export const ColorPickerRaw = component$<ColorPickerProps>(({ color, colors, onI
     window.addEventListener('touchend', mouseUpListener);
   });
 
+  useOn('change', $(() => {
+    if (!id) return;
+    const inputElement = document.getElementById(id) as HTMLInputElement | null;
+    if (!inputElement) return;
+    setColor(inputElement.value);
+  }));
+
   return (
     <div class={{
-      'transition-all p-4 gap-4 bg-gray-800/50 backdrop-blur-xl flex rounded-lg border border-gray-700 touch-none': true,
+      'transition-all p-4 bg-gray-800/50 backdrop-blur-xl flex flex-col gap-6 rounded-lg border border-gray-700 touch-none': true,
       ...props.class,
     }}
     preventdefault:mousedown
-    preventdefault:touchstart>
-      <div class="w-[125px] h-[150px] border border-gray-700 rounded-md relative"
-        style={{
-          background: `linear-gradient(to right, #FFFFFF, ${store.hue.color})`,
-        }}
-        onMouseDown$={sbMouseDown}
-        onTouchStart$={sbMouseDown}
-        preventdefault:mousedown
-        preventdefault:touchstart
-      >
-        <div class="w-[125px] h-[150px] border border-gray-700 rounded-md bg-gradient-to-b from-transparent to-black"/>
-        <div class="absolute -top-2 -left-2 w-4 h-4 border border-white rounded-full bg-white"
+    preventdefault:touchstart
+    id={id ? `${id}-picker` : undefined}>
+      <div class="flex gap-4">
+        <div class="w-[125px] h-[150px] border border-gray-700 rounded-md relative"
           style={{
-            background: store.color,
-            transform: `translate(${store.sPosition}px, ${store.bPosition}px)`,
-          }}/>
-      </div>
-      <div class="h-[150px] relative w-2 border border-gray-700 rounded-md"
-        style={{
-          background: 'linear-gradient(to bottom, #ff0000, #ff00ff, #0000ff, #00ffff, #00ff00, #ffff00, #ff0000)',
-        }}
-        onMouseDown$={hueMouseDown}
-        onTouchStart$={hueMouseDown}
-        preventdefault:mousedown
-        preventdefault:touchstart
-      >
-        <div class="absolute -bottom-2 -left-[5px] w-4 h-4 border border-white rounded-full bg-[#ff0000]"
+            background: `linear-gradient(to right, #FFFFFF, ${store.hue.color})`,
+          }}
+          onMouseDown$={sbMouseDown}
+          onTouchStart$={sbMouseDown}
+          preventdefault:mousedown
+          preventdefault:touchstart
+        >
+          <div class="w-[125px] h-[150px] border border-gray-700 rounded-md bg-gradient-to-b from-transparent to-black"/>
+          <div class="absolute -top-2 -left-2 w-4 h-4 border border-white rounded-full bg-white"
+            style={{
+              background: store.color,
+              transform: `translate(${store.sPosition}px, ${store.bPosition}px)`,
+            }}/>
+        </div>
+        <div class="h-[150px] relative w-2 border border-gray-700 rounded-md"
           style={{
-            transform: `translateY(${-store.hue.position}px)`,
-            background: store.hue.color,
-          }}/>
+            background: 'linear-gradient(to bottom, #ff0000, #ff00ff, #0000ff, #00ffff, #00ff00, #ffff00, #ff0000)',
+          }}
+          onMouseDown$={hueMouseDown}
+          onTouchStart$={hueMouseDown}
+          preventdefault:mousedown
+          preventdefault:touchstart
+        >
+          <div class="absolute -bottom-2 -left-[5px] w-4 h-4 border border-white rounded-full bg-[#ff0000]"
+            style={{
+              transform: `translateY(${-store.hue.position}px)`,
+              background: store.hue.color,
+            }}/>
+        </div>
       </div>
-      <div class="h-[150px] flex flex-col flex-wrap gap-1 justify-evenly">
+      <div class="w-[150px] flex flex-wrap gap-1 justify-evenly">
         {colors.map((color, i) => {
           return (
             <button key={i} class="w-[25px] h-[25px] border border-gray-700 rounded-md hover:scale-110 transition-all"
