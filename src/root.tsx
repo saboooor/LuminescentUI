@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Button, ButtonAnchor, Card, Header, ColorInput, NumberInput, LoadingIcon, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses } from './components/elements';
+import { Button, ButtonAnchor, Card, ColorInput, Header, LoadingIcon, NavContainer, NumberInput, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses } from './components/elements';
 import { LogoBirdflop, LogoDiscord, LogoFabric, LogoForge, LogoLuminescent, LogoLuminescentFull, LogoPaper, LogoPterodactyl, LogoPurpur, LogoVelocity, LogoWaterfall } from './components/logos';
 import './global.css';
 
@@ -20,6 +20,9 @@ interface docsStore {
   colorinput: {
     preview?: 'left' | 'right' | 'top' | 'bottom' | 'full';
   };
+  nav: {
+    floating?: boolean;
+  };
   numberinput: {
     input?: boolean;
   };
@@ -39,6 +42,7 @@ export default component$(() => {
     button: {},
     card: {},
     colorinput: {},
+    nav: {},
     numberinput: {},
     selectinput: {},
     textarea: {},
@@ -50,11 +54,19 @@ export default component$(() => {
         <meta charSet="utf-8" />
         <title>Luminescent UI</title>
       </head>
-      <body class="bg-gray-950 text-gray-200 max-w-6xl mx-auto py-20 flex flex-col gap-4">
-        <div style="filter: drop-shadow(0 0 2rem #CB6CE6);">
-          <div class="text-5xl font-semibold mb-6 flex items-center gap-4 text-[#f0ccfb] fill-[#f0ccfb]" style="filter: drop-shadow(0 0 2rem #CB6CE6);">
-            <LogoLuminescentFull width={250} class="mt-1.5" /> / ui
-          </div>
+      <body class="bg-gray-950 text-gray-200 max-w-6xl mx-auto py-24 flex flex-col gap-4">
+        <NavContainer floating={store.nav.floating}>
+          <Button q:slot="start" color="transparent" class={{
+            'text-[#f0ccfb] fill-[#f0ccfb]': true,
+          }}>
+            <div class="font-semibold flex items-center gap-1 text-[#f0ccfb] fill-[#f0ccfb]" style="filter: drop-shadow(0 0 1rem #CB6CE6);">
+              <LogoLuminescentFull width={100} class="mt-1" /> / ui
+            </div>
+          </Button>
+          <Toggle q:slot="end" id="nav-floating" onChange$={(e, element) => store.nav.floating = element.checked} label="Floating" />
+        </NavContainer>
+        <div class="text-4xl font-extrabold tracking-wide mb-2 flex items-center gap-4">
+          Elements
         </div>
         <Card>
           <Header id="anchor">

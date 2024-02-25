@@ -1,8 +1,8 @@
 import { component$, useStore } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import {
-  Button, ButtonAnchor, Card, Header, ColorInput, NumberInput, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses,
-  LogoBirdflop, LogoDiscord, LogoFabric, LogoForge, LogoLuminescent, LogoLuminescentFull, LogoPaper, LogoPterodactyl, LogoPurpur, LogoVelocity, LogoWaterfall, LoadingIcon,
+  Button, ButtonAnchor, Card, ColorInput, Header, LoadingIcon, NumberInput, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses,
+  LogoBirdflop, LogoDiscord, LogoFabric, LogoForge, LogoLuminescent, LogoLuminescentFull, LogoPaper, LogoPterodactyl, LogoPurpur, LogoVelocity, LogoWaterfall,
 } from '@luminescent/ui';
 
 interface docsStore {
@@ -47,11 +47,9 @@ export default component$(() => {
     toggle: {},
   });
   return (
-    <section class="max-w-6xl mx-auto py-20 flex flex-col gap-4">
-      <div style="filter: drop-shadow(0 0 2rem #CB6CE6);">
-        <div class="text-5xl font-semibold mb-6 flex items-center gap-4 text-[#f0ccfb] fill-[#f0ccfb]" style="filter: drop-shadow(0 0 2rem #CB6CE6);">
-          <LogoLuminescentFull width={250} class="mt-1.5" /> / ui
-        </div>
+    <section class="max-w-6xl mx-auto py-24 flex flex-col gap-4">
+      <div class="text-4xl font-extrabold tracking-wide mb-2 flex items-center gap-4">
+        Elements
       </div>
       <Card>
         <Header id="anchor">
