@@ -1,7 +1,7 @@
 import { component$, useStore } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import {
-  Button, ButtonAnchor, Card, ColorInput, Header, LoadingIcon, NumberInput, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses,
+  Button, ButtonAnchor, Card, ColorInput, Header, LoadingIcon, NavContainer, NumberInput, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses,
   LogoBirdflop, LogoDiscord, LogoFabric, LogoForge, LogoLuminescent, LogoLuminescentFull, LogoPaper, LogoPterodactyl, LogoPurpur, LogoVelocity, LogoWaterfall,
 } from '@luminescent/ui';
 
@@ -22,6 +22,9 @@ interface docsStore {
   colorinput: {
     preview?: 'left' | 'right' | 'top' | 'bottom' | 'full';
   };
+  nav: {
+    floating?: boolean;
+  };
   numberinput: {
     input?: boolean;
   };
@@ -41,6 +44,7 @@ export default component$(() => {
     button: {},
     card: {},
     colorinput: {},
+    nav: {},
     numberinput: {},
     selectinput: {},
     textarea: {},
@@ -48,6 +52,16 @@ export default component$(() => {
   });
   return (
     <section class="max-w-6xl mx-auto py-24 flex flex-col gap-4">
+      <NavContainer floating={store.nav.floating}>
+        <Button q:slot="start" color="transparent" class={{
+          'text-[#f0ccfb] fill-[#f0ccfb]': true,
+        }}>
+          <div class="font-semibold flex items-center gap-1 text-[#f0ccfb] fill-[#f0ccfb]" style="filter: drop-shadow(0 0 1rem #CB6CE6);">
+            <LogoLuminescentFull width={100} class="mt-1" /> / ui
+          </div>
+        </Button>
+        <Toggle q:slot="end" id="nav-floating" onChange$={(e, element) => store.nav.floating = element.checked} label="Floating" />
+      </NavContainer>
       <div class="text-4xl font-extrabold tracking-wide mb-2 flex items-center gap-4">
         Elements
       </div>

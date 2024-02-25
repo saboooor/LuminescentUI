@@ -26,7 +26,7 @@
     "@anuragroy/tailwindcss-animate": "^1.0.6",
     "@builder.io/qwik": "^1.4.5",
     "@builder.io/qwik-city": "^1.4.5",
-    "@luminescent/ui": "^0.8.0",
+    "@luminescent/ui": "0.10.0-0",
     "@types/eslint": "^8.56.3",
     "@types/node": "^20.11.20",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
