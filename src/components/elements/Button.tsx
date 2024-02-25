@@ -15,8 +15,8 @@ export const buttonColorClasses = {
 export const sizeClasses = {
   sm: 'text-sm px-2 py-1 rounded-md gap-2 active:px-1',
   md: 'text-base px-4 py-2 rounded-md gap-3',
-  lg: 'text-base px-6 py-3 rounded-lg gap-3',
-  xl: 'text-base px-8 py-4 rounded-xl gap-4',
+  lg: 'text-lg px-6 py-3 rounded-lg gap-3',
+  xl: 'text-lg px-8 py-4 rounded-xl gap-4',
 };
 
 const buttonClass = 'relative flex items-center gap-3 transition ease-in-out border text-gray-50 fill-gray-50 disabled:opacity-50 hover:shadow-lg active:scale-95 whitespace-nowrap';
