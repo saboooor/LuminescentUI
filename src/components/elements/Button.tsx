@@ -13,7 +13,7 @@ export const buttonColorClasses = {
 };
 
 export const sizeClasses = {
-  sm: 'text-sm px-2.5 py-1.5 rounded-md gap-2',
+  sm: 'text-base px-2.5 py-1.5 rounded-md gap-2',
   md: 'text-base px-4 py-2 rounded-md gap-3',
   lg: 'text-lg px-6 py-3 rounded-lg gap-3',
   xl: 'text-lg px-8 py-4 rounded-xl gap-4',
