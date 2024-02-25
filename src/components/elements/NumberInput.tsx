@@ -1,5 +1,5 @@
 import type { PropsOf, QRL } from '@builder.io/qwik';
-import { Slot, component$, useStore, useStyles$ } from '@builder.io/qwik';
+import { $, Slot, component$, useStyles$ } from '@builder.io/qwik';
 import { Plus } from '../../svg/Plus';
 import { Minus } from '../../svg/Minus';
 import { InputClasses } from './TextInput';
@@ -48,11 +48,12 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, onDecrem
       'flex text-gray-50': true,
       'gap-2': !input,
     }}>
-      <Button color={input ? 'gray' : 'darkgray'} data-action="decrement" aria-label="Decrement" disabled={props.min ? value <= props.min : false} onClick$={(event, element) => {
+      <Button color={input ? 'gray' : 'darkgray'} data-action="decrement" aria-label="Decrement" disabled={props.min ? value <= props.min : false}
+      onClick$={input ? $((event, element) => {
         const siblingInput = element.nextElementSibling as HTMLInputElement;
-        if (input) siblingInput.stepDown();
-        onDecrement$(event, element, input ? siblingInput : undefined);
-      }} class={{
+        siblingInput.stepDown();
+        onDecrement$(event, element, siblingInput);
+      }) : onDecrement$} class={{
         'mr-2': input,
       }}>
         <Minus width="24" class="fill-current" />
@@ -64,11 +65,12 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, onDecrem
           ...props.class,
         }}/>
       }
-      <Button color={input ? 'gray' : 'darkgray'} data-action="increment" aria-label="Increment" disabled={props.max ? value >= props.max : false} onClick$={(event, element) => {
+      <Button color={input ? 'gray' : 'darkgray'} data-action="increment" aria-label="Increment" disabled={props.max ? value >= props.max : false}
+      onClick$={input ? $((event, element) => {
         const siblingInput = element.previousElementSibling as HTMLInputElement;
-        if (input) siblingInput.stepUp();
-        onIncrement$(event, element, input ? siblingInput : undefined);
-      }} class={{
+        siblingInput.stepUp();
+        onIncrement$(event, element, siblingInput);
+      }) : onIncrement$} class={{
         'ml-2': input,
       }}>
         <Plus width="24" class="fill-current" />
