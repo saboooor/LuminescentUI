@@ -6,8 +6,8 @@ import { InputClasses } from './TextInput';
 import { Button } from './Button';
 
 interface NumberInputRawProps extends Omit<(PropsOf<'input'> & { type: 'number' }), 'class' | 'type'> {
-  onDecrement$: QRL<(event: PointerEvent, element: HTMLButtonElement, store: { value: number }) => void>;
-  onIncrement$: QRL<(event: PointerEvent, element: HTMLButtonElement, store: { value: number }) => void>;
+  onDecrement$: QRL<(event: PointerEvent, element: HTMLButtonElement, inputElement?: HTMLInputElement) => void>;
+  onIncrement$: QRL<(event: PointerEvent, element: HTMLButtonElement, inputElement?: HTMLInputElement) => void>;
   input?: boolean;
   class?: { [key: string]: boolean };
   value?: number;
@@ -43,33 +43,31 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, onDecrem
     }
   `);
 
-  const store = useStore({
-    value,
-  });
-
   return (
     <div class={{
       'flex text-gray-50': true,
       'gap-2': !input,
     }}>
-      <Button color={input ? 'gray' : 'darkgray'} data-action="decrement" aria-label="Decrement" disabled={props.min ? store.value <= props.min : false} onClick$={(event, element) => {
-        store.value = store.value - step;
-        onDecrement$(event, element, store);
+      <Button color={input ? 'gray' : 'darkgray'} data-action="decrement" aria-label="Decrement" disabled={props.min ? value <= props.min : false} onClick$={(event, element) => {
+        const siblingInput = element.nextElementSibling as HTMLInputElement;
+        if (input) siblingInput.stepDown();
+        onDecrement$(event, element, input ? siblingInput : undefined);
       }} class={{
         'mr-2': input,
       }}>
         <Minus width="24" class="fill-current" />
       </Button>
       { input &&
-        <input {...props} type="number" value={store.value} step={step} class={{
+        <input {...props} type="number" value={value} step={step} class={{
           [InputClasses]: true,
           'text-center': true,
           ...props.class,
         }}/>
       }
-      <Button color={input ? 'gray' : 'darkgray'} data-action="increment" aria-label="Increment" disabled={props.max ? store.value >= props.max : false} onClick$={(event, element) => {
-        store.value = store.value + step;
-        onIncrement$(event, element, store);
+      <Button color={input ? 'gray' : 'darkgray'} data-action="increment" aria-label="Increment" disabled={props.max ? value >= props.max : false} onClick$={(event, element) => {
+        const siblingInput = element.previousElementSibling as HTMLInputElement;
+        if (input) siblingInput.stepUp();
+        onIncrement$(event, element, input ? siblingInput : undefined);
       }} class={{
         'ml-2': input,
       }}>
