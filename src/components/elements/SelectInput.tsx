@@ -60,7 +60,7 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
           return <option key={i} value={value.value}>{value.name}</option>;
         })}
       </select>
-      <Button class={{
+      <Button size="sm" class={{
         'flex focus:bg-gray-700': true,
         ...Class,
       }} onClick$={() => {

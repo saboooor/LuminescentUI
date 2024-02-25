@@ -45,9 +45,9 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
           backgroundColor: `${value}`,
           color: getBrightness(hexNumberToRgb(hexStringToNumber(value))) > 0.5 ? 'black' : 'white',
         } : preview == 'left' ? {
-          borderLeft: `40px solid ${value}`,
+          borderLeft: `35px solid ${value}`,
         } : preview == 'right' ? {
-          borderRight: `40px solid ${value}`,
+          borderRight: `35px solid ${value}`,
         } : preview == 'top' ? {
           borderTop: `10px solid ${value}`,
         } : preview == 'bottom' ? {
@@ -76,10 +76,10 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
             el.style.color = getBrightness(hexNumberToRgb(hexStringToNumber(color))) > 0.5 ? 'black' : 'white';
             break;
           case 'left':
-            el.style.borderLeft = `40px solid ${color}`;
+            el.style.borderLeft = `35px solid ${color}`;
             break;
           case 'right':
-            el.style.borderRight = `40px solid ${color}`;
+            el.style.borderRight = `35px solid ${color}`;
             break;
           case 'top':
             el.style.borderTop = `10px solid ${color}`;

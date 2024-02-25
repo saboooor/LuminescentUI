@@ -48,7 +48,7 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, onDecrem
       'flex text-gray-50': true,
       'gap-2': !input,
     }}>
-      <Button color={input ? 'gray' : 'darkgray'} data-action="decrement" aria-label="Decrement" disabled={props.min ? value <= props.min : false}
+      <Button size="sm" color={input ? 'gray' : 'darkgray'} data-action="decrement" aria-label="Decrement" disabled={props.min ? value <= props.min : false}
         onClick$={input ? $((event, element) => {
           const siblingInput = element.nextElementSibling as HTMLInputElement;
           siblingInput.stepDown();
@@ -65,7 +65,7 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, onDecrem
           ...props.class,
         }}/>
       }
-      <Button color={input ? 'gray' : 'darkgray'} data-action="increment" aria-label="Increment" disabled={props.max ? value >= props.max : false}
+      <Button size="sm" color={input ? 'gray' : 'darkgray'} data-action="increment" aria-label="Increment" disabled={props.max ? value >= props.max : false}
         onClick$={input ? $((event, element) => {
           const siblingInput = element.previousElementSibling as HTMLInputElement;
           siblingInput.stepUp();
