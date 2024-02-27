@@ -14,7 +14,7 @@
     "build.client": "vite build",
     "build.preview": "vite build --ssr src/entry.preview.tsx",
     "build.server": "vite build -c adapters/cloudflare-pages/vite.config.ts",
-    "build.types": "tsc --emitDeclarationOnly",
+    "build.types": "tsc --noEmit",
     "deploy": "wrangler pages dev ./dist",
     "lint": "eslint \"src/**/*.ts*\"",
     "preview": "qwik build preview && vite preview",

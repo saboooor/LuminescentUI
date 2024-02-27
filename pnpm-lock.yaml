@@ -6,11 +6,7 @@ settings:
 
 importers:
 
-  .:
-    devDependencies:
-      '@luminescent/ui':
-        specifier: '*'
-        version: link:packages/ui
+  .: {}
 
   packages/docs:
     devDependencies:

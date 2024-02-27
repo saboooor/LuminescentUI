@@ -10,10 +10,10 @@
   "packageManager": "pnpm@8.14.0",
   "private": true,
   "scripts": {
-    "build": "cd packages/ui && pnpm run build && cd ../docs && pnpm run build"
+    "build": "cd packages/ui && pnpm run build && cd ../docs && pnpm run build",
+    "np": "cd packages/ui && pnpm run build && pnpm run np",
+    "start": "cd packages/ui && pnpm run start",
+    "start:docs": "cd packages/docs && pnpm run start"
   },
-  "type": "module",
-  "devDependencies": {
-    "@luminescent/ui": "*"
-  }
+  "type": "module"
 }

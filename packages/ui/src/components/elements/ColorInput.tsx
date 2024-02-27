@@ -3,7 +3,7 @@ import type { PropsOf, QRL } from '@builder.io/qwik';
 import { $, Slot, component$, useOn, useStore } from '@builder.io/qwik';
 import type { TextInputRawProps } from './TextInput';
 import { TextInputRaw } from './TextInput';
-import { getBrightness, hexNumberToRgb, hexStringToNumber, hsvToRgb, rgbToHex, rgbToHsv, clamp, getMousePosition } from '../../utils/simple-color-picker/color';
+import { getBrightness, hexNumberToRgb, hexStringToNumber, hsvToRgb, rgbToHex, rgbToHsv, clamp, getMousePosition } from '../../utils/color';
 
 export interface ColorInputProps extends Omit<TextInputRawProps, 'onInput$' | 'children'> {
   onInput$?: QRL<(color: string) => void>;
