@@ -1,62 +1,19 @@
 {
-  "name": "@luminescent/ui",
-  "version": "0.10.0-0",
-  "description": "Luminescent UI library",
-  "main": "./lib/index.qwik.mjs",
-  "qwik": "./lib/index.qwik.mjs",
-  "types": "./lib-types/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./lib/index.qwik.mjs",
-      "require": "./lib/index.qwik.cjs",
-      "types": "./lib-types/index.d.ts"
-    },
-    "./config": "./src/tailwind.config.js"
-  },
-  "files": [
-    "lib",
-    "lib-types",
-    "src/tailwind.config.js"
-  ],
+  "name": "ui-monorepo",
+  "version": "0.0.1",
   "engines": {
-    "node": ">=15.0.0"
+    "node": ">=16.8.0 <18.0.0 || >=18.11",
+    "npm": "please-use-pnpm",
+    "yarn": "please-use-pnpm",
+    "pnpm": ">=8.6.12"
   },
-  "license": "AGPL-3.0-or-later",
-  "private": false,
-  "type": "module",
-  "publishConfig": {
-    "access": "public"
-  },
+  "packageManager": "pnpm@8.14.0",
+  "private": true,
   "scripts": {
-    "build": "qwik build",
-    "build.lib": "vite build --mode lib",
-    "build.types": "tsc --emitDeclarationOnly",
-    "dev": "vite --mode ssr",
-    "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
-    "lint": "eslint \"src/**/*.ts*\"",
-    "release": "np",
-    "start": "vite --open --mode ssr",
-    "test": "echo \"No test specified\" && exit 0",
-    "qwik": "qwik"
+    "build": "cd packages/ui && pnpm run build && cd ../docs && pnpm run build"
   },
+  "type": "module",
   "devDependencies": {
-    "@anuragroy/tailwindcss-animate": "^1.0.6",
-    "@builder.io/qwik": "1.4.5",
-    "@builder.io/qwik-city": "^1.4.5",
-    "@types/eslint": "^8.56.3",
-    "@types/node": "^20.11.20",
-    "@typescript-eslint/eslint-plugin": "^7.0.2",
-    "@typescript-eslint/parser": "^7.0.2",
-    "autoprefixer": "^10.4.17",
-    "chart.js": "^4.4.1",
-    "eslint": "^8.57.0",
-    "eslint-plugin-qwik": "latest",
-    "np": "^9.2.0",
-    "postcss": "^8.4.35",
-    "tailwindcss": "3.4.1",
-    "typescript": "5.3.3",
-    "undici": "*",
-    "vite": "^5.1.4",
-    "vite-tsconfig-paths": "^4.3.1"
+    "@luminescent/ui": "*"
   }
 }
