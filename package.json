@@ -11,9 +11,9 @@
   "private": true,
   "scripts": {
     "build": "cd packages/ui && pnpm run build && cd ../docs && pnpm run build",
-    "np": "cd packages/ui && pnpm run build && pnpm run np",
+    "np": "cd packages/ui && pnpm run build && pnpm np",
     "start": "cd packages/ui && pnpm run start",
-    "start:docs": "cd packages/docs && pnpm run start"
+    "start:docs": "cd packages/ui && pnpm run build && cd ../docs && pnpm run start"
   },
   "type": "module"
 }

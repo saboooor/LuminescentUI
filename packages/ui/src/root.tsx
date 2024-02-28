@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Button, ButtonAnchor, Card, ColorInput, Header, LoadingIcon, NavContainer, NumberInput, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses } from './components/elements';
+import { Button, ButtonAnchor, Card, ColorInput, Header, LoadingIcon, Nav, NumberInput, SelectInput, TextArea, TextAreaRaw, TextInput, Toggle, buttonColorClasses, cardColorClasses, sizeClasses } from './components/elements';
 import { LogoBirdflop, LogoDiscord, LogoFabric, LogoForge, LogoLuminescent, LogoLuminescentFull, LogoPaper, LogoPterodactyl, LogoPurpur, LogoVelocity, LogoWaterfall } from './components/logos';
 import './global.css';
 
@@ -21,6 +21,7 @@ interface docsStore {
     preview?: 'left' | 'right' | 'top' | 'bottom' | 'full';
   };
   nav: {
+    fixed?: boolean;
     floating?: boolean;
   };
   numberinput: {
@@ -53,18 +54,9 @@ export default component$(() => {
       <head>
         <meta charSet="utf-8" />
         <title>Luminescent UI</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body class="bg-gray-950 text-gray-200 max-w-6xl mx-auto py-24 flex flex-col gap-4">
-        <NavContainer floating={store.nav.floating}>
-          <Button q:slot="start" color="transparent" class={{
-            'text-[#f0ccfb] fill-[#f0ccfb]': true,
-          }}>
-            <div class="font-semibold flex items-center gap-1 text-[#f0ccfb] fill-[#f0ccfb]" style="filter: drop-shadow(0 0 1rem #CB6CE6);">
-              <LogoLuminescentFull width={100} class="mt-1" /> / ui
-            </div>
-          </Button>
-          <Toggle q:slot="end" id="nav-floating" onChange$={(e, element) => store.nav.floating = element.checked} label="Floating" />
-        </NavContainer>
+      <body class="bg-gray-950 text-gray-200 max-w-6xl mx-auto py-24 px-4 flex flex-col gap-4">
         <div class="text-4xl font-extrabold tracking-wide mb-2 flex items-center gap-4">
           Elements
         </div>
@@ -181,6 +173,68 @@ export default component$(() => {
 <ColorInput id="color-input"${store.colorinput.preview ? ` preview="${store.colorinput.preview}"` : ''}>
   Color Input
 </ColorInput>`} />
+        </Card>
+        <Card>
+          <Header>
+            Nav
+          </Header>
+          <Toggle id="nav-fixed" onChange$={(e, element) => store.nav.fixed = element.checked}
+            label="fixed" />
+          <Toggle id="nav-floating" onChange$={(e, element) => store.nav.floating = element.checked}
+            label="floating" />
+          <div class="relative h-40">
+            <Nav floating={store.nav.floating} fixed={store.nav.fixed}>
+
+              <Button q:slot="start" color="transparent" class={{ 'hidden sm:flex': true }}>
+                Button 1
+              </Button>
+
+              <Button q:slot="center" color="transparent" class={{ 'hidden sm:flex': true }}>
+                Button 2
+              </Button>
+
+              <Button q:slot="end" color="transparent" class={{ 'hidden sm:flex': true }}>
+                Button 3
+              </Button>
+
+              <Button q:slot="mobile" color="transparent">
+                Button 1
+              </Button>
+              <Button q:slot="mobile" color="transparent">
+                Button 2
+              </Button>
+              <Button q:slot="mobile" color="transparent">
+                Button 3
+              </Button>
+
+            </Nav>
+          </div>
+          <TextAreaRaw output value={`
+<Nav${store.nav.floating ? ' floating' : ''}${store.nav.fixed ? ' fixed' : ''}>
+
+<Button q:slot="start" color="transparent" class={{ 'hidden sm:flex': true }}>
+  Button 1
+</Button>
+
+<Button q:slot="center" color="transparent" class={{ 'hidden sm:flex': true }}>
+  Button 2
+</Button>
+
+<Button q:slot="end" color="transparent" class={{ 'hidden sm:flex': true }}>
+  Button 3
+</Button>
+
+<Button q:slot="mobile" color="transparent">
+  Button 1
+</Button>
+<Button q:slot="mobile" color="transparent">
+  Button 2
+</Button>
+<Button q:slot="mobile" color="transparent">
+  Button 3
+</Button>
+
+</Nav>`} />
         </Card>
         <Card>
           <Header>
