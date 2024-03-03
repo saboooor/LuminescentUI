@@ -30,7 +30,8 @@ interface docsStore {
     input?: boolean;
   };
   selectinput: {
-    transparent?: boolean;
+    display?: string;
+    color?: keyof typeof buttonColorClasses;
   };
   textarea: {
     output?: boolean;
@@ -239,7 +240,7 @@ export default component$(() => {
           </NumberInput>
         </div>
         <TextAreaRaw output value={`
-<NumberInput id="number-input" ${store.numberinput.input ? ' input' : ''}>
+<NumberInput id="number-input"${store.numberinput.input ? ' input' : ''}>
   Number Input
 </NumberInput`} />
       </Card>
@@ -247,6 +248,18 @@ export default component$(() => {
         <Header>
           SelectInput
         </Header>
+        <TextInput id="select-display" onInput$={(e, el) => {
+          store.selectinput.display = el.value;
+        }}>
+          display
+        </TextInput>
+        <SelectInput id="select-color"
+          onChange$={(e, element) => store.selectinput.color = element.value as keyof typeof buttonColorClasses}
+          values={Object.keys(buttonColorClasses).map((color) => ({ name: color, value: color }))}
+          value="gray"
+        >
+          color
+        </SelectInput>
         <div>
           <SelectInput id="select-input"
             values={[
@@ -255,12 +268,14 @@ export default component$(() => {
               { name: 'Option 3', value: '3' },
             ]}
             value="1"
+            display={store.selectinput.display ? <div dangerouslySetInnerHTML={store.selectinput.display}></div> : undefined}
+            color={store.selectinput.color}
           >
             Select Input
           </SelectInput>
         </div>
         <TextAreaRaw output value={`
-<SelectInput id="select-input"
+<SelectInput id="select-input"${store.selectinput.display ? ` display={${store.selectinput.display}}` : ''}${store.selectinput.color ? ` color="${store.selectinput.color}"` : ''}
   values={[
     { name: 'Option 1', value: '1' },
     { name: 'Option 2', value: '2' },

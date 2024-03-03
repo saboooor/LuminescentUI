@@ -1,10 +1,13 @@
-import type { PropsOf } from '@builder.io/qwik';
+import type { JSXChildren, PropsOf } from '@builder.io/qwik';
 import { component$, Slot, useStore, useStyles$ } from '@builder.io/qwik';
+import type { buttonColorClasses } from './Button';
 import { Button } from './Button';
 import { ChevronDown } from '../../svg/ChevronDown';
 
 interface SelectInputProps extends Omit<PropsOf<'select'>, 'class'> {
   class?: { [key: string]: boolean };
+  display?: JSXChildren;
+  color?: keyof typeof buttonColorClasses;
   id: string;
   values: {
     name: string;
@@ -23,7 +26,7 @@ export const SelectInput = component$<SelectInputProps>((props) => {
   );
 });
 
-export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class: Class, ...props }) => {
+export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class: Class, display, color, ...props }) => {
   const store = useStore({
     opened: false,
   });
@@ -60,15 +63,18 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
           return <option key={i} value={value.value}>{value.name}</option>;
         })}
       </select>
-      <Button size="sm" class={{
-        'flex focus:bg-gray-700': true,
+      <Button color={color} size="sm" class={{
+        'flex': true,
         ...Class,
       }} onClick$={() => {
         store.opened = !store.opened;
       }}>
-        <span id={`lui-${id}-name`} class="flex-1 text-left">
-          {values.find((value) => value.value.toString() === props.value)?.name ?? values[0].name}
-        </span>
+        {display}
+        {!display &&
+          <span id={`lui-${id}-name`} class="flex-1 text-left">
+            {values.find((value) => value.value.toString() === props.value)?.name ?? values[0].name}
+          </span>
+        }
         <ChevronDown width={16} class={{
           'motion-safe:transition-all duration-200': true,
           'transform rotate-180': store.opened,
@@ -80,7 +86,7 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
       }}>
         {values.map((value, i) => {
           return (
-            <Button key={i} onClick$={() => {
+            <Button color='transparent' key={i} onClick$={() => {
               store.opened = false;
               const select = document.getElementById(id) as HTMLSelectElement;
               select.value = value.value.toString();
@@ -88,7 +94,6 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
               name.textContent = value.name;
               select.dispatchEvent(new Event('change'));
             }} class={{
-              'border-0 bg-transparent': true,
               'opacity-0': !store.opened,
             }}>
               {value.name}
