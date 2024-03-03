@@ -27,7 +27,7 @@ export const TextAreaRaw = component$<TextAreaRawProps>(({ output, ...props }) =
     <textarea {...props} class={{
       [InputClasses]: true,
       'h-32': true,
-      'cursor-pointer active:bg-gray-600': output,
+      'cursor-pointer active:bg-gray-600 select-none': output,
       ...props.class,
     }} onClick$={output ? $((event, element) => {
       navigator.clipboard.writeText(element.value);

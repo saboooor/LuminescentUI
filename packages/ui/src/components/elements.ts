@@ -1,4 +1,5 @@
 export * from './elements/Anchor';
+export * from './elements/Blobs';
 export * from './elements/Button';
 export * from './elements/Card';
 export * from './elements/ColorInput';

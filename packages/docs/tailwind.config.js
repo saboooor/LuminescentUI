@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        ...theme.extend.colors,
+      },
       animation: {
         ...theme.extend.animation,
       },

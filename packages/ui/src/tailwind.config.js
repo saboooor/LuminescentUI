@@ -3,8 +3,8 @@ function getBlobKeyFrame() {
   const translateYPercentages = [0, 12, 25, 38, 50];
   const scaleValues = [0.8, 1, 1.2, 1.4];
 
-  const translateX0Key = Math.floor(Math.random() * 70);
-  const translateX0 = Math.floor(Math.random() * 70);
+  const translateX0Key = Math.floor(Math.random() * translateXPercentages.length);
+  const translateX0 = translateXPercentages[translateX0Key];
   translateXPercentages.splice(translateX0Key, 1);
   const translateX1Key = Math.floor(Math.random() * translateXPercentages.length);
   const translateX1 = translateXPercentages[translateX1Key];
@@ -44,10 +44,25 @@ function getBlobKeyFrame() {
   return keyframe;
 }
 
+const luminescent = {
+  50 : "hsl(286deg, 65%, 97%)",
+  100: "hsl(286deg, 60%, 95%)",
+  200: "hsl(286deg, 55%, 90%)",
+  300: "hsl(286deg, 50%, 82%)",
+  400: "hsl(286deg, 45%, 75%)",
+  500: "hsl(286deg, 40%, 60%)",
+  600: "hsl(286deg, 35%, 51%)",
+  700: "hsl(286deg, 30%, 42%)",
+  800: "hsl(286deg, 25%, 35%)",
+  900: "hsl(286deg, 20%, 30%)",
+  950: "hsl(286deg, 15%, 17%)"
+};
+
 module.exports = {
   content: ['./node_modules/@luminescent/ui/**/*.{mjs,cjs}'],
   theme: {
     extend: {
+      colors: { luminescent },
       animation: {
         blob: 'blob 15s infinite',
         blob1: 'blob1 15s infinite',

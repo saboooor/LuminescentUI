@@ -17,6 +17,9 @@
     "incremental": true,
     "isolatedModules": true,
     "types": ["vite/client"],
+    "paths": {
+      "~/*": ["./src/*"],
+    },
   },
   "include": ["src"],
   "exclude": ["src/tailwind.config.js"],

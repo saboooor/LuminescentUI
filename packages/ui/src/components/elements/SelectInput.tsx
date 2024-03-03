@@ -11,8 +11,9 @@ interface SelectInputProps extends Omit<PropsOf<'select'>, 'class' | 'size'> {
   size?: keyof typeof sizeClasses;
   id: string;
   values: {
-    name: string;
+    name: JSXChildren;
     value: string | number;
+    color?: keyof typeof buttonColorClasses;
   }[];
 }
 
@@ -30,6 +31,7 @@ export const SelectInput = component$<SelectInputProps>((props) => {
 export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class: Class, display, color, size = 'sm', ...props }) => {
   const store = useStore({
     opened: false,
+    value: props.value,
   });
 
   useStyles$(`
@@ -61,7 +63,7 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
         'hidden': true,
       }}>
         {values.map((value, i) => {
-          return <option key={i} value={value.value}>{value.name}</option>;
+          return <option key={i} value={value.value}>{`${value.value}`}</option>;
         })}
       </select>
       <Button color={color} size={size} class={{
@@ -73,7 +75,7 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
         {display}
         {!display &&
           <span id={`lui-${id}-name`} class="flex-1 text-left">
-            {values.find((value) => value.value.toString() === props.value)?.name ?? values[0].name}
+            {values.find((value) => value.value.toString() === store.value)?.name ?? values[0].name}
           </span>
         }
         <ChevronDown width={16} class={{
@@ -85,19 +87,16 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
         'motion-safe:transition-all absolute top-full left-0 p-1 mt-2 gap-1 bg-gray-800/50 backdrop-blur-xl flex flex-col rounded-lg border border-gray-700 z-[1000] max-h-72 lui-scroll overflow-auto select-none': true,
         'pointer-events-none opacity-0 scale-95': !store.opened,
       }}>
-        {values.map((value, i) => {
+        {values.map(({ name, value, color = 'transparent' }, i) => {
           return (
-            <Button color='transparent' key={i} onClick$={() => {
+            <Button color={color} size={size} key={i} onClick$={() => {
               store.opened = false;
               const select = document.getElementById(id) as HTMLSelectElement;
-              select.value = value.value.toString();
-              const name = document.getElementById(`lui-${id}-name`);
-              if (name) name.textContent = value.name;
+              select.value = value.toString();
+              store.value = value.toString();
               select.dispatchEvent(new Event('change'));
-            }} class={{
-              'opacity-0': !store.opened,
             }}>
-              {value.name}
+              {name}
             </Button>
           );
         })}

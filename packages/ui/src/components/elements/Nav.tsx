@@ -18,29 +18,31 @@ export const Nav = component$<NavContainerProps>(({ fixed, floating }) => {
       <div class={{
         'sm:hidden motion-safe:transition-all flex flex-col px-2 items-center absolute w-full': true,
         'top-full mt-2': menu.value,
-        'opacity-0 top-0': !menu.value,
+        'opacity-0 top-0 scale-95': !menu.value,
       }}>
         <div class={{
-          'flex flex-col motion-safe:transition-all max-w-7xl w-full p-2 bg-gray-800/50 border border-gray-700/50 backdrop-blur-lg drop-shadow-xl rounded-lg': true,
+          'flex flex-col gap-2 motion-safe:transition-all max-w-7xl w-full p-2 bg-gray-800/50 border border-gray-700/50 backdrop-blur-lg drop-shadow-xl rounded-lg': true,
         }}>
           <Slot name="mobile" />
         </div>
       </div>
       <div class={{
-        'bg-gray-800/50 border-b border-gray-700/50 backdrop-blur-lg drop-shadow-xl': !floating,
-        'p-2 pb-0': floating,
+        'bg-gray-800/50 border-b border-gray-700/50': !floating,
+        'before:absolute before:content-[""] before:w-full before:h-full before:backdrop-blur-lg before:drop-shadow-xl before:-z-10': !floating,
+        'relative mt-2': floating,
       }}>
         <div class={{
-          'flex justify-evenly w-full mx-auto px-4 py-2 max-w-7xl': true,
-          'bg-gray-800/50 border border-gray-700/50 backdrop-blur-lg drop-shadow-xl rounded-lg': floating,
+          'flex justify-evenly w-full mx-auto px-2 max-w-7xl': true,
+          'bg-gray-800/50 border border-gray-700/50 rounded-lg': floating,
+          'before:absolute before:content-[""] before:w-full before:h-full before:backdrop-blur-lg before:drop-shadow-xl before:-z-10': floating,
         }}>
-          <div class="flex items-center flex-1 gap-2 justify-start">
+          <div class="flex items-center flex-1 gap-2 py-2 justify-start">
             <Slot name="start" />
           </div>
-          <div class="flex items-center flex-1 gap-2 justify-center">
+          <div class="flex items-center flex-1 gap-2 py-2 justify-center">
             <Slot name="center" />
           </div>
-          <div class="flex items-center flex-1 gap-2 justify-end">
+          <div class="flex items-center flex-1 gap-2 py-2 justify-end">
             <Slot name="end" />
             <Button color="transparent" square class={{ 'sm:hidden': true }}
               onClick$={() => menu.value = !menu.value}>

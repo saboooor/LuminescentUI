@@ -12,6 +12,7 @@
 /* Custom styles */
 body {
   font-family: "Inter", sans-serif;
+  overflow-y: scroll;
 }
 
 * {
