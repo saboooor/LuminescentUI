@@ -71,7 +71,6 @@ module.exports = {
         blob4: 'blob4 15s infinite',
         blob5: 'blob5 15s infinite',
         blob6: 'blob6 15s infinite',
-        float: 'float 6s infinite',
       },
       keyframes: {
         blob: getBlobKeyFrame(),
