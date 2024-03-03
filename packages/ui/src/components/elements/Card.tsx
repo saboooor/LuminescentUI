@@ -164,7 +164,7 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
       [colorClass.card.bg]: !blobs,
       [colorClass.card.bg_blobs]: blobs,
       [colorClass.card.hover + ' hover:shadow-lg']: hover,
-      [colorClass.card.click + ' active:scale-[99%] cursor-pointer select-none']: hover == 'clickable',
+      [colorClass.card.click + ' active:scale-[99%] cursor-pointer select-none touch-manipulation']: hover == 'clickable',
       ...props.class,
     }}>
       <div class={{

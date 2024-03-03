@@ -10,7 +10,7 @@ interface ToggleProps extends Omit<(PropsOf<'input'> & { type: 'checkbox' }), 'c
 export const Toggle = component$<ToggleProps>(({ center, label, ...props }) => {
   return (
     <div class={{
-      'flex gap-3 items-center': true,
+      'flex gap-3 items-center touch-manipulation': true,
       'justify-center': center,
     }}>
       <label class="inline-flex relative items-center cursor-pointer">

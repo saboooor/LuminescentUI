@@ -52,7 +52,7 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
   `);
 
   return (
-    <div class="relative">
+    <div class="relative touch-manipulation">
       <select {...props} id={id} class={{
         'hidden': true,
       }}>

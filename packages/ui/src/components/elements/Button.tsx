@@ -36,7 +36,7 @@ export const sizeClasses = {
   },
 };
 
-const buttonClass = 'relative flex items-center gap-3 transition ease-in-out border text-gray-50 fill-gray-50 disabled:opacity-50 hover:shadow-lg active:scale-95 whitespace-nowrap';
+const buttonClass = 'relative flex items-center gap-3 transition ease-in-out border text-gray-50 fill-gray-50 disabled:opacity-50 hover:shadow-lg active:scale-95 whitespace-nowrap touch-manipulation';
 
 interface GenericButtonProps {
   color?: keyof typeof buttonColorClasses;

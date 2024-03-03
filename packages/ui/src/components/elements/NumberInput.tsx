@@ -45,7 +45,7 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, onDecrem
 
   return (
     <div class={{
-      'flex text-gray-50': true,
+      'flex text-gray-50 touch-manipulation': true,
       'gap-2': !input,
     }}>
       <Button size="sm" color={input ? 'gray' : 'darkgray'} data-action="decrement" aria-label="Decrement" disabled={props.min ? value <= props.min : false}
