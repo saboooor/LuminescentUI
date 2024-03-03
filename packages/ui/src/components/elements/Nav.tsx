@@ -29,7 +29,7 @@ export const Nav = component$<NavContainerProps>(({ fixed, floating }) => {
       <div class={{
         'bg-gray-800/50 border-b border-gray-700/50': !floating,
         'before:absolute before:content-[""] before:w-full before:h-full before:backdrop-blur-lg before:drop-shadow-xl before:-z-10': !floating,
-        'relative mt-2': floating,
+        'relative mt-2 mx-2': floating,
       }}>
         <div class={{
           'flex justify-evenly w-full mx-auto px-2 max-w-7xl': true,
