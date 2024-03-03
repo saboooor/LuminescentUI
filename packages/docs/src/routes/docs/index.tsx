@@ -6,9 +6,9 @@ import Blobs from '~/components/docs/Blobs';
 import Button from '~/components/docs/Button';
 import CardSection from '~/components/docs/Card';
 import ColorInput from '~/components/docs/ColorInput';
+import Dropdown from '~/components/docs/Dropdown';
 import Nav from '~/components/docs/Nav';
 import NumberInput from '~/components/docs/NumberInput';
-import SelectInput from '~/components/docs/SelectInput';
 import TextArea from '~/components/docs/TextArea';
 import TextInput from '~/components/docs/TextInput';
 import Toggle from '~/components/docs/Toggle';
@@ -38,9 +38,9 @@ export default component$(() => {
       <Button />
       <CardSection />
       <ColorInput />
+      <Dropdown />
       <Nav />
       <NumberInput />
-      <SelectInput />
       <TextArea />
       <TextInput />
       <Toggle />

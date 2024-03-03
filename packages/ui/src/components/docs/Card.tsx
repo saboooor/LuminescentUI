@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, Header, SelectInput, TextAreaRaw, Toggle, cardColorClasses } from '../../index';
+import { Card, Header, Dropdown, TextAreaRaw, Toggle, cardColorClasses } from '../../index';
 
 interface cardOptions {
   color?: keyof typeof cardColorClasses;
@@ -18,13 +18,13 @@ export default component$(() => {
         Card (and Header)
       </Header>
       <div class="flex">
-        <SelectInput id="card-color"
+        <Dropdown id="card-color"
           onChange$={(e, element) => store.color = element.value as keyof typeof cardColorClasses}
           values={Object.keys(cardColorClasses).map((color) => ({ name: color, value: color }))}
           value="darkgray"
         >
           color
-        </SelectInput>
+        </Dropdown>
       </div>
       <Toggle id="card-hoverable" onChange$={(e, element) => store.hover = element.checked}
         checked={store.hover == 'clickable' || store.hover}

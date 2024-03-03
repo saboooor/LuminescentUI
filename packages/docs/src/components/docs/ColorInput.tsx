@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, ColorInput, Header, SelectInput, TextAreaRaw } from '@luminescent/ui';
+import { Card, ColorInput, Header, Dropdown, TextAreaRaw } from '@luminescent/ui';
 
 interface colorInputOptions {
   preview?: 'left' | 'right' | 'top' | 'bottom' | 'full';
@@ -12,13 +12,13 @@ export default component$(() => {
       <Header>
         ColorInput
       </Header>
-      <SelectInput id="color-preview"
+      <Dropdown id="color-preview"
         onChange$={(e, element) => store.preview = element.value as 'left' | 'right' | 'top' | 'bottom' | 'full'}
         values={['left', 'right', 'top', 'bottom', 'full'].map((preview) => ({ name: preview, value: preview }))}
         value="left"
       >
         preview
-      </SelectInput>
+      </Dropdown>
       <div>
         <ColorInput id="color-input" onInput$={() => {}} preview={store.preview}>
           Color Input

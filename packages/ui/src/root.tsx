@@ -7,7 +7,7 @@ import Card from '~/components/docs/Card';
 import ColorInput from '~/components/docs/ColorInput';
 import Nav from '~/components/docs/Nav';
 import NumberInput from '~/components/docs/NumberInput';
-import SelectInput from '~/components/docs/SelectInput';
+import Dropdown from '~/components/docs/Dropdown';
 import TextArea from '~/components/docs/TextArea';
 import TextInput from '~/components/docs/TextInput';
 import Toggle from '~/components/docs/Toggle';
@@ -29,9 +29,9 @@ export default component$(() => {
         <Button />
         <Card />
         <ColorInput />
+        <Dropdown />
         <Nav />
         <NumberInput />
-        <SelectInput />
         <TextArea />
         <TextInput />
         <Toggle />

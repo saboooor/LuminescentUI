@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Button, Card, Header, Nav, SelectInputRaw, TextAreaRaw, Toggle } from '../../index';
+import { Button, Card, Header, Nav, DropdownRaw, TextAreaRaw, Toggle } from '../../index';
 
 interface navOptions {
   fixed?: boolean;
@@ -28,13 +28,13 @@ export default component$(() => {
             Button 2
           </Button>
 
-          <SelectInputRaw id="nav-dropdown" q:slot="end" color="transparent" class={{ 'hidden sm:flex': true }} values={[
+          <DropdownRaw id="nav-dropdown" q:slot="end" color="transparent" class={{ 'hidden sm:flex': true }} values={[
             { name: 'Option 1', value: '1' },
             { name: 'Option 2', value: '2' },
             { name: 'Option 3', value: '3' },
           ]}>
             Button 3
-          </SelectInputRaw>
+          </DropdownRaw>
 
           <Button q:slot="mobile" color="transparent">
             Button 1
@@ -42,13 +42,13 @@ export default component$(() => {
           <Button q:slot="mobile" color="transparent">
             Button 2
           </Button>
-          <SelectInputRaw id="nav-mobile-dropdown" q:slot="mobile" color="transparent" values={[
+          <DropdownRaw id="nav-mobile-dropdown" q:slot="mobile" color="transparent" values={[
             { name: 'Option 1', value: '1' },
             { name: 'Option 2', value: '2' },
             { name: 'Option 3', value: '3' },
           ]}>
             Button 3
-          </SelectInputRaw>
+          </DropdownRaw>
 
         </Nav>
       </div>
@@ -63,13 +63,13 @@ export default component$(() => {
     Button 2
   </Button>
 
-  <SelectInputRaw id="nav-dropdown" q:slot="end" color="transparent" class={{ 'hidden sm:flex': true }} values={[
+  <DropdownRaw id="nav-dropdown" q:slot="end" color="transparent" class={{ 'hidden sm:flex': true }} values={[
     { name: 'Option 1', value: '1' },
     { name: 'Option 2', value: '2' },
     { name: 'Option 3', value: '3' },
   ]}>
     Button 3
-  </SelectInputRaw>
+  </DropdownRaw>
 
   <Button q:slot="mobile" color="transparent">
     Button 1
@@ -77,13 +77,13 @@ export default component$(() => {
   <Button q:slot="mobile" color="transparent">
     Button 2
   </Button>
-  <SelectInputRaw id="nav-mobile-dropdown" q:slot="mobile" color="transparent" values={[
+  <DropdownRaw id="nav-mobile-dropdown" q:slot="mobile" color="transparent" values={[
     { name: 'Option 1', value: '1' },
     { name: 'Option 2', value: '2' },
     { name: 'Option 3', value: '3' },
   ]}>
     Button 3
-  </SelectInputRaw>
+  </DropdownRaw>
 
 </Nav>`} />
     </Card>

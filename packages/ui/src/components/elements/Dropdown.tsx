@@ -4,7 +4,7 @@ import type { buttonColorClasses, sizeClasses } from './Button';
 import { Button } from './Button';
 import { ChevronDown } from '../../svg/ChevronDown';
 
-interface SelectInputProps extends Omit<PropsOf<'select'>, 'class' | 'size'> {
+interface DropdownProps extends Omit<PropsOf<'select'>, 'class' | 'size'> {
   class?: { [key: string]: boolean };
   display?: JSXChildren;
   color?: keyof typeof buttonColorClasses;
@@ -17,18 +17,18 @@ interface SelectInputProps extends Omit<PropsOf<'select'>, 'class' | 'size'> {
   }[];
 }
 
-export const SelectInput = component$<SelectInputProps>((props) => {
+export const Dropdown = component$<DropdownProps>((props) => {
   return (
     <div class="flex flex-col">
       <label for={props.id} class="text-gray-300 pb-1 select-none">
         <Slot />
       </label>
-      <SelectInputRaw {...props}/>
+      <DropdownRaw {...props}/>
     </div>
   );
 });
 
-export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class: Class, display, color, size = 'sm', ...props }) => {
+export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class, display, color, size = 'sm', ...props }) => {
   const store = useStore({
     opened: false,
     value: props.value,
@@ -59,13 +59,15 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
 
   return (
     <div class="relative touch-manipulation">
-      <select {...props} id={id} class={{
-        'hidden': true,
-      }}>
-        {values.map((value, i) => {
-          return <option key={i} value={value.value}>{`${value.value}`}</option>;
-        })}
-      </select>
+      {values &&
+        <select {...props} id={id} class={{
+          'hidden': true,
+        }}>
+          {values.map((value, i) => {
+            return <option key={i} value={value.value}>{`${value.value}`}</option>;
+          })}
+        </select>
+      }
       <Button color={color} size={size} class={{
         'flex': true,
         ...Class,
@@ -91,15 +93,18 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
           return (
             <Button color={color} size={size} key={i} onClick$={() => {
               store.opened = false;
-              const select = document.getElementById(id) as HTMLSelectElement;
-              select.value = value.toString();
+              const select = document.getElementById(id) as HTMLSelectElement | null;
+              if (select) {
+                select.value = value.toString();
+                select.dispatchEvent(new Event('change'));
+              }
               store.value = value.toString();
-              select.dispatchEvent(new Event('change'));
             }}>
               {name}
             </Button>
           );
         })}
+        <Slot name="extra-buttons" />
       </div>
     </div>
   );

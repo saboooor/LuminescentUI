@@ -1,40 +1,40 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, Header, SelectInput, TextAreaRaw, TextInput, buttonColorClasses, sizeClasses } from '../../index';
+import { Card, Header, Dropdown, TextAreaRaw, TextInput, buttonColorClasses, sizeClasses } from '../../index';
 
-interface selectInputOptions {
+interface DropdownOptions {
   display?: string;
   color?: keyof typeof buttonColorClasses;
   size?: keyof typeof sizeClasses;
 }
 
 export default component$(() => {
-  const store = useStore<selectInputOptions>({});
+  const store = useStore<DropdownOptions>({});
   return (
     <Card>
       <Header>
-        SelectInput
+        Dropdown
       </Header>
       <TextInput id="select-display" onInput$={(e, el) => {
         store.display = el.value;
       }}>
         display
       </TextInput>
-      <SelectInput id="select-color"
+      <Dropdown id="select-color"
         onChange$={(e, element) => store.color = element.value as keyof typeof buttonColorClasses}
         values={Object.keys(buttonColorClasses).map((color) => ({ name: color, value: color }))}
         value="gray"
       >
         color
-      </SelectInput>
-      <SelectInput id="select-size"
+      </Dropdown>
+      <Dropdown id="select-size"
         onChange$={(e, element) => store.size = element.value as keyof typeof sizeClasses}
         values={Object.keys(sizeClasses).map((size) => ({ name: size, value: size }))}
         value="sm"
       >
         size
-      </SelectInput>
+      </Dropdown>
       <div>
-        <SelectInput id="select-input"
+        <Dropdown id="select-input"
           values={[
             { name: <div class="bg-red-500">Any element you want</div>, value: '1' },
             { name: 'Option 2', value: '2' },
@@ -46,10 +46,10 @@ export default component$(() => {
           size={store.size}
         >
           Select Input
-        </SelectInput>
+        </Dropdown>
       </div>
       <TextAreaRaw output value={`
-<SelectInput id="select-input"${store.display ? ` display={${store.display}}` : ''}${store.color ? ` color="${store.color}"` : ''}${store.size ? ` size="${store.size}"` : ''}>
+<Dropdown id="select-input"${store.display ? ` display={${store.display}}` : ''}${store.color ? ` color="${store.color}"` : ''}${store.size ? ` size="${store.size}"` : ''}>
   values={[
     { name: <div class="bg-red-500">Any element you want</div>, value: '1' },
     { name: 'Option 2', value: '2' },
@@ -58,7 +58,7 @@ export default component$(() => {
   value="1"
 >
   Select Input
-</SelectInput>`} />
+</Dropdown>`} />
     </Card>
   );
 });

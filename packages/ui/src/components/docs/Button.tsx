@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Button, Card, Header, SelectInput, TextAreaRaw, Toggle, buttonColorClasses, sizeClasses } from '../../index';
+import { Button, Card, Header, Dropdown, TextAreaRaw, Toggle, buttonColorClasses, sizeClasses } from '../../index';
 
 interface buttonOptions {
   color?: keyof typeof buttonColorClasses;
@@ -14,20 +14,20 @@ export default component$(() => {
       <Header>
         Button
       </Header>
-      <SelectInput id="button-color"
+      <Dropdown id="button-color"
         onChange$={(e, element) => store.color = element.value as keyof typeof buttonColorClasses}
         values={Object.keys(buttonColorClasses).map((color) => ({ name: color, value: color }))}
         value="gray"
       >
         color
-      </SelectInput>
-      <SelectInput id="button-size"
+      </Dropdown>
+      <Dropdown id="button-size"
         onChange$={(e, element) => store.size = element.value as keyof typeof sizeClasses}
         values={Object.keys(sizeClasses).map((size) => ({ name: size, value: size }))}
         value="md"
       >
         size
-      </SelectInput>
+      </Dropdown>
       <Toggle id="button-square"
         onChange$={(e, element) => store.square = element.checked}
         label="square" />
