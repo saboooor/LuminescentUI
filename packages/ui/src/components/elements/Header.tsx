@@ -34,7 +34,7 @@ export const Header = component$<HeaderProps>(({ id, loading, subheader }) => {
       <div class="flex">
         {Component}
         <div class={{
-          'transition-all duration-200': true,
+          'motion-safe:transition-all duration-200': true,
           'opacity-0': !loading,
           'opacity-100': loading,
         }}>

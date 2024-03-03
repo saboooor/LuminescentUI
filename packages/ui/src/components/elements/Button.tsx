@@ -10,7 +10,7 @@ export const buttonColorClasses = {
   yellow: 'bg-yellow-700/90 border-yellow-600 hover:bg-yellow-600 active:bg-yellow-500 focus:border-yellow-500',
   gray: 'bg-gray-700/90 border-gray-600 hover:bg-gray-600 active:bg-gray-500 focus:border-gray-500',
   darkgray: 'bg-gray-800/90 border-gray-700 hover:bg-gray-700 active:bg-gray-600 focus:border-gray-600',
-  transparent: 'bg-transparent border-transparent hover:bg-gray-700/30 active:bg-gray-700/40 focus:border-gray-700/40',
+  transparent: 'bg-transparent border-transparent hover:bg-gray-700/40 active:bg-gray-700/50 focus:border-gray-700/50',
 };
 
 export const sizeClasses = {
@@ -36,7 +36,7 @@ export const sizeClasses = {
   },
 };
 
-const buttonClass = 'relative flex items-center gap-3 transition ease-in-out border text-gray-50 fill-gray-50 disabled:opacity-50 hover:shadow-lg active:scale-95 whitespace-nowrap touch-manipulation';
+const buttonClass = 'relative flex items-center gap-3 motion-safe:transition ease-in-out border text-gray-50 fill-gray-50 disabled:opacity-50 hover:shadow-lg motion-safe:active:scale-95 whitespace-nowrap touch-manipulation select-none';
 
 interface GenericButtonProps {
   color?: keyof typeof buttonColorClasses;

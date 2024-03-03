@@ -22,7 +22,7 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
 
   return (
     <div class="relative">
-      <label for={id} class="text-gray-300 pb-1 flex">
+      <label for={id} class="text-gray-300 pb-1 flex select-none">
         <Slot />
       </label>
       <TextInputRaw {...props} value={value}
@@ -64,7 +64,7 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
           ...presetColors ?? [],
         ]}
         class={{
-          'transition-all absolute top-full mt-2 left-0 gap-1 z-[1000]': true,
+          'motion-safe:transition-all absolute top-full mt-2 left-0 gap-1 z-[1000]': true,
           'opacity-0 pointer-events-none scale-95': !store.opened,
         }}
         onInput$={(color: string) => {
@@ -196,7 +196,7 @@ export const ColorPickerRaw = component$<ColorPickerProps>(({ id, color, colors,
 
   return (
     <div class={{
-      'transition-all p-4 bg-gray-800/50 backdrop-blur-xl flex flex-col gap-6 rounded-lg border border-gray-700 touch-none': true,
+      'motion-safe:transition-all p-4 bg-gray-800/50 backdrop-blur-xl flex flex-col gap-6 rounded-lg border border-gray-700 touch-none': true,
       ...props.class,
     }}
     preventdefault:mousedown
@@ -238,7 +238,7 @@ export const ColorPickerRaw = component$<ColorPickerProps>(({ id, color, colors,
       <div class="w-[150px] flex flex-wrap gap-1 justify-evenly">
         {colors.map((color, i) => {
           return (
-            <button key={i} class="w-[25px] h-[25px] border border-gray-700 rounded-md hover:scale-110 transition-all"
+            <button key={i} class="w-[25px] h-[25px] border border-gray-700 rounded-md hover:scale-110 motion-safe:transition-all"
               style={`background: ${color}`}
               onMouseDown$={() => {
                 setColor(color);

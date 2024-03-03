@@ -14,7 +14,7 @@ interface TextAreaProps extends Omit<TextAreaRawProps, 'children'> {
 export const TextArea = component$<TextAreaProps>((props) => {
   return (
     <div class="flex flex-col">
-      <label for={props.id} class="text-gray-300 pb-1">
+      <label for={props.id} class="text-gray-300 pb-1 select-none">
         <Slot/>
       </label>
       <TextAreaRaw {...props} />

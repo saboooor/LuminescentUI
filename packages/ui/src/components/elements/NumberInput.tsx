@@ -23,7 +23,7 @@ interface NumberInputProps extends Omit<NumberInputRawProps, 'children'>{
 export const NumberInput = component$<NumberInputProps>((props) => {
   return (
     <div class="flex flex-col">
-      <label for={props.id} class="text-gray-300 pb-1">
+      <label for={props.id} class="text-gray-300 pb-1 select-none">
         <Slot />
       </label>
       <NumberInputRaw {...{ ...props, children: undefined }} />

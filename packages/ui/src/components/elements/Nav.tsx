@@ -11,17 +11,17 @@ export const Nav = component$<NavContainerProps>(({ fixed, floating }) => {
 
   return (
     <nav class={{
-      'transition-all duration-200 flex flex-col top-0 left-0 w-full z-50': true,
+      'motion-safe:transition-all duration-200 flex flex-col top-0 left-0 w-full z-50': true,
       'fixed': fixed,
       'absolute': !fixed,
     }}>
       <div class={{
-        'sm:hidden transition-all flex flex-col px-2 items-center absolute w-full': true,
+        'sm:hidden motion-safe:transition-all flex flex-col px-2 items-center absolute w-full': true,
         'top-full mt-2': menu.value,
         'opacity-0 top-0': !menu.value,
       }}>
         <div class={{
-          'flex flex-col transition-all max-w-7xl w-full p-2 bg-gray-800/50 border border-gray-700/50 backdrop-blur-lg drop-shadow-xl rounded-lg': true,
+          'flex flex-col motion-safe:transition-all max-w-7xl w-full p-2 bg-gray-800/50 border border-gray-700/50 backdrop-blur-lg drop-shadow-xl rounded-lg': true,
         }}>
           <Slot name="mobile" />
         </div>

@@ -160,7 +160,7 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
 
   return (
     <div  {...props} class={{
-      'relative p-8 border rounded-lg transition-all': true,
+      'relative p-8 border rounded-lg motion-safe:transition-all': true,
       [colorClass.card.bg]: !blobs,
       [colorClass.card.bg_blobs]: blobs,
       [colorClass.card.hover + ' hover:shadow-lg']: hover,
@@ -176,7 +176,7 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
       </div>
       {props.href && <a href={props.href} class="absolute inset-0" />}
       {blobs &&
-        <div class="absolute -z-10 inset-0 transition-all overflow-clip animate-in fade-in anim-duration-[2s]" style={{ containerType: 'size' }}>
+        <div class="motion-reduce:hidden absolute -z-10 inset-0 transition-all overflow-clip animate-in fade-in anim-duration-[2s]" style={{ containerType: 'size' }}>
           <div class={{
             'absolute top-0 w-[30cqw] h-[30cqw] rounded-full opacity-20 ease-in-out blur-xl': true,
             [blobClasses[blob]]: true,
