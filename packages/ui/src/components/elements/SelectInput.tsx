@@ -90,8 +90,8 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
               store.opened = false;
               const select = document.getElementById(id) as HTMLSelectElement;
               select.value = value.value.toString();
-              const name = document.getElementById(`lui-${id}-name`) as HTMLSpanElement;
-              name.textContent = value.name;
+              const name = document.getElementById(`lui-${id}-name`);
+              if (name) name.textContent = value.name;
               select.dispatchEvent(new Event('change'));
             }} class={{
               'opacity-0': !store.opened,
