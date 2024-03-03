@@ -9,12 +9,12 @@ interface DropdownProps extends Omit<PropsOf<'select'>, 'class' | 'size'> {
   display?: JSXChildren;
   color?: keyof typeof buttonColorClasses;
   size?: keyof typeof sizeClasses;
-  id: string;
-  values: {
+  values?: {
     name: JSXChildren;
     value: string | number;
     color?: keyof typeof buttonColorClasses;
   }[];
+  id: string;
 }
 
 export const Dropdown = component$<DropdownProps>((props) => {
@@ -75,7 +75,7 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
         store.opened = !store.opened;
       }}>
         {display}
-        {!display &&
+        {!display && values &&
           <span id={`lui-${id}-name`} class="flex-1 text-left">
             {values.find((value) => value.value.toString() === store.value)?.name ?? values[0].name}
           </span>
@@ -89,7 +89,7 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
         'motion-safe:transition-all absolute top-full left-0 p-1 mt-2 gap-1 bg-gray-800/50 backdrop-blur-xl flex flex-col rounded-lg border border-gray-700 z-[1000] max-h-72 lui-scroll overflow-auto select-none': true,
         'pointer-events-none opacity-0 scale-95': !store.opened,
       }}>
-        {values.map(({ name, value, color = 'transparent' }, i) => {
+        {values?.map(({ name, value, color = 'transparent' }, i) => {
           return (
             <Button color={color} size={size} key={i} onClick$={() => {
               store.opened = false;
