@@ -11,7 +11,7 @@
   "private": true,
   "scripts": {
     "build": "cd packages/ui && pnpm run build && cd ../docs && pnpm run build",
-    "np": "cd packages/ui && pnpm run build && pnpm np",
+    "np": "cd packages/ui && pnpm run build && pnpm np --no-cleanup",
     "start": "cd packages/ui && pnpm run start",
     "start:docs": "cd packages/ui && pnpm run build && cd ../docs && pnpm run start"
   },
