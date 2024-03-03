@@ -32,6 +32,7 @@ interface docsStore {
   selectinput: {
     display?: string;
     color?: keyof typeof buttonColorClasses;
+    size?: keyof typeof sizeClasses;
   };
   textarea: {
     output?: boolean;
@@ -260,6 +261,13 @@ export default component$(() => {
         >
           color
         </SelectInput>
+        <SelectInput id="select-size"
+          onChange$={(e, element) => store.selectinput.size = element.value as keyof typeof sizeClasses}
+          values={Object.keys(sizeClasses).map((size) => ({ name: size, value: size }))}
+          value="sm"
+        >
+          size
+        </SelectInput>
         <div>
           <SelectInput id="select-input"
             values={[
@@ -270,12 +278,13 @@ export default component$(() => {
             value="1"
             display={store.selectinput.display ? <div dangerouslySetInnerHTML={store.selectinput.display}></div> : undefined}
             color={store.selectinput.color}
+            size={store.selectinput.size}
           >
             Select Input
           </SelectInput>
         </div>
         <TextAreaRaw output value={`
-<SelectInput id="select-input"${store.selectinput.display ? ` display={${store.selectinput.display}}` : ''}${store.selectinput.color ? ` color="${store.selectinput.color}"` : ''}
+<SelectInput id="select-input"${store.selectinput.display ? ` display={${store.selectinput.display}}` : ''}${store.selectinput.color ? ` color="${store.selectinput.color}"` : ''}${store.selectinput.size ? ` size="${store.selectinput.size}"` : ''}>
   values={[
     { name: 'Option 1', value: '1' },
     { name: 'Option 2', value: '2' },

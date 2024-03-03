@@ -1,13 +1,14 @@
 import type { JSXChildren, PropsOf } from '@builder.io/qwik';
 import { component$, Slot, useStore, useStyles$ } from '@builder.io/qwik';
-import type { buttonColorClasses } from './Button';
+import type { buttonColorClasses, sizeClasses } from './Button';
 import { Button } from './Button';
 import { ChevronDown } from '../../svg/ChevronDown';
 
-interface SelectInputProps extends Omit<PropsOf<'select'>, 'class'> {
+interface SelectInputProps extends Omit<PropsOf<'select'>, 'class' | 'size'> {
   class?: { [key: string]: boolean };
   display?: JSXChildren;
   color?: keyof typeof buttonColorClasses;
+  size?: keyof typeof sizeClasses;
   id: string;
   values: {
     name: string;
@@ -26,7 +27,7 @@ export const SelectInput = component$<SelectInputProps>((props) => {
   );
 });
 
-export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class: Class, display, color, ...props }) => {
+export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class: Class, display, color, size = 'sm', ...props }) => {
   const store = useStore({
     opened: false,
   });
@@ -63,7 +64,7 @@ export const SelectInputRaw = component$<SelectInputProps>(({ id, values, class:
           return <option key={i} value={value.value}>{value.name}</option>;
         })}
       </select>
-      <Button color={color} size="sm" class={{
+      <Button color={color} size={size} class={{
         'flex': true,
         ...Class,
       }} onClick$={() => {

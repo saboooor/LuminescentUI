@@ -34,13 +34,13 @@ export const Nav = component$<NavContainerProps>(({ fixed, floating }) => {
           'flex justify-evenly w-full mx-auto px-4 py-2 max-w-7xl': true,
           'bg-gray-800/50 border border-gray-700/50 backdrop-blur-lg drop-shadow-xl rounded-lg': floating,
         }}>
-          <div class="flex flex-1 gap-2 justify-start">
+          <div class="flex items-center flex-1 gap-2 justify-start">
             <Slot name="start" />
           </div>
-          <div class="flex flex-1 gap-2 justify-center">
+          <div class="flex items-center flex-1 gap-2 justify-center">
             <Slot name="center" />
           </div>
-          <div class="flex flex-1 gap-2 justify-end">
+          <div class="flex items-center flex-1 gap-2 justify-end">
             <Slot name="end" />
             <Button color="transparent" square class={{ 'sm:hidden': true }}
               onClick$={() => menu.value = !menu.value}>
