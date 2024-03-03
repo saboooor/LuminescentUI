@@ -16,8 +16,8 @@ export const Nav = component$<NavContainerProps>(({ fixed, floating }) => {
       'absolute': !fixed,
     }}>
       <div class={{
-        'sm:hidden transition-all flex flex-col px-4 items-center absolute w-full': true,
-        'top-full mt-4': menu.value,
+        'sm:hidden transition-all flex flex-col px-2 items-center absolute w-full': true,
+        'top-full mt-2': menu.value,
         'opacity-0 top-0': !menu.value,
       }}>
         <div class={{
@@ -28,7 +28,7 @@ export const Nav = component$<NavContainerProps>(({ fixed, floating }) => {
       </div>
       <div class={{
         'bg-gray-800/50 border-b border-gray-700/50 backdrop-blur-lg drop-shadow-xl': !floating,
-        'p-4 pb-0': floating,
+        'p-2 pb-0': floating,
       }}>
         <div class={{
           'flex justify-evenly w-full mx-auto px-4 py-2 max-w-7xl': true,
