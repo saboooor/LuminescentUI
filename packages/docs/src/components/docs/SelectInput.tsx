@@ -51,9 +51,9 @@ export default component$(() => {
       <TextAreaRaw output value={`
 <SelectInput id="select-input"${store.display ? ` display={${store.display}}` : ''}${store.color ? ` color="${store.color}"` : ''}${store.size ? ` size="${store.size}"` : ''}>
   values={[
-    { name: 'Option 1', value: '1' },
+    { name: <div class="bg-red-500">Any element you want</div>, value: '1' },
     { name: 'Option 2', value: '2' },
-    { name: 'Option 3', value: '3' },
+    { name: 'Option 3', value: '3', color: 'blue' },
   ]}
   value="1"
 >
