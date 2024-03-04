@@ -77,7 +77,7 @@ export const Blobs = component$<BlobProps>(({ color = 'darkgray', blur = 'xl', .
 
   return (
     <div class={{
-      'motion-reduce:hidden absolute -z-10 inset-0 transition-all animate-in fade-in anim-duration-[2s]': true,
+      'motion-reduce:hidden absolute inset-0 transition-all animate-in fade-in anim-duration-[2s] -z-[1]': true,
       ...props.class,
     }} style={{ containerType: 'size' }}>
       <div class={{
