@@ -100,20 +100,15 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
 
   return (
     <div  {...props} class={{
-      'relative p-8 border rounded-lg motion-safe:transition-all': true,
+      'relative flex gap-4 p-8 border rounded-lg motion-safe:transition-all': true,
+      'flex-col': !row,
       [colorClass.card.bg]: !blobs,
       [colorClass.card.bg_blobs]: blobs,
       [colorClass.card.hover + ' hover:shadow-lg']: hover,
       [colorClass.card.click + ' active:scale-[99%] cursor-pointer select-none touch-manipulation']: hover == 'clickable',
       ...props.class,
     }}>
-      <div class={{
-        'flex gap-4': true,
-        'flex-col': !row,
-        'flex-row items-center': row,
-      }}>
-        <Slot />
-      </div>
+      <Slot />
       {props.href && <a href={props.href} class="absolute inset-0" />}
       {blobs &&
         <Blobs color={color} class={{
