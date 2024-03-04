@@ -1,10 +1,11 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, Header, Dropdown, TextAreaRaw, TextInput, buttonColorClasses, sizeClasses } from '../../index';
+import { Card, Header, Dropdown, TextAreaRaw, TextInput, buttonColorClasses, sizeClasses, Toggle } from '../../index';
 
 interface DropdownOptions {
   display?: string;
   color?: keyof typeof buttonColorClasses;
   size?: keyof typeof sizeClasses;
+  hover?: boolean;
 }
 
 export default component$(() => {
@@ -33,6 +34,10 @@ export default component$(() => {
       >
         size
       </Dropdown>
+      <Toggle id="select-hover" label="hover"
+        onInput$={(e, el) => store.hover = el.checked}>
+        hover
+      </Toggle>
       <div>
         <Dropdown id="select-input"
           values={[
@@ -44,12 +49,13 @@ export default component$(() => {
           display={store.display ? <div dangerouslySetInnerHTML={store.display}></div> : undefined}
           color={store.color}
           size={store.size}
+          hover={store.hover}
         >
           Select Input
         </Dropdown>
       </div>
       <TextAreaRaw output value={`
-<Dropdown id="select-input"${store.display ? ` display={${store.display}}` : ''}${store.color ? ` color="${store.color}"` : ''}${store.size ? ` size="${store.size}"` : ''}>
+<Dropdown id="select-input"${store.display ? ` display={${store.display}}` : ''}${store.color ? ` color="${store.color}"` : ''}${store.size ? ` size="${store.size}"` : ''}${store.hover ? ' hover' : ''}>
   values={[
     { name: <div class="bg-red-500">Any element you want</div>, value: '1' },
     { name: 'Option 2', value: '2' },

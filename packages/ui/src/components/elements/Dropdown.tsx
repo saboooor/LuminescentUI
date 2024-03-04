@@ -9,6 +9,7 @@ interface DropdownProps extends Omit<PropsOf<'select'>, 'class' | 'size'> {
   display?: JSXChildren;
   color?: keyof typeof buttonColorClasses;
   size?: keyof typeof sizeClasses;
+  hover?: boolean;
   values?: {
     name: JSXChildren;
     value: string | number;
@@ -28,7 +29,7 @@ export const Dropdown = component$<DropdownProps>((props) => {
   );
 });
 
-export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class, display, color, size = 'sm', ...props }) => {
+export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class, display, color, size = 'sm', hover, ...props }) => {
   const store = useStore({
     opened: false,
     value: props.value,
@@ -58,7 +59,10 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
   `);
 
   return (
-    <div class="relative touch-manipulation">
+    <div class={{
+      'relative touch-manipulation': true,
+      'group': hover,
+    }}>
       {values &&
         <select {...props} id={id} class={{
           'hidden': true,
@@ -83,28 +87,34 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
         <ChevronDown width={16} class={{
           'motion-safe:transition-all duration-200': true,
           'transform rotate-180': store.opened,
+          'group-hover:transform group-hover:rotate-180': hover,
         }}/>
       </Button>
-      <div id={`lui-${id}-opts`} class={{
-        'motion-safe:transition-all absolute top-full left-0 p-1 mt-2 gap-1 bg-gray-800/50 backdrop-blur-xl flex flex-col rounded-lg border border-gray-700 z-[1000] max-h-72 lui-scroll overflow-auto select-none': true,
+      <div class={{
+        'absolute top-full pt-2 left-0': true,
         'pointer-events-none opacity-0 scale-95': !store.opened,
+        'group-hover:pointer-events-auto group-hover:opacity-100 group-hover:scale-100': hover,
       }}>
-        {values?.map(({ name, value, color = 'transparent' }, i) => {
-          return (
-            <Button color={color} size={size} key={i} onClick$={() => {
-              store.opened = false;
-              const select = document.getElementById(id) as HTMLSelectElement | null;
-              if (select) {
-                select.value = value.toString();
-                select.dispatchEvent(new Event('change'));
-              }
-              store.value = value.toString();
-            }}>
-              {name}
-            </Button>
-          );
-        })}
-        <Slot name="extra-buttons" />
+        <div id={`lui-${id}-opts`} class={{
+          'motion-safe:transition-all p-1 gap-1 bg-gray-800/50 backdrop-blur-xl flex flex-col rounded-lg border border-gray-700 z-[1000] max-h-72 lui-scroll overflow-auto select-none': true,
+        }}>
+          {values?.map(({ name, value, color = 'transparent' }, i) => {
+            return (
+              <Button color={color} size={size} key={i} onClick$={() => {
+                store.opened = false;
+                const select = document.getElementById(id) as HTMLSelectElement | null;
+                if (select) {
+                  select.value = value.toString();
+                  select.dispatchEvent(new Event('change'));
+                }
+                store.value = value.toString();
+              }}>
+                {name}
+              </Button>
+            );
+          })}
+          <Slot name="extra-buttons" />
+        </div>
       </div>
     </div>
   );
