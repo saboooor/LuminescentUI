@@ -91,12 +91,12 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
         }}/>
       </Button>
       <div class={{
-        'absolute top-full pt-2 left-0': true,
+        'absolute top-full pt-2 left-0 z-[1000] ': true,
         'pointer-events-none opacity-0 scale-95': !store.opened,
         'group-hover:pointer-events-auto group-hover:opacity-100 group-hover:scale-100': hover,
       }}>
         <div id={`lui-${id}-opts`} class={{
-          'motion-safe:transition-all p-1 gap-1 bg-gray-800/50 backdrop-blur-xl flex flex-col rounded-lg border border-gray-700 z-[1000] max-h-72 lui-scroll overflow-auto select-none': true,
+          'motion-safe:transition-all p-1.5 gap-1 bg-gray-800/50 backdrop-blur-xl flex flex-col rounded-lg border border-gray-700 max-h-72 lui-scroll overflow-auto select-none': true,
         }}>
           {values?.map(({ name, value, color = 'transparent' }, i) => {
             return (
