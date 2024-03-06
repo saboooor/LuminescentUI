@@ -1,19 +1,22 @@
+import type { PropsOf } from '@builder.io/qwik';
 import { Slot, component$, useSignal } from '@builder.io/qwik';
 import { Button } from './Button';
 
-interface NavContainerProps {
+interface NavContainerProps extends Omit<PropsOf<'nav'>, 'class'> {
+  class?: { [key: string]: boolean };
   fixed?: boolean;
   floating?: boolean;
 }
 
-export const Nav = component$<NavContainerProps>(({ fixed, floating }) => {
+export const Nav = component$<NavContainerProps>(({ fixed, floating, ...props }) => {
   const menu = useSignal(false);
 
   return (
-    <nav class={{
+    <nav {...props} class={{
       'motion-safe:transition-all duration-200 flex flex-col top-0 left-0 w-full z-50': true,
       'fixed': fixed,
       'absolute': !fixed,
+      ...props.class,
     }}>
       <div class={{
         'sm:hidden motion-safe:transition-all flex flex-col px-2 items-center absolute w-full': true,
