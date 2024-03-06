@@ -14,7 +14,7 @@ interface HeaderProps extends Omit<PropsOf<'h2'>, 'class'> {
 export const Header = component$<HeaderProps>(({ id, loading, subheader, ...props }) => {
   let Component = <>
     <h2 class={{
-      'flex gap-2 flex-1 items-center font-bold text-2xl whitespace-nowrap text-white': true,
+      'flex gap-2 flex-1 items-center font-bold text-xl sm:text-2xl whitespace-nowrap text-white': true,
       ...props.class,
     }}>
       <Slot />
