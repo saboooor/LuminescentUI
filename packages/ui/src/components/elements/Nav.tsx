@@ -21,10 +21,10 @@ export const Nav = component$<NavContainerProps>(({ fixed, floating, ...props })
       <div class={{
         'sm:hidden motion-safe:transition-all flex flex-col px-2 items-center absolute w-full': true,
         'top-full mt-2': menu.value,
-        'opacity-0 top-0 scale-95': !menu.value,
+        'opacity-0 top-0 scale-95 pointer-events-none': !menu.value,
       }}>
         <div class={{
-          'flex flex-col gap-2 motion-safe:transition-all max-w-7xl w-full p-2 bg-gray-800/50 border border-gray-700/50 rounded-lg': true,
+          'flex flex-col gap-2 motion-safe:transition-all max-w-7xl w-full px-2 py-4 bg-gray-800/50 border border-gray-700/50 rounded-lg': true,
           'before:absolute before:content-[""] before:w-full before:h-full before:backdrop-blur-lg before:drop-shadow-xl before:-z-10': true,
         }}>
           <Slot name="mobile" />

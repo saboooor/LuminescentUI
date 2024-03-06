@@ -65,7 +65,7 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
         ]}
         class={{
           'motion-safe:transition-all absolute top-full mt-2 left-0 gap-1 z-[1000]': true,
-          'opacity-0 pointer-events-none scale-95': !store.opened,
+          'opacity-0 scale-95 pointer-events-none': !store.opened,
         }}
         onInput$={(color: string) => {
           const el = document.getElementById(id) as HTMLInputElement;

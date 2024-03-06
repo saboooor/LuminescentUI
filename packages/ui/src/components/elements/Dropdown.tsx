@@ -92,7 +92,7 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
       </Button>
       <div class={{
         'absolute top-full pt-2 left-0 z-[1000] ': true,
-        'pointer-events-none opacity-0 scale-95': !store.opened,
+        'opacity-0 scale-95 pointer-events-none': !store.opened,
         'group-hover:pointer-events-auto group-hover:opacity-100 group-hover:scale-100': hover,
       }}>
         <div id={`lui-${id}-opts`} class={{
