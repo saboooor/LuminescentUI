@@ -100,7 +100,7 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
 
   return (
     <div  {...props} class={{
-      'relative flex gap-4 p-8 border rounded-lg motion-safe:transition-all': true,
+      'relative flex gap-4 p-7 border rounded-lg motion-safe:transition-all': true,
       'flex-col': !row,
       [colorClass.card.bg]: !blobs,
       [colorClass.card.bg_blobs]: blobs,
