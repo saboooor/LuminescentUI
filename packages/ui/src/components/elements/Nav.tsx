@@ -10,7 +10,15 @@ interface NavContainerProps extends Omit<PropsOf<'nav'>, 'class'> {
 }
 
 export const navColorClasses = {
-  gray: 'bg-gray-800/50 border-gray-700/50',
+  red: 'bg-red-700/50 border-red-600/50',
+  orange: 'bg-orange-700/50 border-orange-600/50',
+  yellow: 'bg-yellow-700/50 border-yellow-600/50',
+  green: 'bg-green-700/50 border-green-600/50',
+  blue: 'bg-blue-600/50 border-blue-500/50',
+  purple: 'bg-purple-600/50 border-purple-500/50',
+  pink: 'bg-pink-600/50 border-pink-500/50',
+  gray: 'bg-gray-700/50 border-gray-600/50',
+  darkgray: 'bg-gray-800/50 border-gray-700/50',
   transparent: 'bg-transparent border-transparent',
 };
 
@@ -30,24 +38,27 @@ export const Nav = component$<NavContainerProps>(({ fixed, floating, color, ...p
         'opacity-0 top-0 scale-95 pointer-events-none': !menu.value,
       }}>
         <div class={{
-          [navColorClasses[color ?? 'gray']]: true,
+          [navColorClasses[color ?? 'darkgray']]: true,
           'flex flex-col gap-2 motion-safe:transition-all max-w-7xl w-full px-2 py-4 border rounded-lg': true,
-          'before:absolute before:content-[""] before:w-full before:h-full before:backdrop-blur-lg before:drop-shadow-xl before:-z-10': true,
+          'before:backdrop-blur-lg': color !== 'transparent',
+          'before:absolute before:content-[""] before:w-full before:h-full before:drop-shadow-xl before:-z-10': true,
         }}>
           <Slot name="mobile" />
         </div>
       </div>
       <div class={{
-        [navColorClasses[color ?? 'gray']]: !floating,
+        [navColorClasses[color ?? 'darkgray']]: !floating,
         'border-b': !floating,
-        'before:absolute before:content-[""] before:w-full before:h-full before:backdrop-blur-lg before:drop-shadow-xl before:-z-10': !floating,
+        'before:backdrop-blur-lg': color !== 'transparent' && !floating,
+        'before:absolute before:content-[""] before:w-full before:h-full before:drop-shadow-xl before:-z-10': !floating,
         'relative mt-2 mx-2': floating,
       }}>
         <div class={{
           'flex justify-evenly w-full mx-auto px-2 max-w-7xl': true,
-          [navColorClasses[color ?? 'gray']]: floating,
+          [navColorClasses[color ?? 'darkgray']]: floating,
           'border rounded-lg': floating,
-          'before:absolute before:content-[""] before:w-full before:max-w-7xl before:h-full before:rounded-lg before:backdrop-blur-lg before:drop-shadow-xl before:-z-10': floating,
+          'before:backdrop-blur-lg': color !== 'transparent' && floating,
+          'before:absolute before:content-[""] before:w-full before:max-w-7xl before:h-full before:rounded-lg before:drop-shadow-xl before:-z-10': floating,
         }}>
           <div class="flex items-center flex-1 gap-2 py-2 justify-start">
             <Slot name="start" />
