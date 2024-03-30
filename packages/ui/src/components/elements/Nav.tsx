@@ -6,9 +6,15 @@ interface NavContainerProps extends Omit<PropsOf<'nav'>, 'class'> {
   class?: { [key: string]: boolean };
   fixed?: boolean;
   floating?: boolean;
+  color?: keyof typeof navColorClasses;
 }
 
-export const Nav = component$<NavContainerProps>(({ fixed, floating, ...props }) => {
+export const navColorClasses = {
+  gray: 'bg-gray-800/50 border-gray-700/50',
+  transparent: 'bg-transparent border-transparent',
+};
+
+export const Nav = component$<NavContainerProps>(({ fixed, floating, color, ...props }) => {
   const menu = useSignal(false);
 
   return (
@@ -24,20 +30,23 @@ export const Nav = component$<NavContainerProps>(({ fixed, floating, ...props })
         'opacity-0 top-0 scale-95 pointer-events-none': !menu.value,
       }}>
         <div class={{
-          'flex flex-col gap-2 motion-safe:transition-all max-w-7xl w-full px-2 py-4 bg-gray-800/50 border border-gray-700/50 rounded-lg': true,
+          [navColorClasses[color ?? 'gray']]: true,
+          'flex flex-col gap-2 motion-safe:transition-all max-w-7xl w-full px-2 py-4 border rounded-lg': true,
           'before:absolute before:content-[""] before:w-full before:h-full before:backdrop-blur-lg before:drop-shadow-xl before:-z-10': true,
         }}>
           <Slot name="mobile" />
         </div>
       </div>
       <div class={{
-        'bg-gray-800/50 border-b border-gray-700/50': !floating,
+        [navColorClasses[color ?? 'gray']]: !floating,
+        'border-b': !floating,
         'before:absolute before:content-[""] before:w-full before:h-full before:backdrop-blur-lg before:drop-shadow-xl before:-z-10': !floating,
         'relative mt-2 mx-2': floating,
       }}>
         <div class={{
           'flex justify-evenly w-full mx-auto px-2 max-w-7xl': true,
-          'bg-gray-800/50 border border-gray-700/50 rounded-lg': floating,
+          [navColorClasses[color ?? 'gray']]: floating,
+          'border rounded-lg': floating,
           'before:absolute before:content-[""] before:w-full before:max-w-7xl before:h-full before:rounded-lg before:backdrop-blur-lg before:drop-shadow-xl before:-z-10': floating,
         }}>
           <div class="flex items-center flex-1 gap-2 py-2 justify-start">

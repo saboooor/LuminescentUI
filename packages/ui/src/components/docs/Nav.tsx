@@ -1,9 +1,10 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Button, Card, Header, Nav, DropdownRaw, TextAreaRaw, Toggle } from '../../index';
+import { Button, Card, Header, Nav, Dropdown, DropdownRaw, TextAreaRaw, Toggle, navColorClasses } from '../../index';
 
 interface navOptions {
   fixed?: boolean;
   floating?: boolean;
+  color?: keyof typeof navColorClasses;
 }
 
 export default component$(() => {
@@ -17,8 +18,15 @@ export default component$(() => {
         label="fixed" />
       <Toggle id="nav-floating" onChange$={(e, element) => store.floating = element.checked}
         label="floating" />
+      <Dropdown id="nav-color"
+        onChange$={(e, element) => store.color = element.value as keyof typeof navColorClasses}
+        values={Object.keys(navColorClasses).map((color) => ({ name: color, value: color }))}
+        value="gray"
+      >
+        color
+      </Dropdown>
       <div class="relative h-40">
-        <Nav floating={store.floating} fixed={store.fixed}>
+        <Nav floating={store.floating} fixed={store.fixed} color={store.color}>
 
           <Button q:slot="start" color="transparent" class={{ 'hidden sm:flex': true }}>
             Button 1
@@ -53,7 +61,7 @@ export default component$(() => {
         </Nav>
       </div>
       <TextAreaRaw output value={`
-<Nav${store.floating ? ' floating' : ''}${store.fixed ? ' fixed' : ''}>
+<Nav${store.floating ? ' floating' : ''}${store.fixed ? ' fixed' : ''}${store.color ? ` color="${store.color}"` : ''}>
 
   <Button q:slot="start" color="transparent" class={{ 'hidden sm:flex': true }}>
     Button 1
