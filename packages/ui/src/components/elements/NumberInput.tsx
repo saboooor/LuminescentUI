@@ -49,7 +49,7 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, color = 
       'flex text-gray-50 touch-manipulation': true,
       'gap-2': !input,
     }}>
-      <Button size="sm" color={color == 'darkgray' ? (input ? 'gray' : 'darkgray') : color} data-action="decrement" aria-label="Decrement" disabled={props.min ? value <= props.min : false}
+      <Button size="sm" color={color == 'darkgray' || color == 'transparent' ? (input ? 'gray' : 'darkgray') : color} transparent={color == 'transparent'} data-action="decrement" aria-label="Decrement" disabled={props.min ? value <= props.min : false}
         onClick$={input ? $((event, element) => {
           const siblingInput = element.nextElementSibling as HTMLInputElement;
           siblingInput.stepDown();
@@ -67,7 +67,7 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, color = 
           ...props.class,
         }}/>
       }
-      <Button size="sm" color={color == 'darkgray' ? (input ? 'gray' : 'darkgray') : color} data-action="increment" aria-label="Increment" disabled={props.max ? value >= props.max : false}
+      <Button size="sm" color={color == 'darkgray' || color == 'transparent' ? (input ? 'gray' : 'darkgray') : color} transparent={color == 'transparent'} data-action="increment" aria-label="Increment" disabled={props.max ? value >= props.max : false}
         onClick$={input ? $((event, element) => {
           const siblingInput = element.previousElementSibling as HTMLInputElement;
           siblingInput.stepUp();
