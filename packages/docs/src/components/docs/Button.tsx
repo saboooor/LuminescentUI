@@ -17,7 +17,7 @@ export default component$(() => {
       <Dropdown id="button-color"
         onChange$={(e, element) => store.color = element.value as keyof typeof buttonColorClasses}
         values={Object.keys(buttonColorClasses).map((color) => ({ name: color, value: color }))}
-        value="gray"
+        value="darkgray"
       >
         color
       </Dropdown>

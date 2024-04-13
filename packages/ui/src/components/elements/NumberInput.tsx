@@ -2,13 +2,14 @@ import type { PropsOf, QRL } from '@builder.io/qwik';
 import { $, Slot, component$, useStyles$ } from '@builder.io/qwik';
 import { Plus } from '../../svg/Plus';
 import { Minus } from '../../svg/Minus';
-import { InputClasses } from './TextInput';
+import { InputClasses, InputColorClasses } from './TextInput';
 import { Button } from './Button';
 
 interface NumberInputRawProps extends Omit<(PropsOf<'input'> & { type: 'number' }), 'class' | 'type'> {
   onDecrement$: QRL<(event: PointerEvent, element: HTMLButtonElement, inputElement?: HTMLInputElement) => void>;
   onIncrement$: QRL<(event: PointerEvent, element: HTMLButtonElement, inputElement?: HTMLInputElement) => void>;
   input?: boolean;
+  color?: keyof typeof InputColorClasses;
   class?: { [key: string]: boolean };
   value?: number;
   min?: number;
@@ -31,7 +32,7 @@ export const NumberInput = component$<NumberInputProps>((props) => {
   );
 });
 
-export const NumberInputRaw = component$<NumberInputRawProps>(({ input, onDecrement$, onIncrement$, value = 0, step = 1, ...props }) => {
+export const NumberInputRaw = component$<NumberInputRawProps>(({ input, color = 'darkgray', onDecrement$, onIncrement$, value = 0, step = 1, ...props }) => {
   useStyles$(`
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
@@ -48,7 +49,7 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, onDecrem
       'flex text-gray-50 touch-manipulation': true,
       'gap-2': !input,
     }}>
-      <Button size="sm" color={input ? 'gray' : 'darkgray'} data-action="decrement" aria-label="Decrement" disabled={props.min ? value <= props.min : false}
+      <Button size="sm" color={color == 'darkgray' ? (input ? 'gray' : 'darkgray') : color} data-action="decrement" aria-label="Decrement" disabled={props.min ? value <= props.min : false}
         onClick$={input ? $((event, element) => {
           const siblingInput = element.nextElementSibling as HTMLInputElement;
           siblingInput.stepDown();
@@ -61,11 +62,12 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, onDecrem
       { input &&
         <input {...props} type="number" value={value} step={step} class={{
           [InputClasses]: true,
+          [InputColorClasses[color]]: true,
           'text-center': true,
           ...props.class,
         }}/>
       }
-      <Button size="sm" color={input ? 'gray' : 'darkgray'} data-action="increment" aria-label="Increment" disabled={props.max ? value >= props.max : false}
+      <Button size="sm" color={color == 'darkgray' ? (input ? 'gray' : 'darkgray') : color} data-action="increment" aria-label="Increment" disabled={props.max ? value >= props.max : false}
         onClick$={input ? $((event, element) => {
           const siblingInput = element.previousElementSibling as HTMLInputElement;
           siblingInput.stepUp();

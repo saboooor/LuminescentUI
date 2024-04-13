@@ -1,9 +1,10 @@
 import type { PropsOf } from '@builder.io/qwik';
 import { $, Slot, component$ } from '@builder.io/qwik';
-import { InputClasses } from './TextInput';
+import { InputClasses, InputColorClasses } from './TextInput';
 
 export interface TextAreaRawProps extends Omit<PropsOf<'textarea'>, 'class' | 'onChange$' | 'onClick$'> {
   class?: { [key: string]: boolean };
+  color?: keyof typeof InputColorClasses;
   output?: boolean;
 }
 
@@ -22,12 +23,13 @@ export const TextArea = component$<TextAreaProps>((props) => {
   );
 });
 
-export const TextAreaRaw = component$<TextAreaRawProps>(({ output, ...props }) => {
+export const TextAreaRaw = component$<TextAreaRawProps>(({ color = 'darkgray', output, ...props }) => {
   return <>
     <textarea {...props} class={{
       [InputClasses]: true,
+      [InputColorClasses[color]]: true,
       'h-32': true,
-      'cursor-pointer active:bg-gray-600 select-none': output,
+      'cursor-pointer select-none': output,
       ...props.class,
     }} onClick$={output ? $((event, element) => {
       navigator.clipboard.writeText(element.value);

@@ -212,7 +212,7 @@ export const ColorPickerRaw = component$<ColorPickerProps>(({ id, color, colors,
           preventdefault:mousedown
           preventdefault:touchstart
         >
-          <div class="w-[125px] h-[150px] border border-gray-700 rounded-md bg-gradient-to-b from-transparent to-black"/>
+          <div class="w-[123px] h-[148px] rounded-[0.3rem] bg-gradient-to-b from-transparent to-black"/>
           <div class="absolute -top-2 -left-2 w-4 h-4 border border-white rounded-full bg-white"
             style={{
               background: store.color,
