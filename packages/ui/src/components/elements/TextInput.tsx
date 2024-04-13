@@ -35,7 +35,7 @@ export const InputColorClasses = {
   fuchsia: 'bg-fuchsia-700/90 border-fuchsia-600 hover:bg-fuchsia-600 active:bg-fuchsia-500 focus:border-fuchsia-300',
   pink: 'bg-pink-700/90 border-pink-600 hover:bg-pink-600 active:bg-pink-500 focus:border-pink-300',
   rose: 'bg-rose-700/90 border-rose-600 hover:bg-rose-600 active:bg-rose-500 focus:border-rose-300',
-  transparent: 'bg-transparent border-transparent hover:bg-gray-600/50 active:bg-gray-600/60 focus:border-gray-300/60',
+  transparent: 'bg-transparent border-transparent hover:bg-gray-600/50 active:bg-gray-600/60 focus:border-gray-600/60',
 };
 
 export const InputClasses = 'motion-safe:transition ease-in-out border text-gray-50 hover:shadow-lg focus:outline-none rounded-md px-2.5 py-1.5 touch-manipulation';

@@ -51,12 +51,12 @@ export const Nav = component$<NavContainerProps>(({ fixed, floating, color, ...p
         'sm:hidden motion-safe:transition-all flex flex-col px-2 items-center absolute w-full': true,
         'top-full mt-2': menu.value,
         'opacity-0 top-0 scale-95 pointer-events-none': !menu.value,
+        'before:backdrop-blur-lg': color !== 'transparent',
+        'before:absolute before:content-[""] before:w-full before:h-full before:drop-shadow-xl before:-z-10 before:rounded-lg': true,
       }}>
         <div class={{
           [navColorClasses[color ?? 'darkgray']]: true,
           'flex flex-col gap-2 motion-safe:transition-all max-w-7xl w-full px-2 py-4 border rounded-lg': true,
-          'before:backdrop-blur-lg': color !== 'transparent',
-          'before:absolute before:content-[""] before:w-full before:h-full before:drop-shadow-xl before:-z-10': true,
         }}>
           <Slot name="mobile" />
         </div>
@@ -83,7 +83,7 @@ export const Nav = component$<NavContainerProps>(({ fixed, floating, color, ...p
           </div>
           <div class="flex items-center flex-1 gap-2 py-2 justify-end">
             <Slot name="end" />
-            <Button color="transparent" square class={{ 'sm:hidden': true }}
+            <Button transparent square class={{ 'sm:hidden': true }}
               onClick$={() => menu.value = !menu.value}>
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>

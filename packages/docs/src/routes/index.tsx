@@ -32,10 +32,10 @@ export default component$(() => {
               </ButtonAnchor>
             </div>
             <div class="flex gap-2 justify-center">
-              <ButtonAnchor square href="https://luminescent.dev/discord" size="xl" color="transparent">
+              <ButtonAnchor square href="https://luminescent.dev/discord" size="xl" transparent>
                 <LogoGithub width={30} />
               </ButtonAnchor>
-              <ButtonAnchor square href="https://github.com/luminescentDev/ui" size="xl" color="transparent">
+              <ButtonAnchor square href="https://github.com/luminescentDev/ui" size="xl" transparen color="indigo">
                 <LogoDiscord width={30} />
               </ButtonAnchor>
             </div>

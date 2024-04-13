@@ -8,6 +8,7 @@ interface DropdownProps extends Omit<PropsOf<'select'>, 'class' | 'size'> {
   class?: { [key: string]: boolean };
   display?: JSXChildren;
   color?: keyof typeof buttonColorClasses;
+  transparent?: boolean;
   size?: keyof typeof sizeClasses;
   hover?: boolean;
   values?: {
@@ -29,7 +30,7 @@ export const Dropdown = component$<DropdownProps>((props) => {
   );
 });
 
-export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class, display, color, size = 'sm', hover, ...props }) => {
+export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class, display, color, transparent, size = 'sm', hover, ...props }) => {
   const store = useStore({
     opened: false,
     value: props.value,
@@ -72,7 +73,7 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
           })}
         </select>
       }
-      <Button color={color} size={size} class={{
+      <Button color={color} transparent={transparent} size={size} class={{
         'flex': true,
         ...Class,
       }} onClick$={() => {
@@ -98,9 +99,9 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
         <div id={`lui-${id}-opts`} class={{
           'motion-safe:transition-all p-1.5 gap-1 bg-gray-800/50 backdrop-blur-xl flex flex-col rounded-lg border border-gray-700 max-h-72 lui-scroll overflow-auto select-none': true,
         }}>
-          {values?.map(({ name, value, color = 'transparent' }, i) => {
+          {values?.map(({ name, value, color: valueColor }, i) => {
             return (
-              <Button color={color} size={size} key={i} onClick$={() => {
+              <Button color={valueColor ?? color} transparent size={size} key={i} onClick$={() => {
                 store.opened = false;
                 const select = document.getElementById(id) as HTMLSelectElement | null;
                 if (select) {

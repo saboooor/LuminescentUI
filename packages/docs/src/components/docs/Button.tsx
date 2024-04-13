@@ -3,6 +3,7 @@ import { Button, Card, Header, Dropdown, TextAreaRaw, Toggle, buttonColorClasses
 
 interface buttonOptions {
   color?: keyof typeof buttonColorClasses;
+  transparent?: boolean;
   size?: keyof typeof sizeClasses;
   square?: boolean;
 }
@@ -21,6 +22,9 @@ export default component$(() => {
       >
         color
       </Dropdown>
+      <Toggle id="button-transparent"
+        onChange$={(e, element) => store.transparent = element.checked}
+        label="transparent" />
       <Dropdown id="button-size"
         onChange$={(e, element) => store.size = element.value as keyof typeof sizeClasses}
         values={Object.keys(sizeClasses).map((size) => ({ name: size, value: size }))}
@@ -34,6 +38,7 @@ export default component$(() => {
       <div>
         <Button
           color={store.color}
+          transparent={store.transparent}
           size={store.size}
           square={store.square}
         >
@@ -41,7 +46,7 @@ export default component$(() => {
         </Button>
       </div>
       <TextAreaRaw output value={`
-<Button${(store.color && ` color="${store.color}"`) ?? ''}${(store.size && ` size="${store.size}"`) ?? ''}${store.square ? ' square' : ''}>
+<Button${(store.color && ` color="${store.color}"`) ?? ''}${store.transparent ? ' transparent' : ''}${store.size ? ` size="${store.size}"` : ''}${store.square ? ' square' : ''}>
   Button
 </Button>`} />
     </Card>

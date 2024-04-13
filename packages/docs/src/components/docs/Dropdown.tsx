@@ -4,6 +4,7 @@ import { Card, Header, Dropdown, TextAreaRaw, TextInput, buttonColorClasses, siz
 interface DropdownOptions {
   display?: string;
   color?: keyof typeof buttonColorClasses;
+  transparent?: boolean;
   size?: keyof typeof sizeClasses;
   hover?: boolean;
 }
@@ -27,6 +28,9 @@ export default component$(() => {
       >
         color
       </Dropdown>
+      <Toggle id="button-transparent"
+        onChange$={(e, element) => store.transparent = element.checked}
+        label="transparent" />
       <Dropdown id="select-size"
         onChange$={(e, element) => store.size = element.value as keyof typeof sizeClasses}
         values={Object.keys(sizeClasses).map((size) => ({ name: size, value: size }))}
@@ -48,6 +52,7 @@ export default component$(() => {
           value="1"
           display={store.display ? <div dangerouslySetInnerHTML={store.display}></div> : undefined}
           color={store.color}
+          transparent={store.transparent}
           size={store.size}
           hover={store.hover}
         >
@@ -55,7 +60,7 @@ export default component$(() => {
         </Dropdown>
       </div>
       <TextAreaRaw output value={`
-<Dropdown id="select-input"${store.display ? ` display={${store.display}}` : ''}${store.color ? ` color="${store.color}"` : ''}${store.size ? ` size="${store.size}"` : ''}${store.hover ? ' hover' : ''}>
+<Dropdown id="select-input"${store.display ? ` display={${store.display}}` : ''}${store.color ? ` color="${store.color}"` : ''}${store.transparent ? ' transparent' : ''}${store.size ? ` size="${store.size}"` : ''}${store.hover ? ' hover' : ''}>
   values={[
     { name: <div class="bg-red-500">Any element you want</div>, value: '1' },
     { name: 'Option 2', value: '2' },
