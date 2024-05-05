@@ -6,6 +6,7 @@ interface DropdownOptions {
   color?: keyof typeof buttonColorClasses;
   transparent?: boolean;
   size?: keyof typeof sizeClasses;
+  round?: boolean;
   hover?: boolean;
 }
 

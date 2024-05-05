@@ -39,7 +39,7 @@ export default component$(() => {
       <div>
         <Toggle id="toggle" label="Toggle" round={store.round} checkbox={store.checkbox} onColor={store.onColor} offColor={store.offColor} center={store.center} />
       </div>
-      <TextAreaRaw output value={`<Toggle id="toggle" label="Toggle"${store.round ? ` round` : ''}${store.checkbox ? ` checkbox` : ''}${store.onColor ? ` onColor="${store.onColor}"` : ''}${store.offColor ? ` offColor="${store.offColor}"` : ''}${store.center ? ' center' : ''} />`} />
+      <TextAreaRaw output value={`<Toggle id="toggle" label="Toggle"${store.round ? ' round' : ''}${store.checkbox ? ' checkbox' : ''}${store.onColor ? ` onColor="${store.onColor}"` : ''}${store.offColor ? ` offColor="${store.offColor}"` : ''}${store.center ? ' center' : ''} />`} />
     </Card>
   );
 });

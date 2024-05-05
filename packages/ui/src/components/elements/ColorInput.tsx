@@ -30,34 +30,34 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
         'w-full': true,
         ...Class,
       }} {...props} value={value}
-        onFocus$={() => {
-          store.opened = true;
-        }}
+      onFocus$={() => {
+        store.opened = true;
+      }}
 
-        onBlur$={() => {
-          store.opened = false;
-        }}
+      onBlur$={() => {
+        store.opened = false;
+      }}
 
-        onInput$={(e, el) => {
-          const div = document.getElementById(`${id}-picker`)!;
-          const event = new Event('change');
-          div.dispatchEvent(event);
-          onInput$?.(el.value);
-        }}
+      onInput$={(e, el) => {
+        const div = document.getElementById(`${id}-picker`)!;
+        const event = new Event('change');
+        div.dispatchEvent(event);
+        onInput$?.(el.value);
+      }}
 
-        style={preview == 'full' ? {
-          backgroundColor: `${value}`,
-          color: getBrightness(hexNumberToRgb(hexStringToNumber(value))) > 0.5 ? 'black' : 'white',
-        } : preview == 'left' ? {
-          borderLeft: `35px solid ${value}`,
-        } : preview == 'right' ? {
-          borderRight: `35px solid ${value}`,
-        } : preview == 'top' ? {
-          borderTop: `10px solid ${value}`,
-        } : preview == 'bottom' ? {
-          borderBottom: `10px solid ${value}`,
-        } : {}
-        }
+      style={preview == 'full' ? {
+        backgroundColor: `${value}`,
+        color: getBrightness(hexNumberToRgb(hexStringToNumber(value))) > 0.5 ? 'black' : 'white',
+      } : preview == 'left' ? {
+        borderLeft: `35px solid ${value}`,
+      } : preview == 'right' ? {
+        borderRight: `35px solid ${value}`,
+      } : preview == 'top' ? {
+        borderTop: `10px solid ${value}`,
+      } : preview == 'bottom' ? {
+        borderBottom: `10px solid ${value}`,
+      } : {}
+      }
       />
       <ColorPickerRaw
         id={id}
