@@ -42,6 +42,10 @@ export default component$(() => {
         onInput$={(e, el) => store.hover = el.checked}>
         hover
       </Toggle>
+      <Toggle id="select-round" label="round"
+        onInput$={(e, el) => store.round = el.checked}>
+        round
+      </Toggle>
       <div>
         <Dropdown id="select-input"
           values={[
@@ -55,12 +59,13 @@ export default component$(() => {
           transparent={store.transparent}
           size={store.size}
           hover={store.hover}
+          round={store.round}
         >
           Select Input
         </Dropdown>
       </div>
       <TextAreaRaw output value={`
-<Dropdown id="select-input"${store.display ? ` display={${store.display}}` : ''}${store.color ? ` color="${store.color}"` : ''}${store.transparent ? ' transparent' : ''}${store.size ? ` size="${store.size}"` : ''}${store.hover ? ' hover' : ''}>
+<Dropdown id="select-input"${store.display ? ` display={${store.display}}` : ''}${store.color ? ` color="${store.color}"` : ''}${store.transparent ? ' transparent' : ''}${store.size ? ` size="${store.size}"` : ''}${store.hover ? ' hover' : ''}${store.round ? ' round' : ''}>
   values={[
     { name: <div class="bg-red-500">Any element you want</div>, value: '1' },
     { name: 'Option 2', value: '2' },

@@ -3,6 +3,8 @@ import { component$ } from '@builder.io/qwik';
 
 interface ToggleProps extends Omit<(PropsOf<'input'> & { type: 'checkbox' }), 'class' | 'bind:checked' | 'type' | 'children'> {
   class?: { [key: string]: boolean };
+  checkbox?: boolean;
+  round?: boolean;
   onColor?: keyof typeof toggleOnColorClasses;
   offColor?: keyof typeof toggleOffColorClasses;
   center?: boolean;
@@ -207,7 +209,7 @@ export const toggleOffColorClasses = {
   },
 };
 
-export const Toggle = component$<ToggleProps>(({ center, label, onColor = 'blue', offColor = 'darkgray', ...props }) => {
+export const Toggle = component$<ToggleProps>(({ checkbox, round, center, label, onColor = 'blue', offColor = 'darkgray', ...props }) => {
   return (
     <div class={{
       'flex gap-3 items-center touch-manipulation': true,
@@ -219,9 +221,12 @@ export const Toggle = component$<ToggleProps>(({ center, label, onColor = 'blue'
           ...props.class,
         }} />
         <div class={{
-          'motion-safe:transition ease-in-out w-12 h-7 rounded-md peer border hover:shadow-lg': true,
-          'after:content-[\'\'] after:absolute after:top-[4px] after:left-[4px] after:border after:rounded-[0.2rem] after:h-5 after:w-5 after:motion-safe:transition-all after:ease-in-out': true,
-          'peer-checked:after:translate-x-full': true,
+          'motion-safe:transition ease-in-out h-7 peer border hover:shadow-lg': true,
+          'after:content-[\'\'] after:absolute after:top-[4px] after:left-[4px] after:border after:h-5 after:w-5 after:motion-safe:transition-all after:ease-in-out': true,
+          'rounded-md after:rounded-[0.2rem]': !round,
+          'rounded-full after:rounded-full': round,
+          'w-12 peer-checked:after:translate-x-full': !checkbox,
+          'w-7 after:opacity-0 peer-checked:after:opacity-100': checkbox,
           [toggleOnColorClasses[onColor].checked]: true,
           [toggleOnColorClasses[onColor].checkedAfter]: true,
           [toggleOffColorClasses[offColor].unchecked]: true,

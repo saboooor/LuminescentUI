@@ -4,6 +4,7 @@ import { $, Slot, component$, useOn, useStore } from '@builder.io/qwik';
 import type { TextInputRawProps } from './TextInput';
 import { TextInputRaw } from './TextInput';
 import { getBrightness, hexNumberToRgb, hexStringToNumber, hsvToRgb, rgbToHex, rgbToHsv, clamp, getMousePosition } from '../../utils/color';
+import { Shuffle } from '~/svg/Shuffle';
 
 export interface ColorInputProps extends Omit<TextInputRawProps, 'onInput$' | 'children'> {
   onInput$?: QRL<(color: string) => void>;
@@ -13,7 +14,7 @@ export interface ColorInputProps extends Omit<TextInputRawProps, 'onInput$' | 'c
   id: string;
 }
 
-export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000000', presetColors, preview = 'left', ...props }) => {
+export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000000', presetColors, preview = 'left', class: Class, ...props }) => {
   const store = useStore({
     opened: false,
   });
@@ -25,7 +26,10 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
       <label for={id} class="text-gray-300 pb-1 flex select-none">
         <Slot />
       </label>
-      <TextInputRaw {...props} value={value}
+      <TextInputRaw class={{
+        'w-full': true,
+        ...Class,
+      }} {...props} value={value}
         onFocus$={() => {
           store.opened = true;
         }}
@@ -61,6 +65,7 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
         colors={[
           '#FAEDCB', '#C9E4DE', '#C6DEF1', '#DBCDF0', '#F2C6DE',
           '#FCD05C', '#5FE2C5', '#4498DB', '#9863E7', '#E43A96',
+          '#000000', '#555555', '#AAAAAA', '#FFFFFF',
           ...presetColors ?? [],
         ]}
         class={{
@@ -238,7 +243,7 @@ export const ColorPickerRaw = component$<ColorPickerProps>(({ id, color, colors,
       <div class="w-[150px] flex flex-wrap gap-1 justify-evenly">
         {colors.map((color, i) => {
           return (
-            <button key={i} class="w-[25px] h-[25px] border border-gray-700 rounded-md hover:scale-110 motion-safe:transition-all"
+            <button key={i} class="w-[1.6rem] h-[1.6rem] border border-gray-700 rounded-md hover:scale-110 motion-safe:transition-all"
               style={`background: ${color}`}
               onMouseDown$={() => {
                 setColor(color);
@@ -251,6 +256,20 @@ export const ColorPickerRaw = component$<ColorPickerProps>(({ id, color, colors,
             ></button>
           );
         })}
+        <button class="w-[1.6rem] h-[1.6rem] border border-gray-700 rounded-md hover:scale-110 motion-safe:transition-all"
+          onMouseDown$={() => {
+            const color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+            setColor(color);
+          }}
+          onTouchStart$={() => {
+            const color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+            setColor(color);
+          }}
+          preventdefault:mousedown
+          preventdefault:touchstart
+        >
+          <Shuffle class="fill-current text-gray-300 pl-0.5 p-0.5" />
+        </button>
       </div>
     </div>
   );

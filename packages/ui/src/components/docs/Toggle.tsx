@@ -2,6 +2,8 @@ import { component$, useStore } from '@builder.io/qwik';
 import { Card, Dropdown, Header, TextAreaRaw, Toggle, toggleOffColorClasses, toggleOnColorClasses } from '../../index';
 
 interface toggleOptions {
+  checkbox?: boolean;
+  round?: boolean;
   center?: boolean;
   onColor?: keyof typeof toggleOnColorClasses;
   offColor?: keyof typeof toggleOffColorClasses;
@@ -30,10 +32,14 @@ export default component$(() => {
       </Dropdown>
       <Toggle id="toggle-center" onChange$={(e, element) => store.center = element.checked}
         label='center'/>
+      <Toggle id="toggle-checkbox" onChange$={(e, element) => store.checkbox = element.checked}
+        label='checkbox'/>
+      <Toggle id="toggle-round" onChange$={(e, element) => store.round = element.checked}
+        label='round'/>
       <div>
-        <Toggle id="toggle" label="Toggle" onColor={store.onColor} offColor={store.offColor} center={store.center} />
+        <Toggle id="toggle" label="Toggle" round={store.round} checkbox={store.checkbox} onColor={store.onColor} offColor={store.offColor} center={store.center} />
       </div>
-      <TextAreaRaw output value={`<Toggle id="toggle" label="Toggle"${store.onColor ? ` onColor="${store.onColor}"` : ''}${store.offColor ? ` offColor="${store.offColor}"` : ''}${store.center ? ' center' : ''} />`} />
+      <TextAreaRaw output value={`<Toggle id="toggle" label="Toggle"${store.round ? ` round` : ''}${store.checkbox ? ` checkbox` : ''}${store.onColor ? ` onColor="${store.onColor}"` : ''}${store.offColor ? ` offColor="${store.offColor}"` : ''}${store.center ? ' center' : ''} />`} />
     </Card>
   );
 });

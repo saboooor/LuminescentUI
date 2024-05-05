@@ -102,22 +102,26 @@ export const buttonColorClasses = {
 
 export const sizeClasses = {
   sm: {
-    base: 'text-base rounded-md gap-2',
+    base: 'text-base gap-2',
+    round: 'rounded-md',
     pad: 'px-2.5 py-1.5',
     equal: 'p-1.5',
   },
   md: {
-    base: 'text-base rounded-md gap-3',
+    base: 'text-base gap-3',
+    round: 'rounded-md',
     pad: 'px-4 py-2',
     equal: 'p-2',
   },
   lg: {
-    base: 'text-lg rounded-lg gap-3',
+    base: 'text-lg gap-3',
+    round: 'rounded-lg',
     pad: 'px-6 py-3',
     equal: 'p-3',
   },
   xl: {
-    base: 'text-lg rounded-xl gap-4',
+    base: 'text-lg gap-4',
+    round: 'rounded-xl',
     pad: 'px-8 py-4',
     equal: 'p-4',
   },
@@ -129,6 +133,7 @@ interface GenericButtonProps {
   color?: keyof typeof buttonColorClasses;
   transparent?: boolean;
   size?: keyof typeof sizeClasses;
+  round?: boolean;
   square?: boolean;
   class?: { [key: string]: boolean | undefined };
 }
@@ -138,7 +143,7 @@ interface AnchorProps extends Omit<PropsOf<'a'>, 'class'>, GenericButtonProps {
   href: string;
 }
 
-export const Button = component$<ButtonProps>(({ color = 'darkgray', transparent, size = 'md', square, ...props }) => {
+export const Button = component$<ButtonProps>(({ color = 'darkgray', transparent, size = 'md', round, square, ...props }) => {
   const colorClass = buttonColorClasses[color as keyof typeof buttonColorClasses];
   const sizeClass = sizeClasses[size as keyof typeof sizeClasses];
 
@@ -148,6 +153,8 @@ export const Button = component$<ButtonProps>(({ color = 'darkgray', transparent
     'border-transparent': transparent,
     [colorClass.hover]: true,
     [sizeClass.base]: true,
+    [sizeClass.round]: !round,
+    'rounded-full': round,
     [sizeClass.pad]: !square,
     [sizeClass.equal]: square,
     ...props.class,
@@ -156,7 +163,7 @@ export const Button = component$<ButtonProps>(({ color = 'darkgray', transparent
   return <button {...props}><Slot /></button>;
 });
 
-export const ButtonAnchor = component$<AnchorProps>(({ color = 'darkgray', transparent, size = 'md', square, ...props }) => {
+export const ButtonAnchor = component$<AnchorProps>(({ color = 'darkgray', transparent, size = 'md', round, square, ...props }) => {
   const colorClass = buttonColorClasses[color as keyof typeof buttonColorClasses];
   const sizeClass = sizeClasses[size as keyof typeof sizeClasses];
 
@@ -166,6 +173,8 @@ export const ButtonAnchor = component$<AnchorProps>(({ color = 'darkgray', trans
     'border-transparent': transparent,
     [colorClass.hover]: true,
     [sizeClass.base]: true,
+    [sizeClass.round]: !round,
+    'rounded-full': round,
     [sizeClass.pad]: !square,
     [sizeClass.equal]: square,
     ...props.class,

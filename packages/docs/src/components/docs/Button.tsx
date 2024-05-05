@@ -6,6 +6,7 @@ interface buttonOptions {
   transparent?: boolean;
   size?: keyof typeof sizeClasses;
   square?: boolean;
+  round?: boolean;
 }
 
 export default component$(() => {
@@ -35,18 +36,22 @@ export default component$(() => {
       <Toggle id="button-square"
         onChange$={(e, element) => store.square = element.checked}
         label="square" />
+      <Toggle id="button-round"
+        onChange$={(e, element) => store.round = element.checked}
+        label="round" />
       <div>
         <Button
           color={store.color}
           transparent={store.transparent}
           size={store.size}
           square={store.square}
+          round={store.round}
         >
           Button
         </Button>
       </div>
       <TextAreaRaw output value={`
-<Button${(store.color && ` color="${store.color}"`) ?? ''}${store.transparent ? ' transparent' : ''}${store.size ? ` size="${store.size}"` : ''}${store.square ? ' square' : ''}>
+<Button${(store.color && ` color="${store.color}"`) ?? ''}${store.transparent ? ' transparent' : ''}${store.size ? ` size="${store.size}"` : ''}${store.square ? ' square' : ''}${store.round ? ' round' : ''}>
   Button
 </Button>`} />
     </Card>
