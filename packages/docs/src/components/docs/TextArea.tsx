@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, Header, TextArea, TextAreaRaw, Toggle, InputColorClasses } from '@luminescent/ui';
+import { Card, Header, TextArea, TextAreaRaw, Toggle, InputColorClasses, Dropdown } from '@luminescent/ui';
 
 interface textAreaOptions {
   output?: boolean;
