@@ -6,7 +6,7 @@ import {
 export default component$(() => {
   return (
     <Card>
-      <Header>
+      <Header id="icons" anchor>
         Icons/Logos
       </Header>
       <Card>

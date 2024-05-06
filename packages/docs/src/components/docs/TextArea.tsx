@@ -10,7 +10,7 @@ export default component$(() => {
   const store = useStore<textAreaOptions>({});
   return (
     <Card>
-      <Header>
+      <Header id="textarea" anchor>
         TextArea
       </Header>
       <Dropdown id="textarea-color"

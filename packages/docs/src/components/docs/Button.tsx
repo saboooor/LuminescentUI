@@ -13,7 +13,7 @@ export default component$(() => {
   const store = useStore<buttonOptions>({});
   return (
     <Card>
-      <Header>
+      <Header id="button" anchor>
         Button
       </Header>
       <Dropdown id="button-color"

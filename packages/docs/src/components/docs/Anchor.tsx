@@ -7,9 +7,11 @@ export default component$(() => {
       <Header id="anchor">
         Anchor
       </Header>
-      <ButtonAnchor href="#anchor">
-        Scroll to anchor
-      </ButtonAnchor>
+      <div class="flex">
+        <ButtonAnchor href="#anchor">
+          Scroll to anchor
+        </ButtonAnchor>
+      </div>
       <TextAreaRaw output value={'<Anchor id="anchor"/>'} />
     </Card>
   );

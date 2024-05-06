@@ -10,7 +10,7 @@ export default component$(() => {
   const store = useStore<navOptions>({});
   return (
     <Card>
-      <Header>
+      <Header id="nav" anchor>
         Nav
       </Header>
       <Toggle id="nav-fixed" onChange$={(e, element) => store.fixed = element.checked}

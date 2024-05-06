@@ -10,7 +10,7 @@ export default component$(() => {
   const store = useStore<numberInputOptions>({});
   return (
     <Card>
-      <Header>
+      <Header id="numberinput" anchor>
         NumberInput
       </Header>
       <Dropdown id="numberinput-color"

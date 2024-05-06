@@ -13,7 +13,7 @@ export default component$(() => {
   const store = useStore<toggleOptions>({});
   return (
     <Card>
-      <Header>
+      <Header id="toggle" anchor>
         Toggle
       </Header>
       <Dropdown id="toggle-oncolor"
@@ -37,9 +37,9 @@ export default component$(() => {
       <Toggle id="toggle-round" onChange$={(e, element) => store.round = element.checked}
         label='round'/>
       <div>
-        <Toggle id="toggle" label="Toggle" round={store.round} checkbox={store.checkbox} onColor={store.onColor} offColor={store.offColor} center={store.center} />
+        <Toggle id="toggle-input" label="Toggle" round={store.round} checkbox={store.checkbox} onColor={store.onColor} offColor={store.offColor} center={store.center} />
       </div>
-      <TextAreaRaw output value={`<Toggle id="toggle" label="Toggle"${store.round ? ' round' : ''}${store.checkbox ? ' checkbox' : ''}${store.onColor ? ` onColor="${store.onColor}"` : ''}${store.offColor ? ` offColor="${store.offColor}"` : ''}${store.center ? ' center' : ''} />`} />
+      <TextAreaRaw output value={`<Toggle id="toggle-input" label="Toggle"${store.round ? ' round' : ''}${store.checkbox ? ' checkbox' : ''}${store.onColor ? ` onColor="${store.onColor}"` : ''}${store.offColor ? ` offColor="${store.offColor}"` : ''}${store.center ? ' center' : ''} />`} />
     </Card>
   );
 });

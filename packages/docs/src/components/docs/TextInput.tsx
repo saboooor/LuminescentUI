@@ -9,7 +9,7 @@ export default component$(() => {
   const store = useStore<textInputOptions>({});
   return (
     <Card>
-      <Header>
+      <Header id="textinput" anchor>
         TextInput
       </Header>
       <Dropdown id="text-input-color"

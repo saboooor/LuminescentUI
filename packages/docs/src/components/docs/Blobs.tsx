@@ -10,7 +10,7 @@ export default component$(() => {
   const store = useStore<blobsOptions>({});
   return (
     <Card>
-      <Header>
+      <Header id="blobs" anchor>
         Blobs
       </Header>
       <Dropdown id="blobs-color"

@@ -14,41 +14,41 @@ export default component$(() => {
   const store = useStore<DropdownOptions>({});
   return (
     <Card>
-      <Header>
+      <Header id="dropdown" anchor>
         Dropdown
       </Header>
-      <TextInput id="select-display" onInput$={(e, el) => {
+      <TextInput id="dropdown-display" onInput$={(e, el) => {
         store.display = el.value;
       }}>
         display
       </TextInput>
-      <Dropdown id="select-color"
+      <Dropdown id="dropdown-color"
         onChange$={(e, element) => store.color = element.value as keyof typeof buttonColorClasses}
         values={Object.keys(buttonColorClasses).map((color) => ({ name: color, value: color }))}
         value="gray"
       >
         color
       </Dropdown>
-      <Toggle id="button-transparent"
+      <Toggle id="dropdown-transparent"
         onChange$={(e, element) => store.transparent = element.checked}
         label="transparent" />
-      <Dropdown id="select-size"
+      <Dropdown id="dropdown-size"
         onChange$={(e, element) => store.size = element.value as keyof typeof sizeClasses}
         values={Object.keys(sizeClasses).map((size) => ({ name: size, value: size }))}
         value="sm"
       >
         size
       </Dropdown>
-      <Toggle id="select-hover" label="hover"
+      <Toggle id="dropdown-hover" label="hover"
         onInput$={(e, el) => store.hover = el.checked}>
         hover
       </Toggle>
-      <Toggle id="select-round" label="round"
+      <Toggle id="dropdown-round" label="round"
         onInput$={(e, el) => store.round = el.checked}>
         round
       </Toggle>
       <div>
-        <Dropdown id="select-input"
+        <Dropdown id="dropdown-input"
           values={[
             { name: <div class="bg-red-500">Any element you want</div>, value: '1' },
             { name: 'Option 2', value: '2' },
@@ -66,7 +66,7 @@ export default component$(() => {
         </Dropdown>
       </div>
       <TextAreaRaw output value={`
-<Dropdown id="select-input"${store.display ? ` display={${store.display}}` : ''}${store.color ? ` color="${store.color}"` : ''}${store.transparent ? ' transparent' : ''}${store.size ? ` size="${store.size}"` : ''}${store.hover ? ' hover' : ''}${store.round ? ' round' : ''}>
+<Dropdown id="dropdown-input"${store.display ? ` display={${store.display}}` : ''}${store.color ? ` color="${store.color}"` : ''}${store.transparent ? ' transparent' : ''}${store.size ? ` size="${store.size}"` : ''}${store.hover ? ' hover' : ''}${store.round ? ' round' : ''}>
   values={[
     { name: <div class="bg-red-500">Any element you want</div>, value: '1' },
     { name: 'Option 2', value: '2' },

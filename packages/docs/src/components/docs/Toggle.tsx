@@ -13,7 +13,7 @@ export default component$(() => {
   const store = useStore<toggleOptions>({});
   return (
     <Card>
-      <Header>
+      <Header id="toggle" anchor>
         Toggle
       </Header>
       <Dropdown id="toggle-oncolor"

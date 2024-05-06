@@ -6,15 +6,16 @@ interface cardOptions {
   hover?: boolean | 'clickable';
   row?: boolean;
   blobs?: boolean;
-  loading?: boolean;
   href?: boolean;
+  loading?: boolean;
+  anchor?: boolean;
 }
 
 export default component$(() => {
   const store = useStore<cardOptions>({});
   return (
     <Card>
-      <Header>
+      <Header id="card" anchor>
         Card (and Header)
       </Header>
       <div class="flex">
@@ -36,10 +37,12 @@ export default component$(() => {
         label="row" />
       <Toggle id="card-blobs" onChange$={(e, element) => store.blobs = element.checked}
         label="blobs" />
-      <Toggle id="card-loading" onChange$={(e, element) => store.loading = element.checked}
-        label="loading" />
       <Toggle id="card-href" onChange$={(e, element) => store.href = element.checked}
         label="href" />
+      <Toggle id="header-loading" onChange$={(e, element) => store.loading = element.checked}
+        label="loading" />
+      <Toggle id="header-anchor" onChange$={(e, element) => store.anchor = element.checked}
+        label="anchor" />
       <div>
         <Card
           color={store.color}
@@ -48,7 +51,7 @@ export default component$(() => {
           blobs={store.blobs}
           href={store.href ? 'https://luminescent.dev' : undefined}
         >
-          <Header subheader="Subheader" loading={!!store.loading}>
+          <Header id="header" subheader="Subheader" loading={!!store.loading} anchor={store.anchor}>
             Header
           </Header>
           Content
@@ -56,7 +59,7 @@ export default component$(() => {
       </div>
       <TextAreaRaw output value={`
 <Card${(store.color && ` color="${store.color}"`) ?? ''}${store.hover ? ' hover' : ''}${store.hover == 'clickable' ? '="clickable"' : ''}${store.row ? ' row' : ''}${store.blobs ? ' blobs' : ''}${store.href ? ' href="https://luminescent.dev"' : ''}>
-  <Header subheader="Subheader" ${store.loading ? 'loading' : ''}/>
+  <Header id="header" subheader="Subheader"${store.loading ? ' loading' : ''}${store.anchor ? ' anchor' : ''}>
     Header
   </Header>
   Content
