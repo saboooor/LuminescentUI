@@ -31,11 +31,11 @@ export default component$(() => {
         <Dropdown id="card-blobs"
           onChange$={(e, element) => {
             if (element.value === 'false') return store.blobs = false;
-            store.blobs = element.value as keyof typeof cardColorClasses
+            store.blobs = element.value as keyof typeof cardColorClasses;
           }}
           values={[
             { name: 'false', value: 'false' },
-            ...Object.keys(cardColorClasses).map((color) => ({ name: color, value: color }))
+            ...Object.keys(cardColorClasses).map((color) => ({ name: color, value: color })),
           ]}
           value="false"
         >
