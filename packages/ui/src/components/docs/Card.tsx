@@ -3,7 +3,7 @@ import { Card, Header, Dropdown, TextAreaRaw, Toggle, cardColorClasses } from '.
 
 interface cardOptions {
   color?: keyof typeof cardColorClasses;
-  hover?: boolean | 'clickable';
+  hover?: boolean | 'clickable' | 'blur';
   row?: boolean;
   blobs?: boolean;
   href?: boolean;
@@ -27,12 +27,24 @@ export default component$(() => {
           color
         </Dropdown>
       </div>
-      <Toggle id="card-hoverable" onChange$={(e, element) => store.hover = element.checked}
-        checked={store.hover == 'clickable' || store.hover}
-        label="hoverable" />
-      <Toggle id="card-clickable" onChange$={(e, element) => store.hover = element.checked ? 'clickable' : false}
-        checked={store.hover == 'clickable'}
-        label="clickable" />
+      <div class="flex">
+        <Dropdown id="card-hover"
+          onChange$={(e, element) => {
+            if (element.value === 'false') return store.hover = false;
+            else if (element.value === 'true') return store.hover = true;
+            store.hover = element.value as 'clickable' | 'blur';
+          }}
+          values={[
+            { name: 'false', value: 'false' },
+            { name: 'true', value: 'true' },
+            { name: 'clickable', value: 'clickable' },
+            { name: 'blur', value: 'blur' },
+          ]}
+          value="false"
+        >
+          hover
+        </Dropdown>
+      </div>
       <Toggle id="card-row" onChange$={(e, element) => store.row = element.checked}
         label="row" />
       <Toggle id="card-blobs" onChange$={(e, element) => store.blobs = element.checked}
@@ -46,7 +58,7 @@ export default component$(() => {
       <div>
         <Card
           color={store.color}
-          hover={store.hover}
+          hover={'blur'}
           row={store.row}
           blobs={store.blobs}
           href={store.href ? 'https://luminescent.dev' : undefined}
@@ -55,14 +67,20 @@ export default component$(() => {
             Header
           </Header>
           Content
+          <div q:slot='blur'>
+            Blur content
+          </div>
         </Card>
       </div>
       <TextAreaRaw output value={`
-<Card${(store.color && ` color="${store.color}"`) ?? ''}${store.hover ? ' hover' : ''}${store.hover == 'clickable' ? '="clickable"' : ''}${store.row ? ' row' : ''}${store.blobs ? ' blobs' : ''}${store.href ? ' href="https://luminescent.dev"' : ''}>
+<Card${(store.color && ` color="${store.color}"`) ?? ''}${store.hover ? ` hover${store.hover != true ? `="${store.hover}"` : ''}` : ''}${store.row ? ' row' : ''}${store.blobs ? ' blobs' : ''}${store.href ? ' href="https://luminescent.dev"' : ''}>
   <Header id="header" subheader="Subheader"${store.loading ? ' loading' : ''}${store.anchor ? ' anchor' : ''}>
     Header
   </Header>
   Content
+  ${store.hover == 'blur' ? `<div q:slot='blur'>
+    Blur content
+  </div>` : ''}
 </Card>`} />
     </Card>
   );

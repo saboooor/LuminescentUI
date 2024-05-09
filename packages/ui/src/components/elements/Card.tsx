@@ -5,7 +5,7 @@ import { Blobs } from './Blobs';
 
 interface CardProps extends Omit<PropsOf<'div'>, 'class'> {
   color?: keyof typeof cardColorClasses;
-  hover?: boolean | 'clickable';
+  hover?: boolean | 'clickable' | 'blur';
   href?: string;
   row?: boolean;
   blobs?: boolean;
@@ -163,7 +163,7 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
   const colorClass = cardColorClasses[color];
 
   return (
-    <div  {...props} class={{
+    <div {...props} class={{
       'relative flex gap-3 sm:gap-4 p-5 sm:p-7 border rounded-lg motion-safe:transition-all': true,
       'flex-col': !row,
       [colorClass.bg]: !blobs,
@@ -172,6 +172,13 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
       [colorClass.click + ' active:scale-[99%] cursor-pointer select-none touch-manipulation']: hover == 'clickable',
       ...props.class,
     }}>
+      {hover == 'blur' &&
+        <div class={{
+          'transition-all absolute flex inset-0 w-full h-full z-10 backdrop-blur-xl rounded-lg opacity-0 hover:opacity-100': true,
+        }}>
+          <Slot name="blur" />
+        </div>
+      }
       <Slot />
       {props.href && <a href={props.href} class="absolute inset-0" />}
       {blobs &&
