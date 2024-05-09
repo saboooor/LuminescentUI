@@ -3,7 +3,7 @@ import { Card, Header, Dropdown, TextAreaRaw, Toggle, cardColorClasses } from '.
 
 interface cardOptions {
   color?: keyof typeof cardColorClasses;
-  blobs?: false | keyof typeof cardColorClasses;
+  blobs?: boolean | keyof typeof cardColorClasses;
   hover?: boolean | 'clickable' | 'blur';
   row?: boolean;
   href?: boolean;
