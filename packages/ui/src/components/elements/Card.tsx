@@ -5,10 +5,10 @@ import { Blobs } from './Blobs';
 
 interface CardProps extends Omit<PropsOf<'div'>, 'class'> {
   color?: keyof typeof cardColorClasses;
+  blobs?: false | keyof typeof cardColorClasses;
   hover?: boolean | 'clickable' | 'blur';
   href?: string;
   row?: boolean;
-  blobs?: boolean;
   class?: { [key: string]: boolean };
 }
 
@@ -164,7 +164,7 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
 
   return (
     <div {...props} class={{
-      'relative flex gap-3 sm:gap-4 p-5 sm:p-7 border rounded-lg motion-safe:transition-all': true,
+      'relative flex gap-3 sm:gap-4 px-5 py-6 sm:px-7 sm:py-8 border rounded-lg motion-safe:transition-all': true,
       'flex-col': !row,
       [colorClass.bg]: !blobs,
       [colorClass.bg_blobs]: blobs,
@@ -182,8 +182,8 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
       <Slot />
       {props.href && <a href={props.href} class="absolute inset-0" />}
       {blobs &&
-        <Blobs color={color} class={{
-          'overflow-clip': true,
+        <Blobs color={blobs} class={{
+          'overflow-clip rounded-lg': true,
         }}/>
       }
     </div>
