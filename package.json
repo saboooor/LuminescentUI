@@ -7,7 +7,7 @@
     "yarn": "please-use-pnpm",
     "pnpm": ">=8.6.12"
   },
-  "packageManager": "pnpm@9.0.6",
+  "packageManager": "pnpm@9.1.0",
   "private": true,
   "scripts": {
     "build": "cd packages/ui && pnpm run build && cd ../docs && pnpm run build",
