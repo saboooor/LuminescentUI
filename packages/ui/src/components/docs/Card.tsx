@@ -58,7 +58,7 @@ export default component$(() => {
       <div>
         <Card
           color={store.color}
-          hover={'blur'}
+          hover={store.hover}
           row={store.row}
           blobs={store.blobs}
           href={store.href ? 'https://luminescent.dev' : undefined}
