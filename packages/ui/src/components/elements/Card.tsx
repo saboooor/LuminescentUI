@@ -5,7 +5,7 @@ import { Blobs } from './Blobs';
 
 interface CardProps extends Omit<PropsOf<'div'>, 'class'> {
   color?: keyof typeof cardColorClasses;
-  blobs?: false | keyof typeof cardColorClasses;
+  blobs?: boolean | keyof typeof cardColorClasses;
   hover?: boolean | 'clickable' | 'blur';
   href?: string;
   row?: boolean;
@@ -182,7 +182,7 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
       <Slot />
       {props.href && <a href={props.href} class="absolute inset-0" />}
       {blobs &&
-        <Blobs color={blobs} class={{
+        <Blobs color={blobs == true ? color : blobs} class={{
           'overflow-clip rounded-lg': true,
         }}/>
       }

@@ -31,10 +31,12 @@ export default component$(() => {
         <Dropdown id="card-blobs"
           onChange$={(e, element) => {
             if (element.value === 'false') return store.blobs = false;
+            else if (element.value === 'true') return store.blobs = true;
             store.blobs = element.value as keyof typeof cardColorClasses;
           }}
           values={[
             { name: 'false', value: 'false' },
+            { name: 'true', value: 'true' },
             ...Object.keys(cardColorClasses).map((color) => ({ name: color, value: color })),
           ]}
           value="false"
@@ -86,7 +88,7 @@ export default component$(() => {
         </Card>
       </div>
       <TextAreaRaw output value={`
-<Card${(store.color && ` color="${store.color}"`) ?? ''}${(store.blobs && ` blobs="${store.blobs}"`) ?? ''}${store.hover ? ` hover${store.hover != true ? `="${store.hover}"` : ''}` : ''}${store.row ? ' row' : ''}${store.href ? ' href="https://luminescent.dev"' : ''}>
+<Card${(store.color && ` color="${store.color}"`) ?? ''}${store.blobs ? ` blobs${store.blobs != true ? `="${store.blobs}"` : ''}` : ''}${store.hover ? ` hover${store.hover != true ? `="${store.hover}"` : ''}` : ''}${store.row ? ' row' : ''}${store.href ? ' href="https://luminescent.dev"' : ''}>
   <Header id="header" subheader="Subheader"${store.loading ? ' loading' : ''}${store.anchor ? ' anchor' : ''}>
     Header
   </Header>
