@@ -2,7 +2,7 @@ import type { PropsOf } from '@builder.io/qwik';
 import { $, Slot, component$ } from '@builder.io/qwik';
 import { InputClasses, InputColorClasses } from './TextInput';
 
-export interface TextAreaRawProps extends Omit<PropsOf<'textarea'>, 'class' | 'onChange$' | 'onClick$'> {
+export interface TextAreaRawProps extends Omit<PropsOf<'textarea'>, 'class' | 'onClick$'> {
   class?: { [key: string]: boolean };
   color?: keyof typeof InputColorClasses;
   output?: boolean;
