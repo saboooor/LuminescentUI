@@ -9,12 +9,12 @@ import { Shuffle } from '~/svg/Shuffle';
 export interface ColorInputProps extends Omit<TextInputRawProps, 'onInput$' | 'children'> {
   onInput$?: QRL<(color: string) => void>;
   value?: string;
-  presetColors?: string[];
+  colors?: string[];
   preview?: 'left' | 'right' | 'top' | 'bottom' | 'full';
   id: string;
 }
 
-export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000000', presetColors, preview = 'left', class: Class, ...props }) => {
+export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000000', colors, preview = 'left', class: Class, ...props }) => {
   const store = useStore({
     opened: false,
   });
@@ -59,15 +59,10 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
       } : {}
       }
       />
-      <ColorPickerRaw
+      <ColorPicker
         id={id}
-        color={value}
-        colors={[
-          '#FAEDCB', '#C9E4DE', '#C6DEF1', '#DBCDF0', '#F2C6DE',
-          '#FCD05C', '#5FE2C5', '#4498DB', '#9863E7', '#E43A96',
-          '#000000', '#555555', '#AAAAAA', '#FFFFFF',
-          ...presetColors ?? [],
-        ]}
+        value={value}
+        colors={colors}
         class={{
           'motion-safe:transition-all absolute top-full mt-2 left-0 gap-1 z-[1000]': true,
           'opacity-0 scale-95 pointer-events-none': !store.opened,
@@ -105,16 +100,20 @@ export interface ColorPickerProps extends Omit<PropsOf<'div'>, 'class' | 'onInpu
     [key: string]: boolean;
   };
   onInput$?: QRL<(color: string) => void>;
-  color: string;
-  colors: string[];
+  value?: string;
+  colors?: string[];
 }
 
-export const ColorPickerRaw = component$<ColorPickerProps>(({ id, color, colors, onInput$, ...props }) => {
+export const ColorPicker = component$<ColorPickerProps>(({ id, value = '#000000', colors = [
+  '#FAEDCB', '#C9E4DE', '#C6DEF1', '#DBCDF0', '#F2C6DE',
+  '#FCD05C', '#5FE2C5', '#4498DB', '#9863E7', '#E43A96',
+  '#000000', '#555555', '#AAAAAA', '#FFFFFF',
+], onInput$, ...props }) => {
   const height = 150;
   const width = height - 25;
   const maxHue = height - 2;
 
-  const hsvColor = rgbToHsv(hexNumberToRgb(hexStringToNumber(color)));
+  const hsvColor = rgbToHsv(hexNumberToRgb(hexStringToNumber(value)));
   const store = useStore({
     hue: {
       position: hsvColor.h * maxHue,
@@ -122,11 +121,11 @@ export const ColorPickerRaw = component$<ColorPickerProps>(({ id, color, colors,
     },
     bPosition: (1 - hsvColor.v) * maxHue,
     sPosition: hsvColor.s * width,
-    color: color,
+    value: value,
   });
 
   const setColor = $((color: string) => {
-    store.color = color;
+    store.value = color;
     const hsv = rgbToHsv(hexNumberToRgb(hexStringToNumber(color)));
     store.hue.position = hsv.h * maxHue;
     store.hue.color = rgbToHex(hsvToRgb({ h: hsv.h, s: 1, v: 1 }));
@@ -138,12 +137,12 @@ export const ColorPickerRaw = component$<ColorPickerProps>(({ id, color, colors,
   const hueChange = $((e: MouseEvent | TouchEvent, hOffset: number) => {
     const { y } = getMousePosition(e);
     store.hue.position = clamp(maxHue - (y - hOffset), 0, maxHue);
-    const hsvColor = rgbToHsv(hexNumberToRgb(hexStringToNumber(store.color)));
+    const hsvColor = rgbToHsv(hexNumberToRgb(hexStringToNumber(store.value)));
     const h = store.hue.position / maxHue;
     hsvColor.h = h;
     store.hue.color = rgbToHex(hsvToRgb({ h, s: 1, v: 1 }));
-    store.color = rgbToHex(hsvToRgb(hsvColor));
-    onInput$?.(store.color);
+    store.value = rgbToHex(hsvToRgb(hsvColor));
+    onInput$?.(store.value);
   });
 
   const hueMouseDown = $((e: MouseEvent | TouchEvent, el: HTMLDivElement) => {
@@ -168,12 +167,12 @@ export const ColorPickerRaw = component$<ColorPickerProps>(({ id, color, colors,
     store.sPosition = clamp(x - hOffset.left, 0, width);
     const s = store.sPosition / width;
     const v = 1 - store.bPosition / maxHue;
-    store.color = rgbToHex(hsvToRgb({
+    store.value = rgbToHex(hsvToRgb({
       h: store.hue.position / maxHue,
       s,
       v,
     }));
-    onInput$?.(store.color);
+    onInput$?.(store.value);
   });
 
   const sbMouseDown = $((e: MouseEvent | TouchEvent, el: HTMLDivElement) => {
@@ -220,7 +219,7 @@ export const ColorPickerRaw = component$<ColorPickerProps>(({ id, color, colors,
           <div class="w-[123px] h-[148px] rounded-[0.3rem] bg-gradient-to-b from-transparent to-black"/>
           <div class="absolute -top-2 -left-2 w-4 h-4 border border-white rounded-full bg-white"
             style={{
-              background: store.color,
+              background: store.value,
               transform: `translate(${store.sPosition}px, ${store.bPosition}px)`,
             }}/>
         </div>
