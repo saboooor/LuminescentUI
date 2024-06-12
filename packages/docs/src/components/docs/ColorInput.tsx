@@ -1,9 +1,11 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, ColorInput, Header, Dropdown, TextAreaRaw, InputColorClasses } from '@luminescent/ui';
+import { Card, ColorInput, Header, Dropdown, TextAreaRaw, InputColorClasses, Toggle, ColorPicker } from '@luminescent/ui';
 
 interface colorInputOptions {
   color?: keyof typeof InputColorClasses;
   preview?: 'left' | 'right' | 'top' | 'bottom' | 'full';
+  horizontal?: boolean;
+  showInput?: boolean;
 }
 
 export default component$(() => {
@@ -11,7 +13,7 @@ export default component$(() => {
   return (
     <Card>
       <Header id="colorinput" anchor>
-        ColorInput
+        ColorInput & ColorPicker
       </Header>
       <Dropdown id="color-input-color"
         onChange$={(e, element) => store.color = element.value as keyof typeof InputColorClasses}
@@ -27,15 +29,30 @@ export default component$(() => {
       >
         preview
       </Dropdown>
-      <div>
-        <ColorInput id="color-input" color={store.color} onInput$={() => {}} preview={store.preview}>
-          Color Input
-        </ColorInput>
-      </div>
-      <TextAreaRaw output value={`
+      <Toggle id="color-input-horizontal" label="horizontal"
+        onInput$={(e, element) => store.horizontal = element.checked}/>
+      <Toggle id="color-input-showinput" label="showInput"
+        onInput$={(e, element) => store.showInput = element.checked}/>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="flex flex-col gap-4">
+          <div class="flex">
+            <ColorPicker id="color-input" preview={store.preview} horizontal={store.horizontal} showInput={store.showInput} onInput$={() => {}}/>
+          </div>
+          <TextAreaRaw output value={`
 <ColorInput id="color-input"${store.color ? ` color="${store.color}"` : ''}${store.preview ? ` preview="${store.preview}"` : ''}>
 Color Input
 </ColorInput>`} />
+        </div>
+        <div class="flex flex-col justify-end gap-4">
+          <ColorInput id="color-input" color={store.color} preview={store.preview} horizontal={store.horizontal} showInput={store.showInput} onInput$={() => {}}>
+            Color Input
+          </ColorInput>
+          <TextAreaRaw output value={`
+<ColorInput id="color-input"${store.color ? ` color="${store.color}"` : ''}${store.preview ? ` preview="${store.preview}"` : ''}>
+Color Input
+</ColorInput>`} />
+        </div>
+      </div>
     </Card>
   );
 });

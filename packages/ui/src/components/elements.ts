@@ -3,6 +3,7 @@ export * from './elements/Blobs';
 export * from './elements/Button';
 export * from './elements/Card';
 export * from './elements/ColorInput';
+export * from './elements/ColorPicker';
 export * from './elements/Dropdown';
 export * from './elements/Header';
 export * from './elements/LoadingIcon';
