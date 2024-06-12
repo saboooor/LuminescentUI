@@ -38,17 +38,14 @@ export default component$(() => {
           <div class="flex">
             <ColorPicker id="color-input" preview={store.preview} horizontal={store.horizontal} showInput={store.showInput} onInput$={() => {}}/>
           </div>
-          <TextAreaRaw output value={`
-<ColorInput id="color-input"${store.color ? ` color="${store.color}"` : ''}${store.preview ? ` preview="${store.preview}"` : ''}>
-Color Input
-</ColorInput>`} />
+          <TextAreaRaw output value={`<ColorPicker id="color-input"${store.color ? ` color="${store.color}"` : ''}${store.preview ? ` preview="${store.preview}"` : ''}${store.horizontal ? ' horizontal' : ''}${store.showInput == false ? ' showInput="false"' : ''}/>`} />
         </div>
         <div class="flex flex-col justify-end gap-4">
           <ColorInput id="color-input" color={store.color} preview={store.preview} horizontal={store.horizontal} showInput={store.showInput} onInput$={() => {}}>
             Color Input
           </ColorInput>
           <TextAreaRaw output value={`
-<ColorInput id="color-input"${store.color ? ` color="${store.color}"` : ''}${store.preview ? ` preview="${store.preview}"` : ''}>
+<ColorInput id="color-input"${store.color ? ` color="${store.color}"` : ''}${store.preview ? ` preview="${store.preview}"` : ''}${store.horizontal ? ' horizontal' : ''}${store.showInput ? ' showInput' : ''}>
 Color Input
 </ColorInput>`} />
         </div>
