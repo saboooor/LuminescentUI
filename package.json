@@ -1,5 +1,5 @@
 {
-  "name": "ui-monorepo",
+  "name": "@luminescent/ui-monorepo",
   "version": "0.0.1",
   "engines": {
     "node": ">=16.8.0 <18.0.0 || >=18.11",
