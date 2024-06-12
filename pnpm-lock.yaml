@@ -20,8 +20,8 @@ importers:
         specifier: ^1.5.6
         version: 1.5.6(@types/node@20.14.2)(rollup@4.14.2)
       '@luminescent/ui':
-        specifier: ^0.17.0
-        version: 0.17.0
+        specifier: ^0.18.0
+        version: 0.18.0
       '@types/eslint':
         specifier: ^8.56.10
         version: 8.56.10
@@ -662,8 +662,8 @@ packages:
     resolution: {integrity: sha512-ajo/heTlG3QgC8EGP6APIejksVAYt4ayz4tqoP3MolFELzcH1x1fzwEYRJTPO0IELutZ5HQ0c26/GqAYy79u3g==}
     engines: {node: '>= 0.4'}
 
-  '@luminescent/ui@0.17.0':
-    resolution: {integrity: sha512-B1I6gb78biF3PBQstNs8WwEPtPYuqXOmSY2eUMKsGq1A/feUXsmDcBRs90eD/bpnAVpg16HGTq30liAl32Ny5A==}
+  '@luminescent/ui@0.18.0':
+    resolution: {integrity: sha512-wP86fg1+oFmb5QfG8lZUhhYOtXFY8T4bqLDH/FpPIyVQPDHi8aI6EiG+aRfvFzzzA1Vzqk7O/MYp58+QSS6CDA==}
     engines: {node: '>=15.0.0'}
 
   '@mdx-js/mdx@3.0.1':
@@ -3841,7 +3841,7 @@ snapshots:
     dependencies:
       call-bind: 1.0.7
 
-  '@luminescent/ui@0.17.0': {}
+  '@luminescent/ui@0.18.0': {}
 
   '@mdx-js/mdx@3.0.1':
     dependencies:
