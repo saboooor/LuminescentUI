@@ -1,6 +1,6 @@
 
 import type { PropsOf, QRL } from '@builder.io/qwik';
-import { $, component$, useOn, useStore } from '@builder.io/qwik';
+import { $, component$, useStore } from '@builder.io/qwik';
 import type { TextInputRawProps } from './TextInput';
 import { TextInputRaw } from './TextInput';
 import { getBrightness, hexNumberToRgb, hexStringToNumber, hsvToRgb, rgbToHex, rgbToHsv, clamp, getMousePosition } from '../../utils/color';
@@ -40,12 +40,15 @@ export const ColorPicker = component$<ColorPickerProps>(({ id, value = '#000000'
   });
 
   const setColor = $((color: string) => {
-    const hsv = rgbToHsv(hexNumberToRgb(hexStringToNumber(color)));
-    store.value = rgbToHex(hsvToRgb(hsv));
+    if (!color.match(/^#[0-9A-F]{6}$/i)) return;
+    const number = hexStringToNumber(color);
+    const hsv = rgbToHsv(hexNumberToRgb(number));
     store.hue.position = hsv.h * maxHue;
     store.hue.color = rgbToHex(hsvToRgb({ h: hsv.h, s: 1, v: 1 }));
     store.sPosition = hsv.s * width;
     store.bPosition = (1 - hsv.v) * maxHue;
+
+    store.value = color;
     onInput$?.(store.value);
   });
 
@@ -56,6 +59,7 @@ export const ColorPicker = component$<ColorPickerProps>(({ id, value = '#000000'
     const h = store.hue.position / maxHue;
     hsvColor.h = h;
     store.hue.color = rgbToHex(hsvToRgb({ h, s: 1, v: 1 }));
+
     store.value = rgbToHex(hsvToRgb(hsvColor));
     onInput$?.(store.value);
   });
@@ -82,6 +86,7 @@ export const ColorPicker = component$<ColorPickerProps>(({ id, value = '#000000'
     store.sPosition = clamp(x - hOffset.left, 0, width);
     const s = store.sPosition / width;
     const v = 1 - store.bPosition / maxHue;
+
     store.value = rgbToHex(hsvToRgb({
       h: store.hue.position / maxHue,
       s,
@@ -106,23 +111,18 @@ export const ColorPicker = component$<ColorPickerProps>(({ id, value = '#000000'
     window.addEventListener('touchend', mouseUpListener);
   });
 
-  useOn('change', $(() => {
-    if (!id) return;
-    const inputElement = document.getElementById(id) as HTMLInputElement | null;
-    if (!inputElement) return;
-    setColor(inputElement.value);
-  }));
-
   return (
     <div class={{
-      'motion-safe:transition-all p-4 bg-gray-800/50 backdrop-blur-xl flex gap-6 rounded-lg border border-gray-700 touch-none': true,
+      'motion-safe:transition-all p-4 bg-gray-800/50 backdrop-blur-xl flex gap-4 rounded-lg border border-gray-700 touch-none': true,
       'flex': true,
       'flex-col': !horizontal,
       ...props.class,
-    }}
-    id={id ? `${id}-picker` : undefined}>
+    }} id={id} onInput$={(e, el) => {
+      if (!el.dataset.value) return;
+      setColor(el.dataset.value);
+    }}>
       <div class="flex gap-4">
-        <div class="w-[125px] h-[150px] border border-gray-700 rounded-md relative"
+        <div class="w-[125px] h-[150px] rounded-md relative"
           style={{
             background: `linear-gradient(to right, #FFFFFF, ${store.hue.color})`,
           }}
@@ -131,7 +131,7 @@ export const ColorPicker = component$<ColorPickerProps>(({ id, value = '#000000'
           preventdefault:mousedown
           preventdefault:touchstart
         >
-          <div class="w-[123px] h-[149px] rounded-[0.3rem] bg-gradient-to-b from-transparent to-black"/>
+          <div class="w-[125px] h-[150px] rounded-[0.3rem] bg-gradient-to-b from-transparent to-black border border-gray-700"/>
           <div class={{
             'absolute -top-2 -left-2 w-4 h-4 border rounded-full bg-white': true,
             'border-white': getBrightness(hexNumberToRgb(hexStringToNumber(store.value))) < 0.5,
@@ -159,25 +159,37 @@ export const ColorPicker = component$<ColorPickerProps>(({ id, value = '#000000'
         </div>
       </div>
       <div class="w-[150px] flex flex-wrap gap-1 justify-between">
-        {showInput &&
+        {showInput && <div class={{
+          'flex w-[150px] pb-3 mb-2 border-b border-b-gray-700': true,
+          'flex-row gap-1': preview == 'left',
+          'flex-row-reverse gap-1': preview == 'right',
+          'flex-col': preview == 'top',
+          'flex-col-reverse': preview == 'bottom',
+        }}>
+          {preview != 'full' &&
+            <div class={{
+              'border border-gray-700': true,
+              'h-full aspect-square rounded-md': preview == 'left' || preview == 'right',
+              'w-full h-3': preview == 'top' || preview == 'bottom',
+              'rounded-t-md': preview == 'top',
+              'rounded-b-md': preview == 'bottom',
+            }} style={{
+              backgroundColor: `${store.value}`,
+            }}>
+            </div>
+          }
           <TextInputRaw class={{
-            'w-[150px] mb-4': true,
+            'w-full': true,
+            'border-t-0 rounded-t-none': preview == 'top',
+            'border-b-0 rounded-b-none': preview == 'bottom',
           }} value={store.value} style={preview == 'full' ? {
             backgroundColor: `${store.value}`,
             color: getBrightness(hexNumberToRgb(hexStringToNumber(store.value))) > 0.5 ? 'black' : 'white',
-          } : preview == 'left' ? {
-            borderLeft: `35px solid ${store.value}`,
-          } : preview == 'right' ? {
-            borderRight: `35px solid ${store.value}`,
-          } : preview == 'top' ? {
-            borderTop: `10px solid ${store.value}`,
-          } : preview == 'bottom' ? {
-            borderBottom: `10px solid ${store.value}`,
           } : {}
           } color={color ?? 'gray'} onInput$={(e, el) => {
             setColor(el.value);
           }}/>
-        }
+        </div>}
         {colors.map((color, i) => {
           return (
             <button key={i} class={{

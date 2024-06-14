@@ -16,7 +16,7 @@ export interface ColorInputProps extends Omit<TextInputRawProps, 'onInput$' | 'c
   id: string;
 }
 
-export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000000', colors, preview = 'left', horizontal, class: Class, showInput = false, ...props }) => {
+export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000000', color, colors, preview = 'left', horizontal, class: Class, showInput = false, ...props }) => {
   const store = useStore({
     opened: false,
   });
@@ -28,47 +28,55 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
       <label for={id} class="text-gray-300 pb-1 flex select-none">
         <Slot />
       </label>
-      <TextInputRaw class={{
-        'w-full': true,
-        ...Class,
-      }} {...props} value={value}
+      <div class={{
+        'flex': true,
+        'flex-row gap-1': preview == 'left',
+        'flex-row-reverse gap-1': preview == 'right',
+        'flex-col': preview == 'top',
+        'flex-col-reverse': preview == 'bottom',
+      }}>
+        {preview != 'full' &&
+          <div id={`${id}-preview`} class={{
+            'border border-gray-700': true,
+            'w-9 rounded-md': preview == 'left' || preview == 'right',
+            'w-full h-3': preview == 'top' || preview == 'bottom',
+            'rounded-t-md': preview == 'top',
+            'rounded-b-md': preview == 'bottom',
+          }} style={{
+            backgroundColor: `${value}`,
+          }}>
+          </div>
+        }
+        <TextInputRaw class={{
+          'border-t-0 rounded-t-none': preview == 'top',
+          'border-b-0 rounded-b-none': preview == 'bottom',
+          ...Class,
+        }} {...props} value={value} color={color}
+        onFocus$={() => {
+          const abortController = new AbortController();
+          document.addEventListener('click', (e) => {
+            if (e.target instanceof HTMLElement && !e.target.closest(`#${id}-popup`) && !e.target.closest(`#${id}`)) {
+              store.opened = false;
+              abortController.abort();
+            }
+          }, { signal: abortController.signal });
+          store.opened = true;
+        }}
 
-      onFocus$={() => {
-        const abortController = new AbortController();
-        document.addEventListener('click', (e) => {
-          if (e.target instanceof HTMLElement && !e.target.closest(`#${id}-picker`) && !e.target.closest(`#${id}`)) {
-            store.opened = false;
-            abortController.abort();
-          }
-        }, { signal: abortController.signal });
-        store.opened = true;
-      }}
-
-      onInput$={(e, el) => {
-        const div = document.getElementById(`${id}-picker`)!;
-        const event = new Event('change');
-        div.dispatchEvent(event);
-        onInput$?.(el.value);
-      }}
-
-      style={preview == 'full' ? {
-        backgroundColor: `${value}`,
-        color: getBrightness(hexNumberToRgb(hexStringToNumber(value))) > 0.5 ? 'black' : 'white',
-      } : preview == 'left' ? {
-        borderLeft: `35px solid ${value}`,
-      } : preview == 'right' ? {
-        borderRight: `35px solid ${value}`,
-      } : preview == 'top' ? {
-        borderTop: `10px solid ${value}`,
-      } : preview == 'bottom' ? {
-        borderBottom: `10px solid ${value}`,
-      } : {}
-      }
-      />
+        onInput$={(e, el) => {
+          const div = document.getElementById(`${id}-popup`)!;
+          div.dataset.value = el.value;
+          div.dispatchEvent(new Event('input'));
+        }}
+        style={preview == 'full' ? {
+          backgroundColor: `${value}`,
+          color: getBrightness(hexNumberToRgb(hexStringToNumber(value))) > 0.5 ? 'black' : 'white',
+        } : {}}/>
+      </div>
       <ColorPicker
-        id={id}
+        id={`${id}-popup`}
         value={value}
-        color={props.color}
+        color={color}
         colors={colors}
         preview={preview}
         horizontal={horizontal}
@@ -79,24 +87,13 @@ export const ColorInput = component$<ColorInputProps>(({ onInput$, value = '#000
         }}
         onInput$={(color: string) => {
           const el = document.getElementById(id) as HTMLInputElement;
+          const previewel = document.getElementById(`${id}-preview`) as HTMLDivElement;
           el.value = color;
-          switch (preview) {
-          case 'full':
+          if (preview == 'full') {
             el.style.backgroundColor = color;
             el.style.color = getBrightness(hexNumberToRgb(hexStringToNumber(color))) > 0.5 ? 'black' : 'white';
-            break;
-          case 'left':
-            el.style.borderLeft = `35px solid ${color}`;
-            break;
-          case 'right':
-            el.style.borderRight = `35px solid ${color}`;
-            break;
-          case 'top':
-            el.style.borderTop = `10px solid ${color}`;
-            break;
-          case 'bottom':
-            el.style.borderBottom = `10px solid ${color}`;
-            break;
+          } else {
+            previewel.style.backgroundColor = color;
           }
           onInput$?.(color);
         }}
