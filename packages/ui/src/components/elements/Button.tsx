@@ -104,26 +104,26 @@ export const mobileSizeClasses = {
   xs: {
     base: 'text-sm gap-1',
     round: 'rounded-md',
-    pad: 'px-2 py-1',
-    equal: 'p-1',
-  },
-  sm: {
-    base: 'text-sm gap-2',
-    round: 'rounded-md',
     pad: 'px-2.5 py-1.5',
     equal: 'p-1.5',
   },
+  sm: {
+    base: 'text-sm gap-2',
+    round: 'rounded-lg',
+    pad: 'px-3 py-2',
+    equal: 'p-2',
+  },
   md: {
     base: 'text-base gap-3',
-    round: 'rounded-md',
+    round: 'rounded-lg',
     pad: 'px-4 py-2',
     equal: 'p-2',
   },
   lg: {
     base: 'text-lg gap-3',
-    round: 'rounded-lg',
-    pad: 'px-6 py-3',
-    equal: 'p-3',
+    round: 'rounded-xl',
+    pad: 'px-7 py-4',
+    equal: 'p-4',
   },
   xl: {
     base: 'text-lg gap-4',
