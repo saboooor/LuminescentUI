@@ -214,19 +214,30 @@ export const Button = component$<ButtonProps>(({ color = 'darkgray', transparent
   return <button {...props}><Slot /></button>;
 });
 
-export const ButtonAnchor = component$<AnchorProps>(({ color = 'darkgray', transparent, size = 'md', round, square, ...props }) => {
+export const ButtonAnchor = component$<AnchorProps>(({ color = 'darkgray', transparent, size = 'md', mobilesize, round, square, ...props }) => {
   const colorClass = buttonColorClasses[color as keyof typeof buttonColorClasses];
   const sizeClass = sizeClasses[size as keyof typeof sizeClasses];
+  const mobileSizeClass = mobileSizeClasses[mobilesize ? mobilesize
+    : size == 'xs' ? 'xs'
+      : size == 'sm' ? 'xs'
+        : size == 'md' ? 'sm'
+          : size == 'lg' ? 'md'
+            : size == 'xl' ? 'lg'
+              : 'md'];
 
   props.class = {
     [buttonClass]: true,
     [colorClass.bg]: !transparent,
     'border-transparent': transparent,
     [colorClass.hover]: true,
+    [mobileSizeClass.base]: true,
     [sizeClass.base]: true,
+    [mobileSizeClass.round]: !round,
     [sizeClass.round]: !round,
     'rounded-full': round,
+    [mobileSizeClass.pad]: !square,
     [sizeClass.pad]: !square,
+    [mobileSizeClass.equal]: square,
     [sizeClass.equal]: square,
     ...props.class,
   };
