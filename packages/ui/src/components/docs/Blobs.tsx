@@ -1,9 +1,9 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Blobs, Card, Header, Dropdown, TextAreaRaw, blobColorClasses, sizeClasses } from '../../index';
+import { Blobs, Card, Header, Dropdown, TextAreaRaw, blobColorClasses } from '../../index';
 
 interface blobsOptions {
   color?: keyof typeof blobColorClasses;
-  blur?: keyof typeof sizeClasses;
+  blur?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export default component$(() => {
@@ -21,8 +21,8 @@ export default component$(() => {
         color
       </Dropdown>
       <Dropdown id="blobs-blur"
-        onChange$={(e, element) => store.blur = element.value as keyof typeof sizeClasses}
-        values={Object.keys(sizeClasses).map((size) => ({ name: size, value: size }))}
+        onChange$={(e, element) => store.blur = element.value as 'sm' | 'md' | 'lg' | 'xl'}
+        values={['sm', 'md', 'lg', 'xl'].map((size) => ({ name: size, value: size }))}
         value="xl"
       >
         blur

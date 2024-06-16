@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Button, Card, Header, Nav, Dropdown, DropdownRaw, TextAreaRaw, Toggle, navColorClasses } from '../../index';
+import { Card, Header, Nav, Dropdown, DropdownRaw, TextAreaRaw, Toggle, navColorClasses } from '../../index';
 
 interface navOptions {
   fixed?: boolean;
@@ -28,88 +28,88 @@ export default component$(() => {
       <div class="relative h-40">
         <Nav floating={store.floating} fixed={store.fixed} color={store.color}>
 
-          <Button q:slot="start" color={store.color == 'transparent' ? 'darkgray' : store.color} transparent>
+          <button class={`btn btn-md btn-gray-800 rounded-md`} q:slot="start" >
             Brand
-          </Button>
+          </button>
 
-          <Button q:slot="center" color={store.color == 'transparent' ? 'darkgray' : store.color} transparent class={{ 'hidden sm:flex': true }}>
+          <button class={`btn btn-md btn-gray-800 rounded-md hidden sm:flex`} q:slot="center">
             Center Button
-          </Button>
+          </button>
 
-          <DropdownRaw id="nav-dropdown" hover q:slot="end" color={store.color == 'transparent' ? 'darkgray' : store.color} transparent class={{ 'hidden sm:flex': true }} display="Dropdown">
-            <Button color={store.color == 'transparent' ? 'darkgray' : store.color} transparent q:slot="extra-buttons">
+          <DropdownRaw id="nav-dropdown" hover q:slot="end" class={{ 'hidden sm:flex': true }} display="Dropdown">
+            <button class={`btn btn-md btn-gray-800 rounded-md`} q:slot="extra-buttons">
               Option 1
-            </Button>
-            <Button color={store.color == 'transparent' ? 'darkgray' : store.color} transparent q:slot="extra-buttons">
+            </button>
+            <button class={`btn btn-md btn-gray-800 rounded-md`} q:slot="extra-buttons">
               Option 2
-            </Button>
-            <Button color={store.color == 'transparent' ? 'darkgray' : store.color} transparent q:slot="extra-buttons">
+            </button>
+            <button class={`btn btn-md btn-gray-800 rounded-md`} q:slot="extra-buttons">
               Option 3
-            </Button>
+            </button>
           </DropdownRaw>
 
-          <Button q:slot="mobile" color={store.color == 'transparent' ? 'darkgray' : store.color} transparent>
-            Button 1
-          </Button>
-          <Button q:slot="mobile" color={store.color == 'transparent' ? 'darkgray' : store.color} transparent>
-            Button 2
-          </Button>
+          <button q:slot="mobile" class={`btn btn-md btn-gray-800 rounded-md`}>
+            button 1
+          </button>
+          <button q:slot="mobile" class={`btn btn-md btn-gray-800 rounded-md`}>
+            button 2
+          </button>
           <h3 q:slot="mobile" class="mx-4 py-2 text-gray-400 border-b border-gray-700">
             Dropdown
           </h3>
-          <Button q:slot="mobile" color={store.color == 'transparent' ? 'darkgray' : store.color} transparent>
+          <button q:slot="mobile" class={`btn btn-md btn-gray-800 rounded-md`}>
             Option 1
-          </Button>
-          <Button q:slot="mobile" color={store.color == 'transparent' ? 'darkgray' : store.color} transparent>
+          </button>
+          <button q:slot="mobile" class={`btn btn-md btn-gray-800 rounded-md`}>
             Option 2
-          </Button>
-          <Button q:slot="mobile" color={store.color == 'transparent' ? 'darkgray' : store.color} transparent>
+          </button>
+          <button q:slot="mobile" class={`btn btn-md btn-gray-800 rounded-md`}>
             Option 3
-          </Button>
+          </button>
 
         </Nav>
       </div>
       <TextAreaRaw output value={`
 <Nav${store.floating ? ' floating' : ''}${store.fixed ? ' fixed' : ''}${store.color ? ` color="${store.color}"` : ''}>
 
-  <Button q:slot="start"${store.color ? ` color="${store.color}"` : ''} transparent>
+  <button q:slot="start"${store.color ? ` color="${store.color}"` : ''}>
     Brand
-  </Button>
+  </button>
 
-  <Button q:slot="center"${store.color ? ` color="${store.color}"` : ''} transparent class={{ 'hidden sm:flex': true }}>
-    Center Button
-  </Button>
+  <button q:slot="center"${store.color ? ` color="${store.color}"` : ''} class={{ 'hidden sm:flex': true }}>
+    Center button
+  </button>
 
-  <DropdownRaw id="nav-dropdown" q:slot="end" hover${store.color ? ` color="${store.color}"` : ''} transparent class={{ 'hidden sm:flex': true }} display="Dropdown">
-    <Button color={store.color == 'transparent' ? 'darkgray' : store.color} transparent q:slot="extra-buttons">
+  <DropdownRaw id="nav-dropdown" q:slot="end" hover${store.color ? ` color="${store.color}"` : ''} class={{ 'hidden sm:flex': true }} display="Dropdown">
+    <button  q:slot="extra-buttons">
       Option 1
-    </Button>
-    <Button color={store.color == 'transparent' ? 'darkgray' : store.color} transparent q:slot="extra-buttons">
+    </button>
+    <button  q:slot="extra-buttons">
       Option 2
-    </Button>
-    <Button color={store.color == 'transparent' ? 'darkgray' : store.color} transparent q:slot="extra-buttons">
+    </button>
+    <button  q:slot="extra-buttons">
       Option 3
-    </Button>
+    </button>
   </DropdownRaw>
 
-  <Button q:slot="mobile"${store.color ? ` color="${store.color}"` : ''} transparent>
-    Button 1
-  </Button>
-  <Button q:slot="mobile"${store.color ? ` color="${store.color}"` : ''} transparent>
-    Button 2
-  </Button>
+  <button q:slot="mobile"${store.color ? ` color="${store.color}"` : ''}>
+    button 1
+  </button>
+  <button q:slot="mobile"${store.color ? ` color="${store.color}"` : ''}>
+    button 2
+  </button>
   <h3 q:slot="mobile" class="mx-4 py-2 text-gray-400 border-b border-gray-700">
     Dropdown
   </h3>
-  <Button q:slot="mobile"${store.color ? ` color="${store.color}"` : ''} transparent>
+  <button q:slot="mobile"${store.color ? ` color="${store.color}"` : ''}>
     Option 1
-  </Button>
-  <Button q:slot="mobile"${store.color ? ` color="${store.color}"` : ''} transparent>
+  </button>
+  <button q:slot="mobile"${store.color ? ` color="${store.color}"` : ''}>
     Option 2
-  </Button>
-  <Button q:slot="mobile"${store.color ? ` color="${store.color}"` : ''} transparent>
+  </button>
+  <button q:slot="mobile"${store.color ? ` color="${store.color}"` : ''}>
     Option 3
-  </Button>
+  </button>
 
 </Nav>`} />
     </Card>

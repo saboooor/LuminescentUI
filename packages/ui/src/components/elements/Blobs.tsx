@@ -1,11 +1,10 @@
 
 import { component$ } from '@builder.io/qwik';
-import type { sizeClasses } from './Button';
 
 interface BlobProps {
   class?: { [key: string]: boolean };
   color?: keyof typeof blobColorClasses | [string, string, string];
-  blur?: keyof typeof sizeClasses;
+  blur?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export const blobColorClasses = {

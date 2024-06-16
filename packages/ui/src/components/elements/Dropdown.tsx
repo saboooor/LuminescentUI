@@ -1,21 +1,14 @@
 import type { JSXChildren, PropsOf } from '@builder.io/qwik';
 import { component$, Slot, useStore, useStyles$ } from '@builder.io/qwik';
-import type { buttonColorClasses, sizeClasses } from './Button';
-import { Button } from './Button';
 import { ChevronDown } from '../../svg/ChevronDown';
 
 interface DropdownProps extends Omit<PropsOf<'select'>, 'class' | 'size'> {
   class?: { [key: string]: boolean };
   display?: JSXChildren;
-  color?: keyof typeof buttonColorClasses;
-  round?: boolean;
-  transparent?: boolean;
-  size?: keyof typeof sizeClasses;
   hover?: boolean;
   values?: {
     name: JSXChildren;
     value: string | number;
-    color?: keyof typeof buttonColorClasses;
   }[];
   id: string;
 }
@@ -31,7 +24,7 @@ export const Dropdown = component$<DropdownProps>((props) => {
   );
 });
 
-export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class, display, color, round, transparent, size = 'sm', hover, ...props }) => {
+export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class, display, hover, ...props }) => {
   const store = useStore({
     opened: false,
     value: props.value,
@@ -74,8 +67,8 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
           })}
         </select>
       }
-      <Button round={round} color={color} transparent={transparent} size={size} class={{
-        'flex': true,
+      <button class={{
+        'btn btn-md btn-gray-800 rounded-md': true,
         ...Class,
       }} onClick$={() => {
         store.opened = !store.opened;
@@ -91,7 +84,7 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
           'transform rotate-180': store.opened,
           'group-hover:transform group-hover:rotate-180': hover,
         }}/>
-      </Button>
+      </button>
       <div class={{
         'transition-all absolute top-full pt-2 left-0 z-[1000] ': true,
         'opacity-0 scale-95 pointer-events-none': !store.opened,
@@ -99,12 +92,12 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
       }}>
         <div id={`lui-${id}-opts`} class={{
           'motion-safe:transition-all p-1 gap-1 bg-gray-800/50 backdrop-blur-xl flex flex-col border border-gray-700 max-h-72 lui-scroll overflow-auto select-none': true,
-          'rounded-lg': !round,
-          'rounded-3xl': round,
         }}>
-          {values?.map(({ name, value, color: valueColor }, i) => {
+          {values?.map(({ name, value }, i) => {
             return (
-              <Button round={round} color={valueColor ?? color} transparent size={size} key={i} onClick$={() => {
+              <button class={{
+                'btn btn-md btn-transparent-gray-800 rounded-md': true,
+              }} key={i} onClick$={() => {
                 store.opened = false;
                 const select = document.getElementById(id) as HTMLSelectElement | null;
                 if (select) {
@@ -114,7 +107,7 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
                 store.value = value.toString();
               }}>
                 {name}
-              </Button>
+              </button>
             );
           })}
           <Slot name="extra-buttons" />

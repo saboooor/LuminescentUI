@@ -12,6 +12,7 @@ import TextArea from '~/components/docs/TextArea';
 import TextInput from '~/components/docs/TextInput';
 import Toggle from '~/components/docs/Toggle';
 import IconsLogos from '~/components/docs/IconsLogos';
+import Playground from './components/docs/Playground';
 
 import './global.css';
 
@@ -24,6 +25,7 @@ export default component$(() => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body class="bg-gray-950 text-gray-200 max-w-6xl mx-auto py-24 px-4 flex flex-col gap-4">
+        <Playground />
         <Anchor />
         <Blobs />
         <Button />

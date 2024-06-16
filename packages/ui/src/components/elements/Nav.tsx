@@ -1,6 +1,5 @@
 import type { PropsOf } from '@builder.io/qwik';
 import { Slot, component$, useSignal } from '@builder.io/qwik';
-import { Button } from './Button';
 
 interface NavContainerProps extends Omit<PropsOf<'nav'>, 'class'> {
   class?: { [key: string]: boolean };
@@ -83,12 +82,9 @@ export const Nav = component$<NavContainerProps>(({ fixed, floating, color, ...p
           </div>
           <div class="flex items-center flex-1 gap-2 py-2 justify-end">
             <Slot name="end" />
-            <Button transparent square class={{ 'sm:hidden': true }}
-              onClick$={() => menu.value = !menu.value}>
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-              </svg>
-            </Button>
+            <button class={`btn btn-md btn-square btn-transparent-gray-800 rounded-md`}>
+              Button
+            </button>
           </div>
         </div>
       </div>

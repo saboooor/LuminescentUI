@@ -3,7 +3,6 @@ import { $, Slot, component$, useStyles$ } from '@builder.io/qwik';
 import { Plus } from '../../svg/Plus';
 import { Minus } from '../../svg/Minus';
 import { InputClasses, InputColorClasses } from './TextInput';
-import { Button } from './Button';
 
 interface NumberInputRawProps extends Omit<(PropsOf<'input'> & { type: 'number' }), 'class' | 'type'> {
   onDecrement$: QRL<(event: PointerEvent, element: HTMLButtonElement, inputElement?: HTMLInputElement) => void>;
@@ -49,16 +48,16 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, color = 
       'flex text-gray-50 touch-manipulation': true,
       'gap-2': !input,
     }}>
-      <Button size="sm" color={color == 'darkgray' || color == 'transparent' ? (input ? 'gray' : 'darkgray') : color} transparent={color == 'transparent'} data-action="decrement" aria-label="Decrement" disabled={props.min ? value <= props.min : false}
+      <button  class={{
+        'btn btn-sm btn-gray-800 rounded-md': true,
+      }} data-action="decrement" aria-label="Decrement" disabled={props.min ? value <= props.min : false}
         onClick$={input ? $((event, element) => {
           const siblingInput = element.nextElementSibling as HTMLInputElement;
           siblingInput.stepDown();
           onDecrement$(event, element, siblingInput);
-        }) : onDecrement$} class={{
-          'mr-2': input,
-        }}>
+        }) : onDecrement$}>
         <Minus width="24" class="fill-current" />
-      </Button>
+      </button>
       { input &&
         <input {...props} type="number" value={value} step={step} class={{
           [InputClasses]: true,
@@ -67,16 +66,16 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, color = 
           ...props.class,
         }}/>
       }
-      <Button size="sm" color={color == 'darkgray' || color == 'transparent' ? (input ? 'gray' : 'darkgray') : color} transparent={color == 'transparent'} data-action="increment" aria-label="Increment" disabled={props.max ? value >= props.max : false}
+      <button class={{
+        'btn btn-sm btn-gray-800 rounded-md': true,
+      }} data-action="increment" aria-label="Increment" disabled={props.max ? value >= props.max : false}
         onClick$={input ? $((event, element) => {
           const siblingInput = element.previousElementSibling as HTMLInputElement;
           siblingInput.stepUp();
           onIncrement$(event, element, siblingInput);
-        }) : onIncrement$} class={{
-          'ml-2': input,
-        }}>
+        }) : onIncrement$}>
         <Plus width="24" class="fill-current" />
-      </Button>
+      </button>
     </div>
   );
 });

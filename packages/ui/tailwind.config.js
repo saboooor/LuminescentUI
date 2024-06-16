@@ -4,6 +4,11 @@ const { theme } = require('./src/tailwind.config');
 
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  safelist: [
+    {
+      pattern: /btn-.*/,
+    }
+  ],
   theme: {
     extend: {
       animation: {
@@ -16,5 +21,6 @@ module.exports = {
   },
   plugins: [
     require('@anuragroy/tailwindcss-animate'),
+    require('./tailwind/plugin'),
   ],
 };

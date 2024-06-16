@@ -1,5 +1,5 @@
 import { component$ } from '@builder.io/qwik';
-import { ButtonAnchor, Card, Header, TextAreaRaw } from '../../index';
+import { Card, Header, TextAreaRaw } from '../../index';
 
 export default component$(() => {
   return (
@@ -8,9 +8,9 @@ export default component$(() => {
         Anchor
       </Header>
       <div class="flex">
-        <ButtonAnchor href="#anchor">
+        <a href="#anchor" class={`btn btn-md btn-gray-800 rounded-md`}>
           Scroll to anchor
-        </ButtonAnchor>
+        </a>
       </div>
       <TextAreaRaw output value={'<Anchor id="anchor"/>'} />
     </Card>
