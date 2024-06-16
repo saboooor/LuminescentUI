@@ -186,7 +186,13 @@ interface AnchorProps extends Omit<PropsOf<'a'>, 'class'>, GenericButtonProps {
 export const Button = component$<ButtonProps>(({ color = 'darkgray', transparent, size = 'md', mobilesize, round, square, ...props }) => {
   const colorClass = buttonColorClasses[color as keyof typeof buttonColorClasses];
   const sizeClass = sizeClasses[size];
-  const mobileSizeClass = mobileSizeClasses[mobilesize ? mobilesize : size == 'sm' ? 'sm' : size == 'md' ? 'sm' : size == 'lg' ? 'md' : size == 'xl' ? 'lg' : 'md'];
+  const mobileSizeClass = mobileSizeClasses[mobilesize ? mobilesize
+    : size == 'xs' ? 'xs'
+      : size == 'sm' ? 'xs'
+        : size == 'md' ? 'sm'
+          : size == 'lg' ? 'md'
+            : size == 'xl' ? 'lg'
+              : 'md'];
 
   props.class = {
     [buttonClass]: true,
