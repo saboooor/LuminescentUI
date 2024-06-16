@@ -48,9 +48,9 @@ export const Nav = component$<NavContainerProps>(({ fixed, floating, color, ...p
       ...props.class,
     }}>
       <div class={{
-        'sm:hidden motion-safe:transition-all flex flex-col px-2 items-center absolute w-full': true,
-        'top-full mt-2': menu.value,
-        'opacity-0 top-0 scale-95 pointer-events-none': !menu.value,
+        'sm:hidden motion-safe:transition-all flex flex-col px-2 items-center absolute w-full top-full': true,
+        'mt-2': menu.value,
+        'opacity-0 pointer-events-none': !menu.value,
         'before:backdrop-blur-lg': color !== 'transparent',
         'before:absolute before:content-[""] before:w-full before:h-full before:drop-shadow-xl before:-z-10 before:rounded-lg': true,
       }}>

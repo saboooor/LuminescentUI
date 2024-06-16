@@ -4,7 +4,7 @@ import Anchor from '~/components/docs/Anchor';
 import Blobs from '~/components/docs/Blobs';
 import Button from '~/components/docs/Button';
 import Card from '~/components/docs/Card';
-import ColorInput from '~/components/docs/ColorInput';
+import ColorInput from '~/components/docs/ColorPicker';
 import Nav from '~/components/docs/Nav';
 import NumberInput from '~/components/docs/NumberInput';
 import Dropdown from '~/components/docs/Dropdown';
@@ -19,7 +19,7 @@ export default component$(() => {
   return (
     <>
       <head>
-        <meta charSet="utf-8" />
+        <meta charset="utf-8" />
         <title>Luminescent UI</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>

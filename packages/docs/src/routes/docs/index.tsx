@@ -5,7 +5,7 @@ import Anchor from '~/components/docs/Anchor';
 import Blobs from '~/components/docs/Blobs';
 import Button from '~/components/docs/Button';
 import CardSection from '~/components/docs/Card';
-import ColorInput from '~/components/docs/ColorInput';
+import ColorPicker from '~/components/docs/ColorPicker';
 import Dropdown from '~/components/docs/Dropdown';
 import Nav from '~/components/docs/Nav';
 import NumberInput from '~/components/docs/NumberInput';
@@ -37,7 +37,7 @@ export default component$(() => {
       <Blobs />
       <Button />
       <CardSection />
-      <ColorInput />
+      <ColorPicker />
       <Dropdown />
       <Nav />
       <NumberInput />
