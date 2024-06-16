@@ -100,9 +100,15 @@ export const buttonColorClasses = {
   },
 };
 
-export const sizeClasses = {
+export const mobileSizeClasses = {
+  xs: {
+    base: 'text-sm gap-1',
+    round: 'rounded-md',
+    pad: 'px-2 py-1',
+    equal: 'p-1',
+  },
   sm: {
-    base: 'text-base gap-2',
+    base: 'text-sm gap-2',
     round: 'rounded-md',
     pad: 'px-2.5 py-1.5',
     equal: 'p-1.5',
@@ -127,12 +133,46 @@ export const sizeClasses = {
   },
 };
 
+export const sizeClasses = {
+  xs: {
+    base: 'sm:text-sm sm:gap-1',
+    round: 'sm:rounded-md',
+    pad: 'sm:px-2 sm:py-1',
+    equal: 'sm:p-1',
+  },
+  sm: {
+    base: 'sm:text-base sm:gap-2',
+    round: 'sm:rounded-md',
+    pad: 'sm:px-2.5 sm:py-1.5',
+    equal: 'sm:p-1.5',
+  },
+  md: {
+    base: 'sm:text-base sm:gap-3',
+    round: 'sm:rounded-md',
+    pad: 'sm:px-4 sm:py-2',
+    equal: 'sm:p-2',
+  },
+  lg: {
+    base: 'sm:text-lg sm:gap-3',
+    round: 'sm:rounded-lg',
+    pad: 'sm:px-6 sm:py-3',
+    equal: 'sm:p-3',
+  },
+  xl: {
+    base: 'sm:text-lg sm:gap-4',
+    round: 'sm:rounded-xl',
+    pad: 'sm:px-8 sm:py-4',
+    equal: 'sm:p-4',
+  },
+};
+
 const buttonClass = 'relative flex items-center gap-3 motion-safe:transition ease-in-out border text-gray-50 fill-gray-50 disabled:opacity-50 hover:shadow-lg motion-safe:active:scale-95 whitespace-nowrap touch-manipulation select-none text-center';
 
 interface GenericButtonProps {
   color?: keyof typeof buttonColorClasses;
   transparent?: boolean;
   size?: keyof typeof sizeClasses;
+  mobilesize?: keyof typeof mobileSizeClasses;
   round?: boolean;
   square?: boolean;
   class?: { [key: string]: boolean | undefined };
@@ -143,19 +183,24 @@ interface AnchorProps extends Omit<PropsOf<'a'>, 'class'>, GenericButtonProps {
   href: string;
 }
 
-export const Button = component$<ButtonProps>(({ color = 'darkgray', transparent, size = 'md', round, square, ...props }) => {
+export const Button = component$<ButtonProps>(({ color = 'darkgray', transparent, size = 'md', mobilesize, round, square, ...props }) => {
   const colorClass = buttonColorClasses[color as keyof typeof buttonColorClasses];
-  const sizeClass = sizeClasses[size as keyof typeof sizeClasses];
+  const sizeClass = sizeClasses[size];
+  const mobileSizeClass = mobileSizeClasses[mobilesize ? mobilesize : size == 'sm' ? 'sm' : size == 'md' ? 'sm' : size == 'lg' ? 'md' : size == 'xl' ? 'lg' : 'md'];
 
   props.class = {
     [buttonClass]: true,
     [colorClass.bg]: !transparent,
     'border-transparent': transparent,
     [colorClass.hover]: true,
+    [mobileSizeClass.base]: true,
     [sizeClass.base]: true,
+    [mobileSizeClass.round]: !round,
     [sizeClass.round]: !round,
     'rounded-full': round,
+    [mobileSizeClass.pad]: !square,
     [sizeClass.pad]: !square,
+    [mobileSizeClass.equal]: square,
     [sizeClass.equal]: square,
     ...props.class,
   };
