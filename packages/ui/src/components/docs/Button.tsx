@@ -1,10 +1,11 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Button, Card, Header, Dropdown, TextAreaRaw, Toggle, buttonColorClasses, sizeClasses } from '../../index';
+import { Button, Card, Header, Dropdown, TextAreaRaw, Toggle, buttonColorClasses, sizeClasses, mobileSizeClasses } from '../../index';
 
 interface buttonOptions {
   color?: keyof typeof buttonColorClasses;
   transparent?: boolean;
   size?: keyof typeof sizeClasses;
+  mobilesize?: keyof typeof mobileSizeClasses;
   square?: boolean;
   round?: boolean;
 }
@@ -32,6 +33,13 @@ export default component$(() => {
         value="md"
       >
         size
+      </Dropdown>
+      <Dropdown id="button-mobilesize"
+        onChange$={(e, element) => store.mobilesize = element.value as keyof typeof mobileSizeClasses}
+        values={Object.keys(mobileSizeClasses).map((size) => ({ name: size, value: size }))}
+        value="sm"
+      >
+        mobilesize
       </Dropdown>
       <Toggle id="button-square"
         onChange$={(e, element) => store.square = element.checked}
