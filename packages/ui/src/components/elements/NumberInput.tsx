@@ -49,13 +49,13 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, color = 
       'gap-2': !input,
     }}>
       <button  class={{
-        'btn btn-sm btn-gray-800 rounded-md': true,
+        'btn btn-sm lum-bg-gray-800 rounded-md': true,
       }} data-action="decrement" aria-label="Decrement" disabled={props.min ? value <= props.min : false}
-        onClick$={input ? $((event, element) => {
-          const siblingInput = element.nextElementSibling as HTMLInputElement;
-          siblingInput.stepDown();
-          onDecrement$(event, element, siblingInput);
-        }) : onDecrement$}>
+      onClick$={input ? $((event, element) => {
+        const siblingInput = element.nextElementSibling as HTMLInputElement;
+        siblingInput.stepDown();
+        onDecrement$(event, element, siblingInput);
+      }) : onDecrement$}>
         <Minus width="24" class="fill-current" />
       </button>
       { input &&
@@ -67,13 +67,13 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, color = 
         }}/>
       }
       <button class={{
-        'btn btn-sm btn-gray-800 rounded-md': true,
+        'btn btn-sm lum-bg-gray-800 rounded-md': true,
       }} data-action="increment" aria-label="Increment" disabled={props.max ? value >= props.max : false}
-        onClick$={input ? $((event, element) => {
-          const siblingInput = element.previousElementSibling as HTMLInputElement;
-          siblingInput.stepUp();
-          onIncrement$(event, element, siblingInput);
-        }) : onIncrement$}>
+      onClick$={input ? $((event, element) => {
+        const siblingInput = element.previousElementSibling as HTMLInputElement;
+        siblingInput.stepUp();
+        onIncrement$(event, element, siblingInput);
+      }) : onIncrement$}>
         <Plus width="24" class="fill-current" />
       </button>
     </div>

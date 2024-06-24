@@ -3,26 +3,33 @@ import { Card, Header, TextAreaRaw, TextInput } from '../../index';
 
 export default component$(() => {
   const store = useStore({
-    color: 'btn-gray-800',
+    class: 'btn btn-md lum-bg-gray-800 hover:lum-bg-gray-800 rounded-md',
   });
   return (
     <Card>
-      <Header id="button" anchor>
-        button
+      <Header id="button" anchor subheader={
+        'classes: btn btn-xs btn-sm btn-md btn-lg btn-xl btn-icon'
+      }>
+        Button
       </Header>
-      <TextInput id="button-color"
-        onInput$={(e, element) => store.color = element.value}
-        value="btn-gray-800"
-      >
-        color
-      </TextInput>
       <div>
-        <button class={`btn btn-md ${store.color ?? 'btn-gray-800'} rounded-md`}>
-          Button
-        </button>
+        <TextInput id="button-class"
+          onInput$={(e, el) => store.class = el.value}
+          value={store.class}
+        >
+          class
+        </TextInput>
+        <p class="text-gray-500">warning: only btn classes are safelisted and other classes that aren't loaded in tailwind and arbitrary values will not work</p>
       </div>
+      <Card>
+        <div>
+          <button class={store.class}>
+            Button
+          </button>
+        </div>
+      </Card>
       <TextAreaRaw output value={`
-<button class="btn btn-md ${store.color ?? 'btn-gray-800'} rounded-md">
+<button class="${store.class}">
   Button
 </button>`} />
     </Card>

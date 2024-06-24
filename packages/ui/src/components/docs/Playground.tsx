@@ -8,7 +8,7 @@ export default component$(() => {
         Playground (Button v2)
       </Header>
       <div>
-        <button class="btn btn-xs btn-square btn-gray-800 rounded-md">
+        <button class="btn btn-xs btn-square lum-bg-gray-800 rounded-md">
           Hello World
         </button>
       </div>

@@ -68,7 +68,7 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
         </select>
       }
       <button class={{
-        'btn btn-md btn-gray-800 rounded-md': true,
+        'btn btn-md lum-bg-gray-800 rounded-md': true,
         ...Class,
       }} onClick$={() => {
         store.opened = !store.opened;
