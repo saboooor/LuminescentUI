@@ -5,12 +5,11 @@ export default component$(() => {
   return (
     <Card>
       <Header>
-        Playground (Button v2)
+        Playground (v2)
       </Header>
       <div>
-        <button class="btn btn-xs btn-square lum-bg-gray-800 rounded-md">
-          Hello World
-        </button>
+        <input class="lum-input lum-bg-gray-800 hover:lum-bg-gray-700 lum-pad-sm rounded-lg">
+        </input>
       </div>
     </Card>
   );

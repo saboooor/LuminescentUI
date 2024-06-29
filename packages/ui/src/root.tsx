@@ -1,5 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 
+import Classes from '~/components/docs/Classes';
 import Anchor from '~/components/docs/Anchor';
 import Blobs from '~/components/docs/Blobs';
 import Button from '~/components/docs/Button';
@@ -10,6 +11,7 @@ import NumberInput from '~/components/docs/NumberInput';
 import Dropdown from '~/components/docs/Dropdown';
 import TextArea from '~/components/docs/TextArea';
 import TextInput from '~/components/docs/TextInput';
+import Input from '~/components/docs/Input';
 import Toggle from '~/components/docs/Toggle';
 import IconsLogos from '~/components/docs/IconsLogos';
 import Playground from './components/docs/Playground';
@@ -26,9 +28,12 @@ export default component$(() => {
       </head>
       <body class="bg-gray-950 text-gray-200 max-w-6xl mx-auto py-24 px-4 flex flex-col gap-4">
         <Playground />
+        <Classes />
+        <Button />
+        <Input />
+
         <Anchor />
         <Blobs />
-        <Button />
         <Card />
         <ColorInput />
         <Dropdown />

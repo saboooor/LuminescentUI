@@ -3,15 +3,15 @@ import { Card, Header, TextAreaRaw, TextInput } from '../../index';
 
 export default component$(() => {
   const store = useStore({
-    class: 'lum-btn lum-pad-md lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md',
+    class: 'lum-input lum-pad-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md',
   });
   return (
     <Card>
-      <Header id="button" anchor>
-        Button
+      <Header id="input" anchor>
+        Input
       </Header>
       <div>
-        <TextInput id="button-class"
+        <TextInput id="input-class"
           onInput$={(e, el) => store.class = el.value}
           value={store.class}
         >
@@ -21,15 +21,11 @@ export default component$(() => {
       </div>
       <Card>
         <div>
-          <button class={store.class}>
-            Button
-          </button>
+          <input class={store.class}/>
         </div>
       </Card>
       <TextAreaRaw output value={`
-<button class="${store.class}">
-  Button
-</button>`} />
+<input class="${store.class}"/>`} />
     </Card>
   );
 });
