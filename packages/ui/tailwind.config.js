@@ -12,6 +12,10 @@ module.exports = {
     {
       pattern: /rounded-.*/,
       variants: ['hover', 'sm', 'md', 'lg', 'xl'],
+    },
+    {
+      pattern: /text-.*/,
+      variants: ['hover', 'sm', 'md', 'lg', 'xl'],
     }
   ],
   theme: {

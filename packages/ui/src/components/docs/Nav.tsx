@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, Header, Nav, Dropdown, DropdownRaw, TextAreaRaw, Toggle, navColorClasses } from '../../index';
+import { Card, Header, Nav, Dropdown, DropdownRaw, Toggle, navColorClasses } from '../../index';
 
 interface navOptions {
   fixed?: boolean;
@@ -28,48 +28,48 @@ export default component$(() => {
       <div class="relative h-40">
         <Nav floating={store.floating} fixed={store.fixed} color={store.color}>
 
-          <button class={`lum-btn lum-pad-md lum-pad-transparent-gray-800 rounded-md`} q:slot="start" >
+          <button class={'lum-btn lum-pad-md text-base lum-pad-transparent-gray-800 rounded-md'} q:slot="start" >
             Brand
           </button>
 
-          <button class={`lum-btn lum-pad-md lum-pad-transparent-gray-800 rounded-md hidden sm:flex`} q:slot="center">
+          <button class={'lum-btn lum-pad-md text-base lum-pad-transparent-gray-800 rounded-md hidden sm:flex'} q:slot="center">
             Center Button
           </button>
 
           <DropdownRaw id="nav-dropdown" hover q:slot="end" class={{ 'hidden sm:flex': true }} display="Dropdown">
-            <button class={`lum-btn lum-pad-md lum-pad-transparent-gray-800 rounded-md`} q:slot="extra-buttons">
+            <button class={'lum-btn lum-pad-md text-base lum-pad-transparent-gray-800 rounded-md'} q:slot="extra-buttons">
               Option 1
             </button>
-            <button class={`lum-btn lum-pad-md lum-pad-transparent-gray-800 rounded-md`} q:slot="extra-buttons">
+            <button class={'lum-btn lum-pad-md text-base lum-pad-transparent-gray-800 rounded-md'} q:slot="extra-buttons">
               Option 2
             </button>
-            <button class={`lum-btn lum-pad-md lum-pad-transparent-gray-800 rounded-md`} q:slot="extra-buttons">
+            <button class={'lum-btn lum-pad-md text-base lum-pad-transparent-gray-800 rounded-md'} q:slot="extra-buttons">
               Option 3
             </button>
           </DropdownRaw>
 
-          <button q:slot="mobile" class={`lum-btn lum-pad-md lum-pad-transparent-gray-800 rounded-md`}>
+          <button q:slot="mobile" class={'lum-btn lum-pad-md text-base lum-pad-transparent-gray-800 rounded-md'}>
             button 1
           </button>
-          <button q:slot="mobile" class={`lum-btn lum-pad-md lum-pad-transparent-gray-800 rounded-md`}>
+          <button q:slot="mobile" class={'lum-btn lum-pad-md text-base lum-pad-transparent-gray-800 rounded-md'}>
             button 2
           </button>
           <h3 q:slot="mobile" class="mx-4 py-2 text-gray-400 border-b border-gray-700">
             Dropdown
           </h3>
-          <button q:slot="mobile" class={`lum-btn lum-pad-md lum-pad-transparent-gray-800 rounded-md`}>
+          <button q:slot="mobile" class={'lum-btn lum-pad-md text-base lum-pad-transparent-gray-800 rounded-md'}>
             Option 1
           </button>
-          <button q:slot="mobile" class={`lum-btn lum-pad-md lum-pad-transparent-gray-800 rounded-md`}>
+          <button q:slot="mobile" class={'lum-btn lum-pad-md text-base lum-pad-transparent-gray-800 rounded-md'}>
             Option 2
           </button>
-          <button q:slot="mobile" class={`lum-btn lum-pad-md lum-pad-transparent-gray-800 rounded-md`}>
+          <button q:slot="mobile" class={'lum-btn lum-pad-md text-base lum-pad-transparent-gray-800 rounded-md'}>
             Option 3
           </button>
 
         </Nav>
       </div>
-      <TextAreaRaw output value={`
+      <textarea class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md h-32" value={`
 <Nav${store.floating ? ' floating' : ''}${store.fixed ? ' fixed' : ''}${store.color ? ` color="${store.color}"` : ''}>
 
   <button q:slot="start"${store.color ? ` color="${store.color}"` : ''}>

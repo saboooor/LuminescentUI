@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, Header, Dropdown, TextAreaRaw, TextInput, buttonColorClasses, sizeClasses, Toggle } from '@luminescent/ui';
+import { Card, Header, Dropdown, TextInput, buttonColorClasses, sizeClasses, Toggle } from '@luminescent/ui';
 
 interface DropdownOptions {
   display?: string;
@@ -65,7 +65,7 @@ export default component$(() => {
           Select Input
         </Dropdown>
       </div>
-      <TextAreaRaw output value={`
+      <textarea class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md h-32" value={`
 <Dropdown id="dropdown-input"${store.display ? ` display={${store.display}}` : ''}${store.color ? ` color="${store.color}"` : ''}${store.transparent ? ' transparent' : ''}${store.size ? ` size="${store.size}"` : ''}${store.hover ? ' hover' : ''}${store.round ? ' round' : ''}>
   values={[
     { name: <div class="bg-red-500">Any element you want</div>, value: '1' },

@@ -1,16 +1,19 @@
 import { component$ } from '@builder.io/qwik';
-import { Card, Header } from '../../index';
+import { Header } from '../../index';
 
 export default component$(() => {
   return (
-    <Card>
+    <div class="lum-card lum-bg-gray-900 lum-pad-4xl lum-pad-equal rounded-lg">
       <Header>
         Playground (v2)
       </Header>
       <div>
-        <input class="lum-input lum-bg-gray-800 hover:lum-bg-gray-700 lum-pad-sm rounded-lg">
-        </input>
+        <div class="lum-card lum-bg-gray-800 lum-pad-4xl lum-pad-equal rounded-lg">
+          <Header subheader="Hello Luminescent v2">
+            This is a card
+          </Header>
+        </div>
       </div>
-    </Card>
+    </div>
   );
 });

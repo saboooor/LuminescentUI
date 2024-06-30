@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Button, Card, Header, Dropdown, TextAreaRaw, Toggle, buttonColorClasses, sizeClasses, mobileSizeClasses } from '@luminescent/ui';
+import { Button, Card, Header, Dropdown, Toggle, buttonColorClasses, sizeClasses, mobileSizeClasses } from '@luminescent/ui';
 
 interface buttonOptions {
   color?: keyof typeof buttonColorClasses;
@@ -58,7 +58,7 @@ export default component$(() => {
           Button
         </Button>
       </div>
-      <TextAreaRaw output value={`
+      <textarea class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md h-32" value={`
 <Button${(store.color && ` color="${store.color}"`) ?? ''}${store.transparent ? ' transparent' : ''}${store.size ? ` size="${store.size}"` : ''}${store.square ? ' square' : ''}${store.round ? ' round' : ''}>
   Button
 </Button>`} />

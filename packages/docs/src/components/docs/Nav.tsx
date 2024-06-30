@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Button, Card, Header, Nav, Dropdown, DropdownRaw, TextAreaRaw, Toggle, navColorClasses } from '@luminescent/ui';
+import { Button, Card, Header, Nav, Dropdown, DropdownRaw, Toggle, navColorClasses } from '@luminescent/ui';
 interface navOptions {
   fixed?: boolean;
   floating?: boolean;
@@ -68,7 +68,7 @@ export default component$(() => {
 
         </Nav>
       </div>
-      <TextAreaRaw output value={`
+      <textarea class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md h-32" value={`
 <Nav${store.floating ? ' floating' : ''}${store.fixed ? ' fixed' : ''}${store.color ? ` color="${store.color}"` : ''}>
 
   <Button q:slot="start"${store.color ? ` color="${store.color}"` : ''} transparent>

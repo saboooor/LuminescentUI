@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, Header, TextArea, TextAreaRaw, Toggle, InputColorClasses, Dropdown } from '@luminescent/ui';
+import { Card, Header, TextArea, Toggle, InputColorClasses, Dropdown } from '@luminescent/ui';
 
 interface textAreaOptions {
   output?: boolean;
@@ -27,7 +27,7 @@ export default component$(() => {
           Text Area
         </TextArea>
       </div>
-      <TextAreaRaw output value={`
+      <textarea class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md h-32" value={`
 <TextArea id="textarea"${store.color ? ` color="${store.color}"` : ''}${store.output ? ' output' : ''} value="Text">
   Text Area
 </TextArea>`} />

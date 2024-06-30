@@ -1,18 +1,18 @@
 import { component$ } from '@builder.io/qwik';
-import { Card, Header, TextAreaRaw } from '../../index';
+import { Header } from '../../index';
 
 export default component$(() => {
   return (
-    <Card>
+    <div class="lum-card lum-bg-gray-900 lum-pad-4xl lum-pad-equal rounded-lg">
       <Header id="anchor">
         Anchor
       </Header>
       <div class="flex">
-        <a href="#anchor" class={'lum-btn lum-pad-md lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md'}>
+        <a href="#anchor" class={'lum-btn lum-pad-md text-base lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md'}>
           Scroll to anchor
         </a>
       </div>
-      <TextAreaRaw output value={'<Anchor id="anchor"/>'} />
-    </Card>
+      <textarea class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md h-32" value={'<Anchor id="anchor"/>'} />
+    </div>
   );
 });

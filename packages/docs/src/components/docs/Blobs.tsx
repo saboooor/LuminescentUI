@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Blobs, Card, Header, Dropdown, TextAreaRaw, blobColorClasses, sizeClasses } from '@luminescent/ui';
+import { Blobs, Card, Header, Dropdown, blobColorClasses, sizeClasses } from '@luminescent/ui';
 
 interface blobsOptions {
   color?: keyof typeof blobColorClasses;
@@ -33,7 +33,7 @@ export default component$(() => {
           blur={store.blur}
         />
       </div>
-      <TextAreaRaw output value={`
+      <textarea class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md h-32" value={`
 <div class="relative h-96 w-96 border border-gray-800 rounded-md">
   <Blobs${(store.color && ` color="${store.color}"`) ?? ''}${(store.blur && ` blur="${store.blur}"`) ?? ''}/>
 </div>`} />

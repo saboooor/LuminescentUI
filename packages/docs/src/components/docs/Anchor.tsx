@@ -1,5 +1,5 @@
 import { component$ } from '@builder.io/qwik';
-import { ButtonAnchor, Card, Header, TextAreaRaw } from '@luminescent/ui';
+import { ButtonAnchor, Card, Header } from '@luminescent/ui';
 
 export default component$(() => {
   return (
@@ -12,7 +12,7 @@ export default component$(() => {
           Scroll to anchor
         </ButtonAnchor>
       </div>
-      <TextAreaRaw output value={'<Anchor id="anchor"/>'} />
+      <textarea class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md h-32" value={'<Anchor id="anchor"/>'} />
     </Card>
   );
 });

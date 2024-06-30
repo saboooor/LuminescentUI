@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, Header, NumberInput, TextAreaRaw, Toggle, InputColorClasses, Dropdown } from '@luminescent/ui';
+import { Card, Header, NumberInput, Toggle, InputColorClasses, Dropdown } from '@luminescent/ui';
 
 interface numberInputOptions {
   color?: keyof typeof InputColorClasses;
@@ -27,7 +27,7 @@ export default component$(() => {
           Number Input
         </NumberInput>
       </div>
-      <TextAreaRaw output value={`
+      <textarea class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md h-32" value={`
 <NumberInput id="number-input"${store.color ? ` color="${store.color}"` : ''}${store.input ? ' input' : ''}>
   Number Input
 </NumberInput`} />

@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, Header, Dropdown, TextAreaRaw, InputColorClasses, Toggle, ColorPicker } from '@luminescent/ui';
+import { Card, Header, Dropdown, InputColorClasses, Toggle, ColorPicker } from '@luminescent/ui';
 
 interface colorPickerOptions {
   color?: keyof typeof InputColorClasses;
@@ -36,7 +36,7 @@ export default component$(() => {
       <div class="flex">
         <ColorPicker id="color-picker" color={store.color} preview={store.preview} horizontal={store.horizontal} showInput={store.showInput} onInput$={() => {}}/>
       </div>
-      <TextAreaRaw output value={`<ColorPicker id="color-picker"${store.color ? ` color="${store.color}"` : ''}${store.preview ? ` preview="${store.preview}"` : ''}${store.horizontal ? ' horizontal' : ''}${store.showInput == false ? ' showInput="false"' : ''}/>`} />
+      <textarea class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md h-32" value={`<ColorPicker id="color-picker"${store.color ? ` color="${store.color}"` : ''}${store.preview ? ` preview="${store.preview}"` : ''}${store.horizontal ? ' horizontal' : ''}${store.showInput == false ? ' showInput="false"' : ''}/>`} />
     </Card>
   );
 });

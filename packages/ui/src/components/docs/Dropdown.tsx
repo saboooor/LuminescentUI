@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, Header, Dropdown, TextAreaRaw, TextInput, Toggle } from '../../index';
+import { Card, Header, Dropdown, Toggle } from '../../index';
 
 interface DropdownOptions {
   display?: string;
@@ -13,11 +13,11 @@ export default component$(() => {
       <Header id="dropdown" anchor>
         Dropdown
       </Header>
-      <TextInput id="dropdown-display" onInput$={(e, el) => {
-        store.display = el.value;
-      }}>
-        display
-      </TextInput>
+      <label for="dropdown-display">display</label>
+      <input id="dropdown-display" class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md"
+        onInput$={(e, el) => store.display = el.value}
+        value={store.display}
+      />
       <Toggle id="dropdown-hover" label="hover"
         onInput$={(e, el) => store.hover = el.checked}>
         hover
@@ -36,7 +36,7 @@ export default component$(() => {
           Select Input
         </Dropdown>
       </div>
-      <TextAreaRaw output value={`
+      <textarea class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md h-32" value={`
 <Dropdown id="dropdown-input"${store.display ? ` display={${store.display}}` : ''}${store.hover ? ' hover' : ''}>
   values={[
     { name: <div class="bg-red-500">Any element you want</div>, value: '1' },

@@ -164,7 +164,7 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
 
   return (
     <div {...props} class={{
-      'relative flex gap-3 sm:gap-4 px-5 py-6 sm:px-7 sm:py-8 border rounded-lg motion-safe:transition-all': true,
+      'flex lum-bg-gray-900 lum-pad-4xl lum-pad-equal rounded-lg': true,
       'flex-col': !row,
       [colorClass.bg]: !blobs,
       [colorClass.bg_blobs]: blobs,

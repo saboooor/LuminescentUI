@@ -1,8 +1,6 @@
 
 import type { PropsOf, QRL } from '@builder.io/qwik';
 import { $, component$, useStore } from '@builder.io/qwik';
-import type { TextInputRawProps } from './TextInput';
-import { TextInputRaw } from './TextInput';
 import { getBrightness, hexNumberToRgb, hexStringToNumber, hsvToRgb, rgbToHex, rgbToHsv, clamp, getMousePosition } from '../../utils/color';
 import { Shuffle } from '~/svg/Shuffle';
 
@@ -13,7 +11,6 @@ export interface ColorPickerProps extends Omit<PropsOf<'div'>, 'class' | 'onInpu
   onInput$?: QRL<(color: string) => void>;
   value?: string;
   colors?: string[];
-  color?: TextInputRawProps['color'];
   preview?: 'left' | 'right' | 'top' | 'bottom' | 'full';
   horizontal?: boolean;
   showInput?: boolean;
@@ -23,7 +20,7 @@ export const ColorPicker = component$<ColorPickerProps>(({ id, value = '#000000'
   '#FAEDCB', '#C9E4DE', '#C6DEF1', '#DBCDF0', '#F2C6DE',
   '#FCD05C', '#5FE2C5', '#4498DB', '#9863E7', '#E43A96',
   '#000000', '#555555', '#AAAAAA', '#FFFFFF',
-], color, onInput$, preview = 'left', horizontal, showInput = true, ...props }) => {
+], onInput$, preview = 'left', horizontal, showInput = true, ...props }) => {
   const height = 150;
   const width = height - 25;
   const maxHue = height - 2;
@@ -178,15 +175,15 @@ export const ColorPicker = component$<ColorPickerProps>(({ id, value = '#000000'
             }}>
             </div>
           }
-          <TextInputRaw class={{
-            'w-full': true,
+          <input class={{
+            'w-full lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md': true,
             'border-t-0 rounded-t-none': preview == 'top',
             'border-b-0 rounded-b-none': preview == 'bottom',
           }} value={store.value} style={preview == 'full' ? {
             backgroundColor: `${store.value}`,
             color: getBrightness(hexNumberToRgb(hexStringToNumber(store.value))) > 0.5 ? 'black' : 'white',
           } : {}
-          } color={color ?? 'gray'} onInput$={(e, el) => {
+          } onInput$={(e, el) => {
             setColor(el.value);
           }}/>
         </div>}
