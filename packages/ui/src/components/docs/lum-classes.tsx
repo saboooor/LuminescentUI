@@ -4,10 +4,9 @@ import { Header } from '../../index';
 export default component$(() => {
   return (
     <div class="lum-card lum-bg-gray-900 lum-pad-4xl lum-pad-equal rounded-lg">
-      <Header id="classes" anchor loading>
+      <Header id="classes" anchor>
         Classes
       </Header>
-      <div class="lum-loading w-6 h-6" />
       <p>Background Classes</p>
       <p class="flex lum-bg-gray-800 py-2 px-3 rounded-lg">
         lum-bg-[color]
