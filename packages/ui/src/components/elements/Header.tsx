@@ -1,7 +1,6 @@
 
 import type { JSXOutput, PropsOf } from '@builder.io/qwik';
 import { Slot, component$ } from '@builder.io/qwik';
-import { LoadingIcon } from './LoadingIcon';
 import { Anchor } from './Anchor';
 import { Link } from '~/svg/Link';
 
@@ -49,7 +48,7 @@ export const Header = component$<HeaderProps>(({ id, anchor, loading, subheader,
           'opacity-0': !loading,
           'opacity-100': loading,
         }}>
-          <LoadingIcon width={24} />
+          <div class="lum-loading w-6 h-6" />
         </div>
       </div>
     );

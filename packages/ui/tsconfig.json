@@ -21,6 +21,6 @@
       "~/*": ["./src/*"],
     },
   },
-  "include": ["src"],
-  "exclude": ["src/tailwind.config.js"],
+  "include": ["src", "tailwind.config.js"],
+  "exclude": ["src/tailwind/tailwind.config.js"],
 }

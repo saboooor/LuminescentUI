@@ -1,6 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import {
-  Card, Header, LoadingIcon, LogoBirdflop, LogoDiscord, LogoFabric, LogoForge, LogoLuminescent, LogoLuminescentFull, LogoPaper, LogoPterodactyl, LogoPurpur, LogoVelocity, LogoWaterfall,
+  Card, Header, LogoBirdflop, LogoDiscord, LogoFabric, LogoForge, LogoLuminescent, LogoLuminescentFull, LogoPaper, LogoPterodactyl, LogoPurpur, LogoVelocity, LogoWaterfall,
 } from '@luminescent/ui';
 
 export default component$(() => {
@@ -15,7 +15,6 @@ export default component$(() => {
           <LogoDiscord width={40} />
           <LogoFabric width={40} />
           <LogoForge width={40} />
-          <LoadingIcon width={40} />
           <LogoLuminescent width={40} />
           <LogoLuminescentFull width={40} />
           <LogoPaper width={40} />

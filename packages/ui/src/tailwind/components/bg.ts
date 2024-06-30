@@ -1,4 +1,4 @@
-import { PluginAPI } from "tailwindcss/types/config";
+import type { PluginAPI } from 'tailwindcss/types/config';
 
 export default function ({ matchUtilities, theme }: PluginAPI) {
   const colors: { [key: string]: string } = {};
@@ -8,10 +8,10 @@ export default function ({ matchUtilities, theme }: PluginAPI) {
     }
     else {
       Object.keys(value).forEach((shade) => {
-        colors[`${color}-${shade}`] = `${color}.${shade}`
+        colors[`${color}-${shade}`] = `${color}.${shade}`;
       });
     }
-  })
+  });
   matchUtilities({
     'lum-bg': (value) => {
       const color = value.split('.')[0];
@@ -21,7 +21,7 @@ export default function ({ matchUtilities, theme }: PluginAPI) {
       const index = shades.indexOf(value);
       const borderColor = shades[index - 1 < 0 ? shades.length - 1 : index - 1] || shades[index + 1 > shades.length - 1 ? 0 : index + 1];
       const textColor = shades[index - 5 < 0 ? shades.length - 1 : index - 5] || shades[index + 5 > shades.length - 1 ? 0 : index + 5];
-    
+
       return {
         background: theme(`colors.${value}`) ?? value,
         color: theme(`colors.${textColor}`) ?? 'inherit',
@@ -33,6 +33,6 @@ export default function ({ matchUtilities, theme }: PluginAPI) {
       };
     },
   }, {
-    values: colors
+    values: colors,
   });
-};
+}

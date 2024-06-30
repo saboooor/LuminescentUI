@@ -1,4 +1,4 @@
-import { PluginAPI } from "tailwindcss/types/config";
+import type { PluginAPI } from 'tailwindcss/types/config';
 
 export default function ({ addComponents }: PluginAPI) {
   addComponents({
@@ -57,4 +57,4 @@ export default function ({ addComponents }: PluginAPI) {
       },
     },
   });
-};
+}

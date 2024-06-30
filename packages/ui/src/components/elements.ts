@@ -4,7 +4,6 @@ export * from './elements/Card';
 export * from './elements/ColorPicker';
 export * from './elements/Dropdown';
 export * from './elements/Header';
-export * from './elements/LoadingIcon';
 export * from './elements/Nav';
 export * from './elements/NumberInput';
 export * from './elements/Toggle';

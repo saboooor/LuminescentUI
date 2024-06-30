@@ -17,7 +17,7 @@
   "files": [
     "lib",
     "lib-types",
-    "src/tailwind.config.js"
+    "src/tailwind"
   ],
   "engines": {
     "node": ">=15.0.0"
