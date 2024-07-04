@@ -1,6 +1,6 @@
 {
   "name": "@luminescent/ui-monorepo",
-  "version": "0.0.1",
+  "private": true,
   "engines": {
     "node": ">=16.8.0 <18.0.0 || >=18.11",
     "npm": "please-use-pnpm",
@@ -8,12 +8,18 @@
     "pnpm": ">=8.6.12"
   },
   "packageManager": "pnpm@9.1.0",
-  "private": true,
   "scripts": {
-    "build": "cd packages/ui && pnpm run build && cd ../docs && pnpm run build",
+    "build": "pnpm nx run-many -t build --parallel",
+    "release": "tsx tools/release.ts",
     "np": "cd packages/ui && pnpm run build && pnpm np --no-cleanup",
     "start": "cd packages/ui && pnpm run start",
     "start:docs": "cd packages/ui && pnpm run build && cd ../docs && pnpm run start"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@nx/js": "^19.4.0",
+    "nx": "19.4.0",
+    "tsx": "^4.16.2",
+    "yargs": "^17.7.2"
+  }
 }

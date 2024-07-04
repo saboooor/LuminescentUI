@@ -1,5 +1,5 @@
 {
-  "name": "luminescent-ui-docs",
+  "name": "@luminescent/ui-docs",
   "description": "Luminescent UI Documentation",
   "engines": {
     "node": ">=15.0.0"

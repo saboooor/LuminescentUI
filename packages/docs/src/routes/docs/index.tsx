@@ -4,7 +4,6 @@ import type { DocumentHead } from '@builder.io/qwik-city';
 import Anchor from '~/components/docs/Anchor';
 import Blobs from '~/components/docs/Blobs';
 import Button from '~/components/docs/Button';
-import CardSection from '~/components/docs/Card';
 import ColorPicker from '~/components/docs/ColorPicker';
 import Dropdown from '~/components/docs/Dropdown';
 import Nav from '~/components/docs/Nav';
@@ -36,7 +35,6 @@ export default component$(() => {
       <Anchor />
       <Blobs />
       <Button />
-      <CardSection />
       <ColorPicker />
       <Dropdown />
       <Nav />
