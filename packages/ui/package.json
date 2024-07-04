@@ -2,11 +2,15 @@
   "name": "@luminescent/ui",
   "version": "0.20.0",
   "description": "Luminescent UI library",
-  "main": "./lib/index.qwik.mjs",
-  "qwik": "./lib/index.qwik.mjs",
+  "main": "./lib/index.js",
+  "qwik": "./lib/index.js",
   "types": "./lib-types/index.d.ts",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.js",
+      "types": "./lib-types/index.d.ts"
+    }
   },
   "files": [
     "src"
@@ -20,6 +24,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "build": "tsc",
+    "dev": "echo \"No dev script specified\" && exit 0",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "release": "np",
+    "test": "echo \"No test specified\" && exit 0"
+  },
   "devDependencies": {
     "@types/eslint": "^8.56.10",
     "@types/node": "^20.14.9",
@@ -28,6 +39,7 @@
     "eslint": "^8.57.0",
     "fs": "0.0.1-security",
     "np": "^10.0.6",
+    "postcss": "^8.4.38",
     "tailwindcss": "3.4.4"
   }
 }
