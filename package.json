@@ -9,7 +9,8 @@
   },
   "packageManager": "pnpm@9.1.0",
   "scripts": {
-    "build": "pnpm nx run-many -t build --parallel",
+    "build:release": "pnpm build && pnpm release",
+    "build": "pnpm nx run-many -t build --parallel --output-style=stream",
     "release": "tsx tools/release.ts",
     "start": "cd packages/ui && pnpm run start",
     "start:docs": "cd packages/ui && pnpm run build && cd ../docs && pnpm run start"
