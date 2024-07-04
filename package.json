@@ -11,7 +11,6 @@
   "scripts": {
     "build": "pnpm nx run-many -t build --parallel",
     "release": "tsx tools/release.ts",
-    "np": "cd packages/ui && pnpm run build && pnpm np --no-cleanup",
     "start": "cd packages/ui && pnpm run start",
     "start:docs": "cd packages/ui && pnpm run build && cd ../docs && pnpm run start"
   },
