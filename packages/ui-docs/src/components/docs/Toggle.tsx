@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, Dropdown, Header, Toggle, toggleOnColorClasses, toggleOffColorClasses } from '@luminescent/ui';
+import { Card, Dropdown, Header, Toggle, toggleOnColorClasses, toggleOffColorClasses } from '@luminescent/ui-qwik';
 
 interface toggleOptions {
   checkbox?: boolean;

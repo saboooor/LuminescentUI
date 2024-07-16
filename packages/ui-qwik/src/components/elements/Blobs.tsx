@@ -1,7 +1,7 @@
 
 import { component$ } from '@builder.io/qwik';
 
-interface BlobProps {
+export interface BlobProps {
   class?: { [key: string]: boolean };
   color?: keyof typeof blobColorClasses | [string, string, string];
   blur?: 'sm' | 'md' | 'lg' | 'xl';

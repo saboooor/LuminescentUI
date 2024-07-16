@@ -24,7 +24,7 @@ export default function ({ matchUtilities, theme }: PluginAPI) {
 
       return {
         background: theme(`colors.${value}`) ?? value,
-        color: theme(`colors.${textColor}`) ?? 'inherit',
+        color: textColor == value ? 'inherit' : theme(`colors.${textColor}`) ?? 'inherit',
         border: `1px solid ${theme(`colors.${borderColor ?? value}`) ?? borderColor ?? value}`,
         outline: 'none',
         '&:focus': {

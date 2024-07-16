@@ -1,18 +1,18 @@
 import { component$ } from '@builder.io/qwik';
-import { ButtonAnchor, Card, Header } from '@luminescent/ui';
+import { Header } from '@luminescent/ui-qwik';
 
 export default component$(() => {
   return (
-    <Card>
+    <div class="lum-card lum-bg-gray-900 lum-pad-4xl lum-pad-equal rounded-lg">
       <Header id="anchor">
         Anchor
       </Header>
       <div class="flex">
-        <ButtonAnchor href="#anchor">
+        <a href="#anchor" class={'lum-btn lum-pad-md text-base lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md'}>
           Scroll to anchor
-        </ButtonAnchor>
+        </a>
       </div>
       <textarea class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md h-32" value={'<Anchor id="anchor"/>'} />
-    </Card>
+    </div>
   );
 });

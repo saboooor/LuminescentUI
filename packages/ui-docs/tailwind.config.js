@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-import { content, theme } from '@luminescent/ui/config';
+import { content, theme } from '@luminescent/ui-qwik/config';
 
 export default {
   content: [
@@ -22,5 +22,6 @@ export default {
   },
   plugins: [
     require('@anuragroy/tailwindcss-animate'),
+    require('@luminescent/ui'),
   ]
 };

@@ -3,16 +3,13 @@ import type { DocumentHead } from '@builder.io/qwik-city';
 
 import Anchor from '~/components/docs/Anchor';
 import Blobs from '~/components/docs/Blobs';
-import Button from '~/components/docs/Button';
 import ColorPicker from '~/components/docs/ColorPicker';
 import Dropdown from '~/components/docs/Dropdown';
 import Nav from '~/components/docs/Nav';
 import NumberInput from '~/components/docs/NumberInput';
-import TextArea from '~/components/docs/TextArea';
-import TextInput from '~/components/docs/TextInput';
 import Toggle from '~/components/docs/Toggle';
 import IconsLogos from '~/components/docs/IconsLogos';
-import { Card, Header } from '@luminescent/ui';
+import { Card, Header } from '@luminescent/ui-qwik';
 import Readme from '../../../../../README.md';
 
 export default component$(() => {
@@ -34,13 +31,10 @@ export default component$(() => {
       </Header>
       <Anchor />
       <Blobs />
-      <Button />
       <ColorPicker />
       <Dropdown />
       <Nav />
       <NumberInput />
-      <TextArea />
-      <TextInput />
       <Toggle />
       <IconsLogos />
     </section>

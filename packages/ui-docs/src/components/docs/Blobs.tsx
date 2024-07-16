@@ -1,15 +1,15 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Blobs, Card, Header, Dropdown, blobColorClasses, sizeClasses } from '@luminescent/ui';
+import { Blobs, Header, Dropdown, blobColorClasses } from '@luminescent/ui-qwik';
 
 interface blobsOptions {
   color?: keyof typeof blobColorClasses;
-  blur?: keyof typeof sizeClasses;
+  blur?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export default component$(() => {
   const store = useStore<blobsOptions>({});
   return (
-    <Card>
+    <div class="lum-card lum-bg-gray-900 lum-pad-4xl lum-pad-equal rounded-lg -z-10">
       <Header id="blobs" anchor>
         Blobs
       </Header>
@@ -21,8 +21,8 @@ export default component$(() => {
         color
       </Dropdown>
       <Dropdown id="blobs-blur"
-        onChange$={(e, element) => store.blur = element.value as keyof typeof sizeClasses}
-        values={Object.keys(sizeClasses).map((size) => ({ name: size, value: size }))}
+        onChange$={(e, element) => store.blur = element.value as 'sm' | 'md' | 'lg' | 'xl'}
+        values={['sm', 'md', 'lg', 'xl'].map((size) => ({ name: size, value: size }))}
         value="xl"
       >
         blur
@@ -37,6 +37,6 @@ export default component$(() => {
 <div class="relative h-96 w-96 border border-gray-800 rounded-md">
   <Blobs${(store.color && ` color="${store.color}"`) ?? ''}${(store.blur && ` blur="${store.blur}"`) ?? ''}/>
 </div>`} />
-    </Card>
+    </div>
   );
 });

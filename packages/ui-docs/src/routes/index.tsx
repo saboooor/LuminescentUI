@@ -1,7 +1,7 @@
 import { component$ } from '@builder.io/qwik';
 import { Link, type DocumentHead } from '@builder.io/qwik-city';
 
-import { Button, ButtonAnchor, LogoDiscord, LogoLuminescentFull } from '@luminescent/ui';
+import { LogoDiscord, LogoLuminescentFull } from '@luminescent/ui-qwik';
 import { CubeOutline, LogoGithub } from 'qwik-ionicons';
 
 export default component$(() => {
@@ -22,22 +22,22 @@ export default component$(() => {
           </h2>
           <div class="flex flex-col gap-2 animate-in fade-in slide-in-from-top-24 anim-duration-1000">
             <div class="flex flex-col sm:flex-row gap-2 justify-center">
-              <Link href="/docs">
-                <Button color="blue" size="xl" class={{ 'w-full': true }}>
+              <Link class={'lum-btn lum-pad-md text-base lum-bg-transparent hover:lum-bg-gray-800 rounded-md'} href="/docs">
+                <button color="blue" size="xl" class={{ 'w-full': true }}>
                   <CubeOutline width={30} class="text-3xl" /> Docs
-                </Button>
+                </button>
               </Link>
-              <ButtonAnchor  href="https://luminescent.dev" color="pink" size="xl" class={{ 'w-full py-5': true }}>
+              <a class={'lum-btn lum-pad-md text-base lum-bg-transparent hover:lum-bg-gray-800 rounded-md'} href="https://luminescent.dev" color="pink" size="xl" class={{ 'w-full py-5': true }}>
                 <LogoLuminescentFull width={120} />
-              </ButtonAnchor>
+              </a>
             </div>
             <div class="flex gap-2 justify-center">
-              <ButtonAnchor square href="https://luminescent.dev/discord" size="xl" transparent>
+              <a class={'lum-btn lum-pad-md text-base lum-bg-transparent hover:lum-bg-gray-800 rounded-md'} href="https://luminescent.dev/discord" size="xl" transparent>
                 <LogoGithub width={30} />
-              </ButtonAnchor>
-              <ButtonAnchor square href="https://github.com/luminescentDev/ui" size="xl" transparent color="indigo">
+              </a>
+              <a class={'lum-btn lum-pad-md text-base lum-bg-transparent hover:lum-bg-gray-800 rounded-md'} href="https://github.com/luminescentDev/ui" size="xl" transparent color="indigo">
                 <LogoDiscord width={30} />
-              </ButtonAnchor>
+              </a>
             </div>
           </div>
         </div>

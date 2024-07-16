@@ -1,7 +1,7 @@
 import { component$ } from '@builder.io/qwik';
 import {
   Card, Header, LogoBirdflop, LogoDiscord, LogoFabric, LogoForge, LogoLuminescent, LogoLuminescentFull, LogoPaper, LogoPterodactyl, LogoPurpur, LogoVelocity, LogoWaterfall,
-} from '@luminescent/ui';
+} from '@luminescent/ui-qwik';
 
 export default component$(() => {
   return (
