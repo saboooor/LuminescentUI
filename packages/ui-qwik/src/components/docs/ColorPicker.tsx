@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, Header, Dropdown, ColorPicker, Toggle } from '../../index';
+import { Header, Dropdown, ColorPicker, Toggle } from '../../index';
 
 interface colorPickerOptions {
   preview?: 'left' | 'right' | 'top' | 'bottom' | 'full';
@@ -10,7 +10,7 @@ interface colorPickerOptions {
 export default component$(() => {
   const store = useStore<colorPickerOptions>({});
   return (
-    <Card>
+    <div class="lum-card">
       <Header id="colorpicker" anchor>
         ColorPicker
       </Header>
@@ -29,6 +29,6 @@ export default component$(() => {
         <ColorPicker id="color-picker" preview={store.preview} horizontal={store.horizontal} showInput={store.showInput} onInput$={() => {}}/>
       </div>
       <textarea class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md h-32" value={`<ColorPicker id="color-picker"${store.preview ? ` preview="${store.preview}"` : ''}${store.horizontal ? ' horizontal' : ''}${store.showInput == false ? ' showInput="false"' : ''}/>`} />
-    </Card>
+    </div>
   );
 });

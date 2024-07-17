@@ -30,6 +30,6 @@ export default {
   },
   plugins: [
     require('@anuragroy/tailwindcss-animate'),
-    require('@luminescent/ui'),
+    require('../ui/src/index'),
   ],
 };

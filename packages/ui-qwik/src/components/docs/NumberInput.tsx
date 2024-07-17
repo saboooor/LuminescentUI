@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, Header, NumberInput, Toggle } from '../../index';
+import { Header, NumberInput, Toggle } from '../../index';
 
 interface numberInputOptions {
   input?: boolean;
@@ -8,7 +8,7 @@ interface numberInputOptions {
 export default component$(() => {
   const store = useStore<numberInputOptions>({});
   return (
-    <Card>
+    <div class="lum-card">
       <Header id="numberinput" anchor>
         NumberInput
       </Header>
@@ -23,6 +23,6 @@ export default component$(() => {
 <NumberInput id="number-input"${store.input ? ' input' : ''}>
   Number Input
 </NumberInput`} />
-    </Card>
+    </div>
   );
 });

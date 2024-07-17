@@ -1,5 +1,5 @@
 import { component$, useStore } from '@builder.io/qwik';
-import { Card, Header, Dropdown, Toggle } from '../../index';
+import { Header, Dropdown, Toggle } from '../../index';
 
 interface DropdownOptions {
   display?: string;
@@ -9,7 +9,7 @@ interface DropdownOptions {
 export default component$(() => {
   const store = useStore<DropdownOptions>({});
   return (
-    <Card>
+    <div class="lum-card">
       <Header id="dropdown" anchor>
         Dropdown
       </Header>
@@ -47,6 +47,6 @@ export default component$(() => {
 >
   Select Input
 </Dropdown>`} />
-    </Card>
+    </div>
   );
 });

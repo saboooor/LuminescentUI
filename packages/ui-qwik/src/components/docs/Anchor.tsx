@@ -3,12 +3,12 @@ import { Header } from '../../index';
 
 export default component$(() => {
   return (
-    <div class="lum-card lum-bg-gray-900 lum-pad-4xl lum-pad-equal rounded-lg">
+    <div class="lum-card">
       <Header id="anchor">
         Anchor
       </Header>
       <div class="flex">
-        <a href="#anchor" class={'lum-btn lum-pad-md text-base lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md'}>
+        <a href="#anchor" class={'lum-btn'}>
           Scroll to anchor
         </a>
       </div>

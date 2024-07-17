@@ -96,7 +96,7 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
           {values?.map(({ name, value }, i) => {
             return (
               <button class={{
-                'lum-btn lum-pad-md text-base lum-pad-transparent-gray-800 rounded-md': true,
+                'lum-btn lum-pad-md text-base lum-bg-transparent': true,
               }} key={i} onClick$={() => {
                 store.opened = false;
                 const select = document.getElementById(id) as HTMLSelectElement | null;

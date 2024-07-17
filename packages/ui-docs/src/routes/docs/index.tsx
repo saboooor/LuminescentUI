@@ -18,6 +18,7 @@ export default component$(() => {
       <h1 class="text-4xl font-extrabold tracking-wide mb-2 flex items-center gap-4">
         Luminescent UI Documentation
       </h1>
+
       <Header>
         Get Started
       </Header>
@@ -26,8 +27,9 @@ export default component$(() => {
           <Readme />
         </div>
       </Card>
+
       <Header>
-        Elements
+        Components
       </Header>
       <Anchor />
       <Blobs />
@@ -37,6 +39,7 @@ export default component$(() => {
       <NumberInput />
       <Toggle />
       <IconsLogos />
+
     </section>
   );
 });

@@ -16,6 +16,7 @@ import Toggle from '~/components/docs/Toggle';
 import IconsLogos from '~/components/docs/IconsLogos';
 
 import './global.css';
+import { Header } from './components/elements';
 
 export default component$(() => {
   return (
@@ -28,11 +29,17 @@ export default component$(() => {
       <body class="bg-gray-950 text-gray-200 max-w-6xl mx-auto py-24 px-4 flex flex-col gap-4">
         <Playground />
 
+        <Header>
+          Luminescent UI
+        </Header>
         <LumClasses />
         <LumBtn />
         <LumCard />
         <LumInput />
 
+        <Header>
+          Components
+        </Header>
         <Anchor />
         <Blobs />
         <ColorInput />

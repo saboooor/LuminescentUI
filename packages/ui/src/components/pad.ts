@@ -1,60 +1,27 @@
-import type { PluginAPI } from 'tailwindcss/types/config';
+import type { CSSRuleObject, PluginAPI } from 'tailwindcss/types/config';
+
+const padding = {
+  xs: ['2.5', '1.5'],
+  sm: ['3', '2'],
+  md: ['4', '2'],
+  lg: ['7', '4'],
+  xl: ['8', '4'],
+  '2xl': ['10', '5'],
+  '3xl': ['12', '6'],
+  '4xl': ['14', '7'],
+  '5xl': ['16', '8'],
+};
 
 export default function ({ addComponents }: PluginAPI) {
-  addComponents({
-    '.lum-pad-xs': {
-      '@apply px-2.5 py-1.5': {},
-      '&.lum-pad-equal': {
-        '@apply p-1.5': {},
-      },
-    },
-    '.lum-pad-sm': {
-      '@apply px-3 py-2': {},
-      '&.lum-pad-equal': {
-        '@apply p-2': {},
-      },
-    },
-    '.lum-pad-md': {
-      '@apply px-4 py-2': {},
-      '&.lum-pad-equal': {
-        '@apply p-2': {},
-      },
-    },
-    '.lum-pad-lg': {
-      '@apply px-7 py-4': {},
-      '&.lum-pad-equal': {
-        '@apply p-4': {},
-      },
-    },
-    '.lum-pad-xl': {
-      '@apply px-8 py-4': {},
-      '&.lum-pad-equal': {
-        '@apply p-4': {},
-      },
-    },
-    '.lum-pad-2xl': {
-      '@apply px-10 py-5': {},
-      '&.lum-pad-equal': {
-        '@apply p-5': {},
-      },
-    },
-    '.lum-pad-3xl': {
-      '@apply px-12 py-6': {},
-      '&.lum-pad-equal': {
-        '@apply p-6': {},
-      },
-    },
-    '.lum-pad-4xl': {
-      '@apply px-14 py-7': {},
-      '&.lum-pad-equal': {
-        '@apply p-7': {},
-      },
-    },
-    '.lum-pad-5xl': {
-      '@apply px-16 py-8': {},
-      '&.lum-pad-equal': {
-        '@apply p-8': {},
-      },
-    },
+  const classes: CSSRuleObject = {};
+  (Object.keys(padding) as Array<keyof typeof padding>).forEach((key) => {
+    const [x, y] = padding[key];
+    classes[`.lum-pad-${key}`] = {
+      [`@apply px-${x} py-${y}`]: {},
+    };
+    classes[`.lum-pad-equal-${key}`] = {
+      [`@apply p-${y}`]: {},
+    };
   });
+  addComponents(classes);
 }

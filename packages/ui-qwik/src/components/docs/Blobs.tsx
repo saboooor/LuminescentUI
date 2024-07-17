@@ -9,7 +9,7 @@ interface blobsOptions {
 export default component$(() => {
   const store = useStore<blobsOptions>({});
   return (
-    <div class="lum-card lum-bg-gray-900 lum-pad-4xl lum-pad-equal rounded-lg -z-10">
+    <div class="lum-card -z-10">
       <Header id="blobs" anchor>
         Blobs
       </Header>

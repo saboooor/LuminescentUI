@@ -164,7 +164,7 @@ export const Card = component$<CardProps>(({ color = 'darkgray', hover, row, blo
 
   return (
     <div {...props} class={{
-      'flex lum-bg-gray-900 lum-pad-4xl lum-pad-equal rounded-lg': true,
+      'flex lum-bg-gray-900 lum-pad-equal-4xl rounded-lg': true,
       'flex-col': !row,
       [colorClass.bg]: !blobs,
       [colorClass.bg_blobs]: blobs,

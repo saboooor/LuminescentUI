@@ -3,7 +3,7 @@ import { Header } from '@luminescent/ui-qwik';
 
 export default component$(() => {
   return (
-    <div class="lum-card lum-bg-gray-900 lum-pad-4xl lum-pad-equal rounded-lg">
+    <div class="lum-card">
       <Header id="anchor">
         Anchor
       </Header>
