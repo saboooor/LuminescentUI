@@ -1,7 +1,7 @@
 import { component$, useStore } from '@builder.io/qwik';
 import { Header } from '../../index';
 
-import { defaultClasses } from '@luminescent/ui';
+import { defaultClasses } from '@luminescent/ui/components/btn';
 
 export default component$(() => {
   const store = useStore({
