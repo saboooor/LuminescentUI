@@ -10,7 +10,7 @@
       "require": "./lib/index.js",
       "types": "./lib-types/index.d.ts"
     },
-    "components/*": {
+    "./components/*": {
       "import": "./lib/components/*",
       "require": "./lib/components/*",
       "types": "./lib-types/components/*"
@@ -37,13 +37,13 @@
   },
   "devDependencies": {
     "@types/eslint": "^8.56.10",
-    "@types/node": "^20.14.10",
-    "@typescript-eslint/eslint-plugin": "^7.16.1",
-    "@typescript-eslint/parser": "^7.16.1",
+    "@types/node": "^20.14.12",
+    "@typescript-eslint/eslint-plugin": "^7.17.0",
+    "@typescript-eslint/parser": "^7.17.0",
     "eslint": "^8.57.0",
     "fs": "0.0.1-security",
-    "postcss": "^8.4.39",
-    "tailwindcss": "3.4.6",
-    "typescript": "5.5.3"
+    "postcss": "^8.4.40",
+    "tailwindcss": "3.4.7",
+    "typescript": "5.5.4"
   }
 }
