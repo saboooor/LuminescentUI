@@ -1,7 +1,8 @@
 import { component$, useStore } from '@builder.io/qwik';
 import { Blobs, Header, Toggle } from '../../index';
 
-import { defaultClasses } from '../../../../ui/src/components/card';
+// @ts-ignore
+import { defaultClasses } from '@luminescent/ui/components/card';
 
 export default component$(() => {
   const store = useStore({

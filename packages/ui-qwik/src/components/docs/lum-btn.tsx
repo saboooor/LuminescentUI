@@ -1,6 +1,7 @@
 import { component$, useStore } from '@builder.io/qwik';
 import { Header } from '../../index';
 
+// @ts-ignore
 import { defaultClasses } from '@luminescent/ui/components/btn';
 
 export default component$(() => {

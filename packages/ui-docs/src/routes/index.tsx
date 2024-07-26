@@ -17,25 +17,23 @@ export default component$(() => {
               </div>
             </div>
           </h1>
-          <h2 class="text-gray-300 text-lg sm:text-2xl animate-in fade-in slide-in-from-top-16 anim-duration-1000 mb-12">
-            Another component library for Qwik built with Tailwind CSS
+          <h2 class="text-gray-300 text-lg sm:text-2xl animate-in fade-in slide-in-from-top-16 anim-duration-1000 mt-4 mb-12">
+            Another ui library built for Tailwind CSS with components for Qwik
           </h2>
           <div class="flex flex-col gap-2 animate-in fade-in slide-in-from-top-24 anim-duration-1000">
             <div class="flex flex-col sm:flex-row gap-2 justify-center">
-              <Link class={'lum-btn'} href="/docs">
-                <button color="blue" size="xl" class={{ 'w-full': true }}>
-                  <CubeOutline width={30} class="text-3xl" /> Docs
-                </button>
+              <Link class="lum-btn lum-pad-xl rounded-xl lum-bg-blue-700 hover:lum-bg-blue-600 text-lg" href="/docs">
+                <CubeOutline width={30} class="text-3xl" /> Docs
               </Link>
-              <a class={'lum-btn'} href="https://luminescent.dev" color="pink" size="xl" class={{ 'w-full py-5': true }}>
+              <a class="lum-btn lum-pad-xl rounded-xl lum-bg-pink-700 hover:lum-bg-pink-600 text-lg" href="https://luminescent.dev" color="pink" size="xl">
                 <LogoLuminescentFull width={120} />
               </a>
             </div>
             <div class="flex gap-2 justify-center">
-              <a class={'lum-btn'} href="https://luminescent.dev/discord" size="xl" transparent>
-                <LogoGithub width={30} />
+              <a class={'lum-btn lum-bg-transparent lum-pad-equal-xl rounded-xl'} href="https://luminescent.dev/discord" size="xl" transparent>
+                <LogoGithub width={30} class="fill-current" />
               </a>
-              <a class={'lum-btn'} href="https://github.com/luminescentDev/ui" size="xl" transparent color="indigo">
+              <a class={'lum-btn lum-bg-transparent lum-pad-equal-xl rounded-xl'} href="https://github.com/luminescentDev/ui" size="xl" transparent color="indigo">
                 <LogoDiscord width={30} />
               </a>
             </div>
