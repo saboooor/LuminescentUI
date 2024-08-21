@@ -1,4 +1,5 @@
 import type { PluginAPI } from 'tailwindcss/types/config';
+import withAlphaVariable from 'tailwindcss/lib/util/withAlphaVariable';
 
 export default function ({ matchUtilities, theme }: PluginAPI) {
   const colors: { [key: string]: string } = {};
@@ -9,23 +10,26 @@ export default function ({ matchUtilities, theme }: PluginAPI) {
     else {
       Object.keys(value).forEach((shade) => {
         colors[`${color}-${shade}`] = `${color}.${shade}`;
+        for (let i = 1; i < 20; i++) {
+          colors[`${color}-${shade}/${i*5}`] = `${color}.${shade}/${i*5}`;
+        }
       });
     }
   });
   matchUtilities({
     'lum-bg': (value) => {
+      const code = value.replace('.', '-');
       const color = value.split('.')[0];
       const shades = Object.values(colors).filter((c) => {
-        return c.startsWith(color);
+        return c.startsWith(color) && !c.includes('/');
       });
       const index = shades.indexOf(value);
       const borderColor = shades[index - 1 < 0 ? shades.length - 1 : index - 1] || shades[index + 1 > shades.length - 1 ? 0 : index + 1];
       const textColor = shades[index - 5 < 0 ? shades.length - 1 : index - 5] || shades[index + 5 > shades.length - 1 ? 0 : index + 5];
 
       return {
-        background: theme(`colors.${value}`) ?? value,
         color: textColor == value ? 'inherit' : theme(`colors.${textColor}`) ?? 'inherit',
-        '@apply border': '',
+        [`@apply border bg-${theme(`colors.${value.split('/')[0]}`) ? code : `[${value}]`}`]: '',
         borderColor: `${theme(`colors.${borderColor ?? value}`) ?? borderColor ?? value}`,
         outline: 'none',
         '&:focus': {

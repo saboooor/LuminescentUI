@@ -44,7 +44,7 @@ export default component$(() => {
           transformStyle: 'preserve-3d',
         }}>
           {store.blur &&
-            <div class="lum-card lum-bg-transparent absolute inset-0 w-full h-full z-10 backdrop-blur-xl opacity-0 hover:opacity-100">
+            <div class="lum-card lum-bg-transparent absolute inset-0 w-full h-full z-10 backdrop-blur-xl transition opacity-0 hover:opacity-100">
               <Header subheader="Hello Luminescent v2">
                 Blur Content
               </Header>
@@ -86,7 +86,7 @@ export default component$(() => {
       <textarea class="lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md h-32" value={`
 <div class="${store.blur || store.blobs ? 'relative ' : ''}${store.class}" ${store.blobs ? 'style={{ transformStyle: "preserve-3d" }}' : ''}>
   ${store.blur ? `
-  <div class="lum-card lum-bg-transparent absolute inset-0 w-full h-full z-10 backdrop-blur-xl opacity-0 hover:opacity-100">
+  <div class="lum-card lum-bg-transparent absolute inset-0 w-full h-full z-10 backdrop-blur-xl transition opacity-0 hover:opacity-100">
     <Header subheader="Hello Luminescent v2">
       Blur Content
     </Header>

@@ -9,7 +9,7 @@ export default component$(() => {
       </Header>
       <p>Background Classes</p>
       <p class="flex lum-bg-gray-800 py-2 px-3 rounded-lg whitespace-pre-wrap">
-        lum-bg-[color]
+        lum-bg-{'<color>/[opacity]'}
       </p>
       <p>Element Classes</p>
       <p class="flex lum-bg-gray-800 py-2 px-3 rounded-lg whitespace-pre-wrap">

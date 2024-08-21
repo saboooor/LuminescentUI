@@ -8,7 +8,7 @@ export default component$(() => {
         Playground (v2)
       </Header>
       <div>
-        <div class="lum-card">
+        <div class="lum-card lum-bg-red-500/50">
           <Header subheader="Hello Luminescent v2">
             This is a card
           </Header>
