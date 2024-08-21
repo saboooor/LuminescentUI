@@ -30,7 +30,7 @@ export default component$(() => {
         <Playground />
 
         <Header>
-          Luminescent UI
+          Luminescent UI Tailwind Components
         </Header>
         <LumClasses />
         <LumBtn />
@@ -38,7 +38,7 @@ export default component$(() => {
         <LumInput />
 
         <Header>
-          Components
+          Luminescent UI Qwik Components
         </Header>
         <Anchor />
         <Blobs />

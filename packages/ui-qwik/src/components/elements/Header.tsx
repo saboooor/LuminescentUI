@@ -8,11 +8,10 @@ interface HeaderProps extends Omit<PropsOf<'h2'>, 'class'> {
   class?: { [key: string]: boolean };
   id?: string;
   anchor?: boolean;
-  loading?: boolean;
   subheader?: string | JSXOutput;
 }
 
-export const Header = component$<HeaderProps>(({ id, anchor, loading, subheader, ...props }) => {
+export const Header = component$<HeaderProps>(({ id, anchor, subheader, ...props }) => {
   let Component = <>
     <h2 class={{
       'flex gap-2 group items-center font-bold text-xl sm:text-2xl whitespace-nowrap text-white': true,
@@ -23,7 +22,7 @@ export const Header = component$<HeaderProps>(({ id, anchor, loading, subheader,
       {anchor && id && <a href={`#${id}`} onClick$={() => {
         navigator.clipboard.writeText(window.location.href);
       }}>
-        <Link class="transition-all opacity-10 group-hover:opacity-100 active:scale-75" width={24} />
+        <Link class="transition-all opacity-10 group-hover:opacity-100 duration-300 group-hover:duration-100" width={24} />
       </a>}
     </h2>
   </>;
@@ -35,21 +34,6 @@ export const Header = component$<HeaderProps>(({ id, anchor, loading, subheader,
         <h3 class="flex items-center text-gray-400 text-sm">
           {subheader}
         </h3>
-      </div>
-    );
-  }
-
-  if (loading !== undefined) {
-    Component = (
-      <div class="flex">
-        {Component}
-        <div class={{
-          'motion-safe:transition-all duration-200': true,
-          'opacity-0': !loading,
-          'opacity-100': loading,
-        }}>
-          <div class="lum-loading w-6 h-6" />
-        </div>
       </div>
     );
   }

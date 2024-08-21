@@ -3,6 +3,7 @@ import { component$ } from '@builder.io/qwik';
 
 export interface BlobProps {
   class?: { [key: string]: boolean };
+  style?: { [key: string]: string | number };
   color?: keyof typeof blobColorClasses | [string, string, string];
   blur?: 'sm' | 'md' | 'lg' | 'xl';
 }
@@ -50,9 +51,9 @@ export const Blobs = component$<BlobProps>(({ color = 'darkgray', blur = 'xl', .
 
   return (
     <div class={{
-      'motion-reduce:hidden absolute inset-0 transition-all animate-in fade-in anim-duration-[2s] -z-[1]': true,
+      'motion-reduce:hidden absolute inset-0 transition-all animate-in fade-in anim-duration-[2s]': true,
       ...props.class,
-    }} style={{ containerType: 'size' }}>
+    }} style={{ containerType: 'size', ...props.style }}>
       <div class={{
         'absolute top-0 w-[30cqw] h-[30cqw] rounded-full opacity-20 ease-in-out': true,
         'blur-sm': blur === 'sm',

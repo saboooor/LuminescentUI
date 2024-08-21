@@ -110,7 +110,7 @@ export const ColorPicker = component$<ColorPickerProps>(({ id, value = '#000000'
 
   return (
     <div class={{
-      'motion-safe:transition-all p-4 bg-gray-800/50 backdrop-blur-xl flex gap-4 rounded-lg border border-gray-700 touch-none': true,
+      'motion-safe:transition-all p-4 lum-bg-gray-900 flex gap-4 rounded-lg touch-none': true,
       'flex': true,
       'flex-col': !horizontal,
       ...props.class,
@@ -190,7 +190,7 @@ export const ColorPicker = component$<ColorPickerProps>(({ id, value = '#000000'
         {colors.map((color, i) => {
           return (
             <button key={i} class={{
-              'w-[1.6rem] h-[1.6rem] rounded-md hover:scale-110 motion-safe:transition-all -outline-offset-1 outline outline-1 outline-white/30': true,
+              'w-[1.6rem] h-[1.6rem] rounded-md hover:scale-110 motion-safe:transition-all duration-300 hover:duration-100 ease-in-out -outline-offset-1 outline outline-1 outline-white/30': true,
             }}
             style={{
               background: color,
@@ -202,7 +202,7 @@ export const ColorPicker = component$<ColorPickerProps>(({ id, value = '#000000'
             ></button>
           );
         })}
-        <button class="w-[1.6rem] h-[1.6rem] border border-gray-700 rounded-md hover:scale-110 motion-safe:transition-all"
+        <button class="w-[1.6rem] h-[1.6rem] border border-gray-700 rounded-md hover:scale-110 motion-safe:transition-all duration-300 hover:duration-100 ease-in-out"
           onClick$={() => {
             const color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
             setColor(color);

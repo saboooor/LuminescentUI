@@ -1,5 +1,5 @@
 import type { JSXChildren, PropsOf } from '@builder.io/qwik';
-import { component$, Slot, useStore, useStyles$ } from '@builder.io/qwik';
+import { component$, Slot, useStore } from '@builder.io/qwik';
 import { ChevronDown } from '../../svg/ChevronDown';
 
 interface DropdownProps extends Omit<PropsOf<'select'>, 'class' | 'size'> {
@@ -30,29 +30,6 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
     value: props.value,
   });
 
-  useStyles$(`
-    .lui-scroll {
-      scroll-behavior: smooth;
-    }
-    .lui-scroll::-webkit-scrollbar {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 8px;
-      height: 8px;
-    }
-    .lui-scroll::-webkit-scrollbar-track {
-      background-color: transparent;
-    }
-    .lui-scroll::-webkit-scrollbar-thumb {
-      background-color: #ffffff20;
-      border: 1px solid #ffffff20;
-      border-radius: 3px;
-    }
-    .lui-scroll::-webkit-scrollbar-corner {
-      background-color: transparent;
-    }
-  `);
-
   return (
     <div class={{
       'relative touch-manipulation': true,
@@ -80,18 +57,18 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
           </span>
         }
         <ChevronDown width={16} class={{
-          'motion-safe:transition-all duration-200': true,
+          'motion-safe:transition-all ease-in-out': true,
           'transform rotate-180': store.opened,
-          'group-hover:transform group-hover:rotate-180': hover,
+          'group-hover:transform group-hover:rotate-180 duration-300 group-hover:duration-100': hover,
         }}/>
       </button>
       <div class={{
-        'transition-all absolute top-full pt-2 left-0 z-[1000] ': true,
+        'transition-all ease-in-out absolute top-full pt-2 left-0 z-[1000] ': true,
         'opacity-0 scale-95 pointer-events-none': !store.opened,
-        'group-hover:pointer-events-auto group-hover:opacity-100 group-hover:scale-100': hover,
+        'group-hover:pointer-events-auto group-hover:opacity-100 group-hover:scale-100 duration-300 group-hover:duration-100': hover,
       }}>
         <div id={`lui-${id}-opts`} class={{
-          'motion-safe:transition-all p-1 gap-1 bg-gray-800/50 backdrop-blur-xl flex flex-col border border-gray-700 max-h-72 lui-scroll overflow-auto select-none': true,
+          'motion-safe:transition-all p-1 gap-1 lum-bg-gray-800 backdrop-blur-xl flex flex-col border max-h-72 lum-scroll overflow-auto select-none rounded-md': true,
         }}>
           {values?.map(({ name, value }, i) => {
             return (

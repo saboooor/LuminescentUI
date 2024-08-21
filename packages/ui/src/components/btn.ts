@@ -5,7 +5,7 @@ export const defaultClasses = 'lum-pad-md text-base lum-bg-gray-800 hover:lum-bg
 export default function ({ addComponents }: PluginAPI) {
   addComponents({
     '.lum-btn': {
-      '@apply flex items-center gap-3 motion-safe:transition ease-in-out disabled:opacity-50 hover:drop-shadow-lg motion-safe:active:scale-95 whitespace-nowrap touch-manipulation select-none text-center': {},
+      '@apply flex items-center gap-3 motion-safe:transition duration-300 hover:duration-100 ease-in-out disabled:opacity-50 hover:drop-shadow-lg motion-safe:active:scale-95 whitespace-nowrap touch-manipulation select-none text-center': {},
       [`@apply ${defaultClasses}`]: {},
     },
   });

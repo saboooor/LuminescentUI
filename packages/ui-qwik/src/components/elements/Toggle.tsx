@@ -221,8 +221,8 @@ export const Toggle = component$<ToggleProps>(({ checkbox, round, center, label,
           ...props.class,
         }} />
         <div class={{
-          'motion-safe:transition ease-in-out h-7 peer border hover:shadow-lg': true,
-          'after:content-[\'\'] after:absolute after:top-[4px] after:left-[4px] after:border after:h-5 after:w-5 after:motion-safe:transition-all after:ease-in-out': true,
+          'motion-safe:transition duration-300 hover:duration-100 ease-in-out h-7 peer border hover:shadow-lg': true,
+          'after:content-[\'\'] after:absolute after:top-[4px] after:left-[4px] after:border after:h-5 after:w-5 after:motion-safe:transition-all after:duration-300 after:hover:duration-100 after:ease-in-out': true,
           'rounded-md after:rounded-[0.2rem]': !round,
           'rounded-full after:rounded-full': round,
           'w-12 peer-checked:after:translate-x-full': !checkbox,
