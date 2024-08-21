@@ -1,5 +1,4 @@
 import type { PluginAPI } from 'tailwindcss/types/config';
-import withAlphaVariable from 'tailwindcss/lib/util/withAlphaVariable';
 
 export default function ({ matchUtilities, theme }: PluginAPI) {
   const colors: { [key: string]: string } = {};
