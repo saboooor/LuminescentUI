@@ -22,7 +22,7 @@ export default function ({ matchUtilities, theme }: PluginAPI) {
       const shades = Object.values(colors).filter((c) => {
         return c.startsWith(color) && !c.includes('/');
       });
-      const index = shades.indexOf(value);
+      const index = shades.indexOf(value.split('/')[0]);
       const borderColor = shades[index - 1 < 0 ? shades.length - 1 : index - 1] || shades[index + 1 > shades.length - 1 ? 0 : index + 1];
       const textColor = shades[index - 5 < 0 ? shades.length - 1 : index - 5] || shades[index + 5 > shades.length - 1 ? 0 : index + 5];
 
