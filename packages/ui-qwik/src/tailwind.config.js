@@ -59,7 +59,7 @@ const luminescent = {
 };
 
 module.exports = {
-  content: ['./node_modules/@luminescent/ui/**/*.{mjs,cjs}'],
+  content: ['./node_modules/@luminescent/ui-qwik/**/*.{mjs,cjs}'],
   theme: {
     extend: {
       colors: { luminescent },
