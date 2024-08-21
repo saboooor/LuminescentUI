@@ -8,7 +8,7 @@ export default component$(() => {
         Anchor
       </Header>
       <div class="flex">
-        <a href="#anchor" class={'lum-btn lum-pad-md text-base lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md'}>
+        <a href="#anchor" class={'lum-btn'}>
           Scroll to anchor
         </a>
       </div>
