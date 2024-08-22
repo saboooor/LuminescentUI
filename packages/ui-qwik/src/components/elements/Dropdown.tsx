@@ -57,15 +57,15 @@ export const DropdownRaw = component$<DropdownProps>(({ id, values, class: Class
           </span>
         }
         <ChevronDown width={16} class={{
-          'motion-safe:transition-all ease-in-out': true,
+          'motion-safe:transition-all ease-out': true,
           'transform rotate-180': store.opened,
-          'group-hover:transform group-hover:rotate-180 duration-300 group-hover:duration-100': hover,
+          'group-hover:transform group-hover:rotate-180 duration-300 group-hover:duration-75': hover,
         }}/>
       </button>
       <div class={{
-        'transition-all ease-in-out absolute top-full pt-2 left-0 z-[1000] ': true,
+        'transition-all ease-out absolute top-full pt-2 left-0 z-[1000] ': true,
         'opacity-0 scale-95 pointer-events-none': !store.opened,
-        'group-hover:pointer-events-auto group-hover:opacity-100 group-hover:scale-100 duration-300 group-hover:duration-100': hover,
+        'group-hover:pointer-events-auto group-hover:opacity-100 group-hover:scale-100 duration-300 group-hover:duration-75': hover,
       }}>
         <div id={`lui-${id}-opts`} class={{
           'motion-safe:transition-all p-1 gap-1 lum-bg-gray-800 backdrop-blur-xl flex flex-col border max-h-72 lum-scroll overflow-auto select-none rounded-md': true,

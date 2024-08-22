@@ -22,7 +22,7 @@ export const Header = component$<HeaderProps>(({ id, anchor, subheader, ...props
       {anchor && id && <a href={`#${id}`} onClick$={() => {
         navigator.clipboard.writeText(window.location.href);
       }}>
-        <Link class="transition-all opacity-10 group-hover:opacity-100 duration-300 group-hover:duration-100" width={24} />
+        <Link class="transition-all opacity-10 group-hover:opacity-100 duration-300 group-hover:duration-75" width={24} />
       </a>}
     </h2>
   </>;
