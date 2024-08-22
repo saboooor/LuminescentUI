@@ -34,7 +34,7 @@ export const Nav = component$<NavContainerProps>(({ fixed, floating, colorClass 
       </div>
       <div class={{
         [colorClass]: !floating,
-        'border-t-0 border-x-0': !floating,
+        '!border-t-0 !border-x-0': !floating,
         'before:backdrop-blur-lg': !colorClass.includes('transparent') && !floating,
         'before:absolute before:content-[""] before:w-full before:h-full before:drop-shadow-xl before:-z-10': !floating,
         'relative mt-2 mx-2': floating,
