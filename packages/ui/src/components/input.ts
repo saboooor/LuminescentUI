@@ -1,6 +1,6 @@
 import type { PluginAPI } from 'tailwindcss/types/config';
 
-export const defaultClasses = 'lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md';
+export const defaultClasses = 'lum-pad-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md';
 
 export default function ({ addComponents }: PluginAPI) {
   addComponents({

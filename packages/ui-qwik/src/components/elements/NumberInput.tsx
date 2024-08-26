@@ -43,11 +43,10 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, onDecrem
 
   return (
     <div class={{
-      'flex text-gray-50 touch-manipulation': true,
-      'gap-2': !input,
+      'flex gap-2 text-gray-50 touch-manipulation': true,
     }}>
       <button  class={{
-        'lum-btn lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md': true,
+        'lum-btn lum-pad-equal-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md': true,
       }} data-action="decrement" aria-label="Decrement" disabled={props.min ? value <= props.min : false}
       onClick$={input ? $((event, element) => {
         const siblingInput = element.nextElementSibling as HTMLInputElement;
@@ -58,13 +57,13 @@ export const NumberInputRaw = component$<NumberInputRawProps>(({ input, onDecrem
       </button>
       { input &&
         <input {...props} type="number" value={value} step={step} class={{
-          'lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md': true,
+          'lum-input text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md': true,
           'text-center': true,
           ...props.class,
         }}/>
       }
       <button class={{
-        'lum-btn lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md': true,
+        'lum-btn lum-pad-equal-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md': true,
       }} data-action="increment" aria-label="Increment" disabled={props.max ? value >= props.max : false}
       onClick$={input ? $((event, element) => {
         const siblingInput = element.previousElementSibling as HTMLInputElement;
