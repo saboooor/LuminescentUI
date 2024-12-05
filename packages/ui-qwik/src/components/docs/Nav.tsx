@@ -4,6 +4,7 @@ import { Header, Nav, DropdownRaw, Toggle } from '../../index';
 interface navOptions {
   fixed?: boolean;
   floating?: boolean;
+  nohamburger?: boolean;
   colorClass?: string;
 }
 
@@ -18,6 +19,8 @@ export default component$(() => {
         label="fixed" />
       <Toggle id="nav-floating" onChange$={(e, element) => store.floating = element.checked}
         label="floating" />
+      <Toggle id="nav-nohamburger" onChange$={(e, element) => store.nohamburger = element.checked}
+        label="nohamburger" />
       <label for="nav-colorclass">colorClass</label>
       <input id="nav-colorclass" class="w-full lum-input lum-pad-sm text-sm lum-bg-gray-800 hover:lum-bg-gray-700 rounded-md"
         onInput$={(e, el) => store.colorClass = el.value}
@@ -25,7 +28,7 @@ export default component$(() => {
         placeholder="lum-bg-gray-900"
       />
       <div class="lum-card relative h-40">
-        <Nav floating={store.floating} fixed={store.fixed} colorClass={store.colorClass}>
+        <Nav floating={store.floating} fixed={store.fixed} nohamburger={store.nohamburger} colorClass={store.colorClass}>
 
           <button q:slot="start" class={'lum-btn lum-bg-transparent'}>
             Brand
